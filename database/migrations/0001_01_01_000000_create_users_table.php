@@ -13,12 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nim')->unique();
+            $table->string('nama');
+            $table->string('jabatan')->nullable();
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('no_hp')->nullable();
+            $table->text('alamat')->nullable();
             $table->string('password');
+            $table->enum('role', ['PengurusInti', 'Pengurus'])->default('Pengurus'); // Role Pengurus Inti dan Pengurus
             $table->rememberToken();
             $table->timestamps();
+        
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
