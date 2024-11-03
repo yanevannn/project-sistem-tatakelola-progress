@@ -17,7 +17,7 @@
                                     <h6>Tabel Surat Keluar</h6>
                                 </div>
                                 <div class="col-lg-3">
-                                    <form action="{{ route('suratkeluar.index') }}" method="GET" class="d-flex">
+                                    <form action="{{ route('suratkeluar.index') }}" method="POST" class="d-flex">
                                         <input type="text" value="{{ request('search') }}" class="form-control"
                                             name="search" placeholder="Kata kunci ..."aria-label="Kata kunci ...">
                                         <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="submit"
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="card-body">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -105,18 +105,18 @@
                                                     </p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs text-center font-weight-bold mb-0">{{ $sk->keterangan }}
+                                                    <p class="text-xs text-center font-weight-bold mb-0">
+                                                        {{ $sk->keterangan }}
                                                     </p>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <button type="button" class="btn btn-secondary mb-0">Download</button>
                                                 </td>
                                                 <td class="align-middle text-center m-0">
-                                                    <form action="" class="mb-0">
-                                                        <a href=""
-                                                            class="font-weight-bold text-xs text-white btn btn-warning mb-0"
-                                                            data-toggle="tooltip" data-original-title="Edit">EDIT</a>
-                                                    </form>
+                                                    <a href="{{ route('suratkeluar.edit', $sk->id) }}"
+                                                        class="font-weight-bold text-xs text-white btn btn-warning mb-0"
+                                                        data-toggle="tooltip" data-original-title="Edit">EDIT</a>
+
                                                 </td>
                                             </tr>
                                         @endforeach

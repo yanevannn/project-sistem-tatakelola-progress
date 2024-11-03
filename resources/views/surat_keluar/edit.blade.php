@@ -6,55 +6,56 @@
     <div class="col-lg-12 mb-lg-0 mb-4">
         <div class="card">
             <div class="card-header pb-0">
-                <h6>Tambah Surat Keluar</h6>
+                <h6>Perbarui Surat Keluar</h6>
             </div>
             <div class="card-body p-3">
-                <form action="{{ route('suratkeluar.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('suratkeluar.update',$suratkeluar->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf <!-- Token CSRF untuk keamanan Laravel -->
+                    @method('PUT')
                     <div class="row coll-lg 12">
-                        <input type="text" name="id_user" value="1" hidden>
                         <div class="form-group col-lg-6">
                             <label for="status">Periode</label>
-                            <select name="status" class="form-control " required>
-                                <option value="" disabled selected>Pilih Periode</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
+                            <select name="periode" class="form-control " required>
+                                <option value="{{ $suratkeluar->id_periode }}" selected>{{ $suratkeluar->periode->tahun }}</option>
+                                @foreach ($periode as $p)
+                                <option value="{{ $p->id }}">{{ $p->tahun }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group col-lg-6">
-                            <label for="periode">Nomor Surat</label>
-                            <input type="number" name="no_surat" class="form-control"
-                                placeholder="masukkan no surat" value=""required>
+                            <label for="nomor_surat_keluar">Nomor Surat</label>
+                            <input type="text" name="nomor_surat_keluar" class="form-control"
+                                placeholder="masukkan no surat" value="{{ $suratkeluar->nomor_surat_keluar }}"required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-6">
-                            <label for="periode">Penerima</label>
-                            <input type="text" name="penerima" class="form-control"
-                                placeholder="masukkan penerima surat" value=""required>
+                            <label for="tertuju">Tertuju</label>
+                            <input type="text" name="tertuju" class="form-control"
+                                placeholder="masukkan penerima surat" value="{{ $suratkeluar->tertuju }}"required>
                         </div>
                         <div class="form-group col-lg-6">
-                            <label for="periode">Pengirim</label>
-                            <input type="text" name="pengirim" class="form-control"
-                                placeholder="masukkan pengirim surat" value=""required>
+                            <label for="keterangan">Keterangan</label>
+                            <input type="text" name="keterangan" class="form-control"
+                                placeholder="masukkan pengirim surat" value="{{ $suratkeluar->keterangan }}"required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-6">
-                            <label for="periode">Tanggal Masuk</label>
-                            <input type="text" name="tanggalmasuk" class="form-control"
-                                placeholder="masukkan tanggal masuk surat" value=""required>
+                            <label for="tanggal_surat">Tanggal Surat</label>
+                            <input type="text" name="tanggal_surat" class="form-control"
+                                placeholder="masukkan tanggal masuk surat" value="{{ $suratkeluar->tanggal_surat }}"required>
                         </div>
                         <div class="form-group col-lg-6">
-                            <label for="periode">Tanggal Kegiatan</label>
-                            <input type="text" name="tanggalkegiatan" class="form-control"
-                                placeholder="masukkan tanggal kegiatan surat" value=""required>
+                            <label for="tanggal_terkirim">Tanggal Dikirim</label>
+                            <input type="text" name="tanggal_terkirim" class="form-control"
+                                placeholder="masukkan tanggal dikirim surat" value="{{ $suratkeluar->tanggal_terkirim }}"required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="foto">File Surat</label>
-                        <input type="file" class="form-control" name="file">
+                        <label for="file">File Surat</label>
+                        <input type="file" class="form-control" name="file" value="{{ $suratkeluar->file }}">
                         @error('file')
                             <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan kesalahan -->
                         @enderror
