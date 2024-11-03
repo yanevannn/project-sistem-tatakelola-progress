@@ -1,12 +1,12 @@
 @extends('layout.layout')
-@section('page-title', 'Surat Masuk')
+@section('page-title', 'Surat Keluar')
 
 @section('content')
     <div class="row mb-4">
         <div class=" mb-lg-0 mb-4">
             <div class="col-lg-12">
                 <button class="btn bg-gradient-success">
-                    <a href="{{ route('suratmasuk.create') }}" class="font-weight-bold text-xs text-white"
+                    <a href="{{ route('suratkeluar.create') }}" class="font-weight-bold text-xs text-white"
                         data-toggle="tooltip" data-original-title="Edit user">Tambah Data</a>
                 </button>
                 <div class="card p-3">
@@ -14,10 +14,10 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-lg-9">
-                                    <h6>Tabel Surat Masuk</h6>
+                                    <h6>Tabel Surat Keluar</h6>
                                 </div>
                                 <div class="col-lg-3">
-                                    <form action="{{ route('suratmasuk.index') }}" method="GET" class="d-flex">
+                                    <form action="{{ route('suratkeluar.index') }}" method="GET" class="d-flex">
                                         <input type="text" value="{{ request('search') }}" class="form-control"
                                             name="search" placeholder="Kata kunci ..."aria-label="Kata kunci ...">
                                         <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="submit"
@@ -46,16 +46,16 @@
                                             Nomor Surat Masuk</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Penerima</th>
+                                            Tertuju</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Pengirim</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Tanggal Masuk</th>
+                                            Tanggal Surat</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Tanggal Terima</th>
+                                            Tanggal Terkirim</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Keterangan</th>
@@ -69,47 +69,43 @@
                                     </tr>
                                 </thead>
                                 <tbody class="mb-0">
-                                    @if ($suratmasuk->isEmpty())
+                                    @if ($suratkeluar->isEmpty())
                                         <tr>
                                             <td colspan="12" class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0 mt-4">Tidak ada data surat masuk.
+                                                <p class="text-xs font-weight-bold mb-0 mt-4">Tidak ada data surat keluar.
                                                 </p>
                                             </td>
                                         </tr>
                                     @else
-                                        @foreach ($suratmasuk as $sm)
+                                        @foreach ($suratkeluar as $sk)
                                             <tr>
                                                 <td class="text-center font-weight-bold text-xs mb-0">{{ $loop->iteration }}
                                                 </td>
                                                 <td>
                                                     <p class="text-xs text-center font-weight-bold mb-0">
-                                                        {{ $sm->periode->tahun }}</p>
+                                                        {{ $sk->periode->tahun }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-xs text-center font-weight-bold mb-0">
-                                                        {{ $sm->nomor_surat_masuk }}</p>
+                                                        {{ $sk->nomor_surat_keluar }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-xs text-center font-weight-bold mb-0">
-                                                        {{ $sm->penerima }}
+                                                        {{ $sk->tertuju }}
                                                     </p>
                                                 </td>
                                                 <td>
                                                     <p class="text-xs text-center font-weight-bold mb-0">
-                                                        {{ $sm->pengirim }}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs text-center font-weight-bold mb-0">
-                                                        {{ $sm->tanggal_surat }}
+                                                        {{ $sk->tanggal_surat }}
                                                     </p>
                                                 </td>
                                                 <td>
                                                     <p class="text-xs text-center font-weight-bold mb-0">
-                                                        {{ $sm->tanggal_terima }}
+                                                        {{ $sk->tanggal_terkirim }}
                                                     </p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs text-center font-weight-bold mb-0">{{ $sm->keterangan }}
+                                                    <p class="text-xs text-center font-weight-bold mb-0">{{ $sk->keterangan }}
                                                     </p>
                                                 </td>
                                                 <td class="align-middle text-center">
@@ -130,7 +126,7 @@
                         </div>
                     </div>
                     <div class="px-3">
-                        {{ $suratmasuk->links() }}
+                        {{ $suratkeluar->links() }}
                     </div>
                 </div>
             </div>

@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\SuratMasuk;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\PeriodeSeeder;
@@ -11,6 +9,8 @@ use Database\Seeders\PengurusSeeder;
 use Database\Seeders\InventarisSeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\SuratMasukSeeder;
+use Database\Seeders\SuratKeluarSeeder;
+
 
 class DatabaseSeeder extends Seeder 
 {
@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call(InventarisSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(SuratMasukSeeder::class);
+        $this->call(SuratKeluarSeeder::class);
+
         
         // User::factory()->create([
         //     'name' => 'Test User',

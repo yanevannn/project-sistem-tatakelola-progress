@@ -12,9 +12,9 @@ class InventarisController extends Controller
      */
     public function index()
     {
-        $maxdata = 10 ;
+        $maxdata = 5 ;
         if(request('search')){
-            $inventaris = Inventaris::where('nama_barang','like','%'.request('search').'%')->paginate($maxdata)->withQuery();
+            $inventaris = Inventaris::where('nama_barang','like','%'.request('search').'%')->paginate($maxdata)->appends(['search' => request('search')]);
             return view('inventaris.index', compact('inventaris'));
         } else {
 

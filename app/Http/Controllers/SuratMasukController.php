@@ -15,7 +15,7 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $maxdata = 10;
+        $maxdata = 5;
         if (request('search')) {
             $suratmasuk = SuratMasuk::where('nomor_surat_masuk', 'like', '%' . request('search') . '%')->paginate($maxdata)->appends(['search' => request('search')]);
             return view('surat_masuk.index', compact('suratmasuk'));
@@ -75,7 +75,10 @@ class SuratMasukController extends Controller
         );
 
         if (!empty($request->file)) {
-            $formattedNama = str_replace(' ', '_', $request->file('file')->getClientOriginalName());
+            $originalName = $request->file('file')->getClientOriginalName();
+            $namenoextension = pathinfo($originalName, PATHINFO_FILENAME);
+
+            $formattedNama = str_replace(' ', '_', $namenoextension);
             $fileName = 'suratmasuk-' . $formattedNama . '-' . uniqid() . '.' . $request->file->extension();
             $request->file->move(public_path('dokumen/suratmasuk/'), $fileName);
         } else {

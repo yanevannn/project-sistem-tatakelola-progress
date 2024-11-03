@@ -29,13 +29,6 @@ class SuratMasuk extends Model
         'keterangan'
     ];
 
-    // Relasi ke User (Many-to-One)
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, 'id_user');
-    // }
-
-    // // Relasi ke Periode (Many-to-One)
     public function periode()
     {
         return $this->belongsTo(Periode::class, 'id_periode');
