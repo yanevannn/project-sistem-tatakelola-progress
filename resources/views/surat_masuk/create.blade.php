@@ -57,18 +57,18 @@
                         <div class="row">
                             <div class="form-group col-lg-6">
                                 <label for="tanggalmasuk">Tanggal Masuk</label>
-                                <input type="date" name="tanggalmasuk" class="form-control"
-                                    placeholder="masukkan tanggal masuk surat" value="{{ old('tanggalmasuk') }}"required>
-                                    @error('tanggalmasuk')
+                                <input type="date" name="tanggal_masuk" class="form-control"
+                                    placeholder="masukkan tanggal masuk surat" value="{{ old('tanggal_masuk') }}"required>
+                                    @error('tanggal_masuk')
                                         <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                                     @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="tanggalkegiatan">Tanggal Kegiatan</label>
-                                <input type="date" name="tanggalkegiatan" class="form-control"
+                                <input type="date" name="tanggal_kegiatan" class="form-control"
                                     placeholder="masukkan tanggal kegiatan surat"
-                                    value="{{ old('tanggalkegiatan') }}"required>
-                                    @error('tanggalkegiatan')
+                                    value="{{ old('tanggal_kegiatan') }}"required>
+                                    @error('tanggal_kegiatan')
                                         <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                                     @enderror
                             </div>

@@ -116,11 +116,9 @@
                                                     <button type="button" class="btn btn-secondary mb-0">Download</button>
                                                 </td>
                                                 <td class="align-middle text-center m-0">
-                                                    <form action="" class="mb-0">
-                                                        <a href=""
+                                                        <a href="{{ route('suratmasuk.edit', $sm->id) }}"
                                                             class="font-weight-bold text-xs text-white btn btn-warning mb-0"
                                                             data-toggle="tooltip" data-original-title="Edit">EDIT</a>
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

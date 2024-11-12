@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/suratmasuk", [SuratMasukController::class, 'index'])->name('suratmasuk.index');
     Route::get("/suratmasuk/create", [SuratMasukController::class, 'create'])->name('suratmasuk.create');
     Route::post('/suratmasuk/store', [SuratMasukController::class, 'store'])->name('suratmasuk.store');
+    Route::get('/suratmasuk/edit/{id}', [SuratMasukController::class, 'edit'])->name('suratmasuk.edit');
+    Route::put('/suratmasuk/{id}',[SuratMasukController::class, 'update'])->name('suratmasuk.update');
 
     // Surat Keluar
     Route::get("/suratkeluar", [SuratKeluarController::class, 'index'])->name('suratkeluar.index');
@@ -62,7 +64,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/inventaris/delete{id}', [InventarisController::class, 'destroy'])->name('inventaris.destroy');
 
     // Keuangan
-    Route::get('/keuangan', [KeuanganController::class, 'index']);
+    Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
     Route::get('/keuangan/create', [KeuanganController::class, 'create'])->name('keuangan.create');
     Route::get('/keuangan/edit', [KeuanganController::class, 'edit2'])->name('keuangan.edit');
+    Route::post('/keuangan/store', [KeuanganController::class, 'store'])->name('keuangan.store');
+
 });

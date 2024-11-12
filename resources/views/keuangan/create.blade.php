@@ -8,7 +8,7 @@
                 <h6>Tambah Data Transaksi</h6>
             </div>
             <div class="card-body p-3">
-                <form action="{{ route('index.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('keuangan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf <!-- Token CSRF untuk keamanan Laravel -->
                     <div class="form-group">
                         <label for="periode">Periode</label>
