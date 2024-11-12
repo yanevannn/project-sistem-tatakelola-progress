@@ -8,36 +8,39 @@
                 <h6>Tambah Data Transaksi</h6>
             </div>
             <div class="card-body p-3">
-                <form action="{{ route('index.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('keuangan.update', $keuangan->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf <!-- Token CSRF untuk keamanan Laravel -->
+                    @method('PUT')
                     <div class="form-group">
                         <label for="periode">Periode</label>
                         <select name="periode" class="form-control mb-4" required>
-                            <option value="baik" selected>2021</option>
-                            <option value="rusak">2022</option>
+                            <option value="{{ $keuangan->id_periode }}" selected>{{ $keuangan->periode->tahun }}</option>
+                            @foreach ($periode as $p ) 
+                            <option value="{{ $p->id}}">{{ $p->tahun }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="periode">Jenis Transaksi</label>
-                        <select name="periode" class="form-control mb-4" required>
-                            <option value="pemasukan" selected>pemasukan</option>
-                            <option value="pengeluran">pengeluaran</option>
+                        <label for="jenistransaksi">Jenis Transaksi</label>
+                        <select name="jenistransaksi" class="form-control mb-4" required>
+                            <option value="pemasukan" {{ $keuangan->pemasukan != 0 && $keuangan->pengeluaran == 0 ? 'selected' : '' }}>Pemasukan</option>
+                            <option value="pengeluaran" {{ $keuangan->pengeluaran != 0 && $keuangan->pemasukan == 0 ? 'selected' : '' }}>Pengeluaran</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="periode">Tanggal Transaksi</label>
-                        <input type="date" name="tgl_transaksi" class="form-control" value="2024-10-29"required>
+                        <label for="tanggal">Tanggal Transaksi</label>
+                        <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') ?? $keuangan->tanggal }}"required>
                     </div>
 
                     <div class="form-group ">
-                        <label for="periode">Jumlah Transaksi</label>
+                        <label for="jumlah_transaksi">Jumlah Transaksi</label>
                         <input type="number" name="jumlah_transaksi" class="form-control"
-                            placeholder="masukkan jumlah transaksi" value="100.000"required>
+                            placeholder="masukkan jumlah transaksi" value="{{ old('jumlah_transaksi') ?? number_format(($keuangan->pemasukan != 0 ? $keuangan->pemasukan : $keuangan->pengeluaran), 0, '', '')}}"required>
                     </div>
                     <div class="form-group">
-                        <label for="periode">Keterangan</label>
+                        <label for="keterangan">Keterangan</label>
                         <input type="text" name="keterangan" class="form-control"
-                            placeholder="masukkan keterangan transaksi" value="Iuran Bulanan"required>
+                            placeholder="masukkan keterangan transaksi" value="{{ old('keterangan') ?? $keuangan->keterangan}}"required>
                     </div>
 
                     {{-- <div class="form-group">

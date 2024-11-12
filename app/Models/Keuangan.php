@@ -20,4 +20,7 @@ class Keuangan extends Model
         'updated_at',
         'created_at',
     ];
+    public function periode(){
+        return $this->belongsTo(Periode::class, 'id_periode');
+    }
 }

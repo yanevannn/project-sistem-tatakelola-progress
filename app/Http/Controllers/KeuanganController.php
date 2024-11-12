@@ -91,10 +91,12 @@ class KeuanganController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {}
-    public function edit2()
+    public function edit(string $id)
     {
-        return view('keuangan.edit');
+        $keuangan = Keuangan::findOrFail($id);
+        $periode = Periode::all();
+        // dd($keuangan, $periode);
+        return view('keuangan.edit', compact('keuangan', 'periode'));
     }
 
     /**
@@ -102,7 +104,43 @@ class KeuanganController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Auth::user();
+        $request->validate([
+            'periode' => 'required',
+            'tanggal' => 'required|date',
+            'jumlah_transaksi' => 'required|numeric',
+            'keterangan' => 'required|string'
+        ], [
+            'periode.required' => 'Periode Wajib Diisi.',
+            'tanggal.required' => 'Tanggal Wajib Diisi',
+            'jumlah_transaksi.required' => 'Transaksi Wajib Diisi',
+            'jumlah_transaksi.numeric' => 'Inputan harus berupa angka',
+            'keterangan.required' => 'wajib mengisi keterangan transaksi',
+            'keterangan.string' => 'keterangan wajib beruka huruf'
+        ]);
+
+        $keuangan = Keuangan::find($id);
+
+        $jenistransaksi = $request->jenistransaksi;
+
+        $data = [
+            'id_user' => $user->id,
+            'id_periode' => $request->periode,
+            'tanggal' => $request->tanggal,
+            'keterangan' => $request->keterangan,
+        ];
+
+
+        if ($jenistransaksi === 'pemasukan') {
+            $data['pemasukan'] = $request->jumlah_transaksi;
+            $data['pengeluaran'] = 0;  // Set pengeluaran menjadi 0 jika jenis transaksi adalah pemasukan
+        } else {
+            $data['pengeluaran'] = $request->jumlah_transaksi;
+            $data['pemasukan'] = 0;  // Set pemasukan menjadi 0 jika jenis transaksi adalah pengeluaran
+        }
+
+        $keuangan->update($data);
+        return redirect()->route('keuangan.index');
     }
 
     /**

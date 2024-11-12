@@ -66,7 +66,8 @@ Route::middleware(['auth'])->group(function () {
     // Keuangan
     Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
     Route::get('/keuangan/create', [KeuanganController::class, 'create'])->name('keuangan.create');
-    Route::get('/keuangan/edit', [KeuanganController::class, 'edit2'])->name('keuangan.edit');
     Route::post('/keuangan/store', [KeuanganController::class, 'store'])->name('keuangan.store');
+    Route::get('/keuangan/edit/{id}', [KeuanganController::class, 'edit'])->name('keuangan.edit');
+    Route::put('/keuangan/{id}', [KeuanganController::class, 'update'])->name('keuangan.update');
 
 });

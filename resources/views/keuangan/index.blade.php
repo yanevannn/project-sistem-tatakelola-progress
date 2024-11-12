@@ -75,7 +75,7 @@
                                     <a href="{{ route('keuangan.edit', $k->id) }}"
                                         class="font-weight-bold text-xs text-white btn btn-warning mb-0"
                                         data-toggle="tooltip" data-original-title="Edit">EDIT</a>
-                                    <form action="" method="POST"
+                                    {{-- <form action="" method="POST"
                                         style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -84,7 +84,7 @@
                                             data-original-title="Delete">
                                             Delete
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                         @empty
