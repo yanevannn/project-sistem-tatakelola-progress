@@ -21,7 +21,7 @@ class KeuanganController extends Controller
         if ($periode) {
             $query->where('id_periode', $periode);
         }
-    
+
         $keuangan = $query->orderBy('tanggal', 'asc')->get();
 
         // Hitung total pemasukan, pengeluaran, dan saldo akhir
@@ -29,7 +29,7 @@ class KeuanganController extends Controller
         $totalPengeluaran = $keuangan->sum('pengeluaran');
         $saldoAkhir = $totalPemasukan - $totalPengeluaran;
 
-        return view ('keuangan.index', compact('keuangan','user','periodes', 'periode','totalPemasukan', 'totalPengeluaran', 'saldoAkhir'));
+        return view('keuangan.index', compact('keuangan', 'user', 'periodes', 'periode', 'totalPemasukan', 'totalPengeluaran', 'saldoAkhir'));
     }
 
     /**
@@ -37,7 +37,8 @@ class KeuanganController extends Controller
      */
     public function create()
     {
-        return view('keuangan.create');
+        $periode = Periode::all();
+        return view('keuangan.create', compact('periode'));
     }
 
     /**
@@ -45,7 +46,38 @@ class KeuanganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $request->validate([
+            'periode' => 'required',
+            'tanggal' => 'required|date',
+            'jumlah_transaksi' => 'required|numeric',
+            'keterangan' => 'required|string'
+        ], [
+            'periode.required' => 'Periode Wajib Diisi.',
+            'tanggal.required' => 'Tanggal Wajib Diisi',
+            'jumlah_transaksi.required' => 'Transaksi Wajib Diisi',
+            'jumlah_transaksi.numeric' => 'Inputan harus berupa angka',
+            'keterangan.required' => 'wajib mengisi keterangan transaksi',
+            'keterangan.string' => 'keterangan wajib beruka huruf'
+        ]);
+        $jenistransaksi = $request->jenistransaksi;
+
+        $data = [
+            'id_user' => $user->id,
+            'id_periode' => $request->periode,
+            'tanggal' => $request->tanggal,
+            'keterangan' => $request->keterangan,
+        ];
+
+        if ($jenistransaksi === 'pemasukan') {
+            $data['pemasukan'] = $request->jumlah_transaksi;
+        } else {
+            $data['pengeluaran'] = $request->jumlah_transaksi;
+        }
+
+        Keuangan::create($data);
+
+        return redirect()->route('keuangan.index');
     }
 
     /**
@@ -59,10 +91,7 @@ class KeuanganController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        
-    }
+    public function edit(string $id) {}
     public function edit2()
     {
         return view('keuangan.edit');

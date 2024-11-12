@@ -14,41 +14,34 @@
                         <label for="periode">Periode</label>
                         <select name="periode" class="form-control mb-4" required>
                             <option value="" disabled selected>Pilih periode</option>
-                            <option value="2021" {{ old('periode') == '2021' ? 'selected' : '' }}>2021</option>
-                            <option value="2022" {{ old('periode') == '2022' ? 'selected' : '' }}>2022</option>
+                            @foreach ($periode as $p ) 
+                            <option value="{{ $p->id}}">{{ $p->tahun }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="jensi_transaksi">Jenis Transaksi</label>
-                        <select name="jenis_transaksi" class="form-control mb-4" required>
+                        <label for="jenistransaksi">Jenis Transaksi</label>
+                        <select name="jenistransaksi" class="form-control mb-4" required>
                             <option value="" disabled selected>Pilih Transaksi</option>
-                            <option value="pemasukan" {{ old('jenis_transaksi') == 'pemasukan' ? 'selected' : '' }}>pemasukan</option>
-                            <option value="pengeluaran" {{ old('jenis_transaksi') == 'pengeluaran' ? 'selected' : '' }}>pengeluaran</option>
+                            <option value="pemasukan">pemasukan</option>
+                            <option value="pengeluaran">pengeluaran</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="periode">Tanggal Transaksi</label>
-                        <input type="date" name="tgl_transaksi" class="form-control" value="{{ old('tgl_transaksi') }}"required>
+                        <label for="tanggal">Tanggal Transaksi</label>
+                        <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}"required>
                     </div>
 
                     <div class="form-group ">
-                        <label for="periode">Jumlah Transaksi</label>
+                        <label for="jumlah_transaksi">Jumlah Transaksi</label>
                         <input type="number" name="jumlah_transaksi" class="form-control"
                             placeholder="masukkan jumlah transaksi" value="{{ old('jumlah_transaksi') }}"required>
                     </div>
                     <div class="form-group">
-                        <label for="periode">Keterangan</label>
+                        <label for="keterangan">Keterangan</label>
                         <input type="text" name="keterangan" class="form-control"
                             placeholder="masukkan keterangan transaksi" value="{{ old('keterangan') }}"required>
                     </div>
-
-                    {{-- <div class="form-group">
-                        <label for="foto">Foto Inventaris</label>
-                        <input type="file" class="form-control" id="foto" name="foto">
-                        @error('foto')
-                            <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan kesalahan -->
-                        @enderror
-                    </div> --}}
                     <div>
                         <button type="submit"
                             class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">Tambah</button>
