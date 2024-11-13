@@ -32,7 +32,9 @@ Route::middleware(['auth'])->group(function () {
 
     //Pengurus
     Route::get("/pengurus", [DataPengurusController::class, 'index'])->name('pengurus.index');
-
+    Route::get("/pengurus/create", [DataPengurusController::class, 'create'])->name('pengurus.create');
+    Route::get("/pengurus/store", [DataPengurusController::class, 'store'])->name('pengurus.store');
+    
     //Surat Masuk
     Route::get("/suratmasuk", [SuratMasukController::class, 'index'])->name('suratmasuk.index');
     Route::get("/suratmasuk/create", [SuratMasukController::class, 'create'])->name('suratmasuk.create');

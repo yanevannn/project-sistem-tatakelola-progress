@@ -4,6 +4,18 @@
 @section('content')
     <div class="row">
         <div class="col-12">
+            <div class="form-group col-lg-2">
+                <label for="periode">PERIODE</label>
+                <select name="periode" class="form-control mb-4" required onchange="this.form.submit()">
+                    <option value="" disabled>Pilih periode</option>
+                    @foreach ($periode as $p)
+                        <option value="{{ $p->id }}"
+                            {{ request('periode', auth()->user()->id_periode) == $p->id ? 'selected' : '' }}>
+                            {{ $p->tahun }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Tabel Pengurus</h6>
@@ -87,7 +99,7 @@
         </div>
     </div>
     <button class="btn bg-gradient-success">
-        <a href="" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
-            data-original-title="Edit user">Tambah Data</a>
+        <a href="{{ route('pengurus.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
+            data-original-title="tambah">Tambah Data</a>
     </button>
 @endsection
