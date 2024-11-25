@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id(); // Primary Key
             $table->foreignId('id_user')->constrained('users'); // Foreign Key to users table
             $table->foreignId('id_periode')->constrained('periodes'); // Foreign Key to periode table
-            // $table->string('id_periode'); // Foreign Key to periode table
-            // $table->string('id_user'); // Foreign Key to periode table
             $table->string('nomor_surat_masuk')->unique(); // Unique constraint for surat number
             $table->string('pengirim'); // Sender's name
             $table->date('tanggal_surat'); // Date of the letter

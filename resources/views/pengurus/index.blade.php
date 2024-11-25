@@ -99,7 +99,7 @@
         </div>
     </div>
     <button class="btn bg-gradient-success">
-        <a href="{{ route('pengurus.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
+        <a href="{{ route('user.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
             data-original-title="tambah">Tambah Data</a>
     </button>
 @endsection

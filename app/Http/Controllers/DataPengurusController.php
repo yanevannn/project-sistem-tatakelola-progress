@@ -15,9 +15,6 @@ class DataPengurusController extends Controller
      */
     public function index()
     {
-        $periode = Periode::all();
-        $pengurus = User::all();
-        return view('pengurus.index', compact('pengurus', 'periode'));
     }
 
     /**
@@ -25,8 +22,6 @@ class DataPengurusController extends Controller
      */
     public function create()
     {
-        $periode = Periode::all();
-        return view('pengurus.create', compact('periode'));
     }
 
     /**

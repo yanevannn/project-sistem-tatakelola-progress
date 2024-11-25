@@ -9,6 +9,7 @@ use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DataPengurusController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -26,14 +27,14 @@ Route::get('/home', function () {
 Route::middleware(['auth'])->group(function () {
     // Users
     Route::get('/logout', [SesiController::class, 'logout']);
-    Route::get('/dashboard', [PengurusController::class, 'index']);
+    Route::get('/dashboard', [UserController::class, 'index']);
     // Route::get('/dashboard/pengurusinti',[PengurusController::class, 'pengurusInti'])->middleware('userAccess:PengurusInti');
     // Route::get('/dashboard/pengurus',[PengurusController::class, 'pengurus'])->middleware('userAccess:Pengurus');
 
-    //Pengurus
-    Route::get("/pengurus", [DataPengurusController::class, 'index'])->name('pengurus.index');
-    Route::get("/pengurus/create", [DataPengurusController::class, 'create'])->name('pengurus.create');
-    Route::get("/pengurus/store", [DataPengurusController::class, 'store'])->name('pengurus.store');
+    //User
+    Route::get("/user", [UserController::class, 'indexPengurus'])->name('user.index');
+    Route::get("/user/create", [UserController::class, 'create'])->name('user.create');
+    Route::post("/user/store", [UserController::class, 'store'])->name('user.store');
     
     //Surat Masuk
     Route::get("/suratmasuk", [SuratMasukController::class, 'index'])->name('suratmasuk.index');
@@ -71,5 +72,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/keuangan/store', [KeuanganController::class, 'store'])->name('keuangan.store');
     Route::get('/keuangan/edit/{id}', [KeuanganController::class, 'edit'])->name('keuangan.edit');
     Route::put('/keuangan/{id}', [KeuanganController::class, 'update'])->name('keuangan.update');
+    
 
 });

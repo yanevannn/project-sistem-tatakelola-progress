@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ request()->is('pengurus*') ? 'active' : '' }}" href="/pengurus">
+                <a class="nav-link  {{ request()->is('user*') ? 'active' : '' }}" href="/user">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-archive-2 bg-secondary"></i>

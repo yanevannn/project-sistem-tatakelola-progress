@@ -15,19 +15,19 @@ class PeriodeSeeder extends Seeder
     {
         DB::table('periodes')->insert([
             [
-                'tahun' => 2023,
+                'tahun' => 2024,
                 'status' => 'aktif',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'tahun' => 2022,
+                'tahun' => 2023,
                 'status' => 'non-aktif',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'tahun' => 2021,
+                'tahun' => 2022,
                 'status' => 'non-aktif',
                 'created_at' => now(),
                 'updated_at' => now(),

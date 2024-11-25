@@ -26,4 +26,5 @@ public/dokumen/suratmasuk/*
 public/dokumen/suratkeluar/*
 public/image/keuangan/*
 public/image/inventaris/*
+public/dokumen/*
 !public/image/inventaris/nophoto.jpg

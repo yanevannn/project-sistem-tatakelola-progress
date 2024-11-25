@@ -12,20 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('nim')->unique();
-            $table->string('nama');
-            $table->string('jabatan')->nullable();
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
-            $table->string('email')->unique();
-            $table->string('no_hp')->nullable();
-            $table->text('alamat')->nullable();
-            $table->string('password');
-            $table->enum('role', ['PengurusInti', 'Pengurus'])->default('Pengurus'); // Role Pengurus Inti dan Pengurus
-            $table->rememberToken();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->foreignId('id_periode')->constrained('periodes')->cascadeOnDelete(); // Foreign key ke tabel periodes
+            $table->string('nim'); // NIM
+            $table->string('nama'); // Nama pengguna
+            $table->enum('role', ['Ketua', 'Bendahara', 'Sekretaris', 'Divisi I', 'Divisi II', 'Divisi III']); // Role
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']); // Jenis kelamin
+            $table->string('email'); // Email
+            $table->string('no_hp')->nullable(); // Nomor HP opsional
+            $table->text('alamat')->nullable(); // Alamat opsional
+            $table->string('password'); // Kata sandi
+            $table->timestamps(); // Kolom created_at dan updated_at otomatis
         
+            // Membuat constraint unik berdasarkan kombinasi id_periode dan nim/email
+            $table->unique(['id_periode', 'nim'], 'unique_nim_periode');
+            $table->unique(['id_periode', 'email'], 'unique_email_periode');
         });
+        
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

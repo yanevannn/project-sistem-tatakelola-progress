@@ -17,34 +17,18 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'nim' => '12345678',
-                'nama' => 'John Doe',
-                'jabatan' => 'Ketua',
+                'id_periode' => 1, // Contoh periode ID
+                'nim' => '210030393',
+                'nama' => 'Wayan Evan Ada Munayana',
+                'role' => 'Ketua',
                 'jenis_kelamin' => 'Laki-laki',
-                'email' => 'johndoe@example.com',
-                'no_hp' => '081234567890',
-                'alamat' => 'Jl. Merdeka No.1, Jakarta',
+                'email' => 'yanevan01@gmail.com',
+                'no_hp' => '08123456789',
+                'alamat' => 'Jl. Contoh No. 1, Kota Jakarta',
                 'password' => Hash::make('password123'),
-                'role' => 'PengurusInti',
-                'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'nim' => '87654321',
-                'nama' => 'Jane Smith',
-                'jabatan' => 'Sekretaris',
-                'jenis_kelamin' => 'Perempuan',
-                'email' => 'janesmith@example.com',
-                'no_hp' => '081298765432',
-                'alamat' => 'Jl. Sudirman No.45, Bandung',
-                'password' => Hash::make('password123'),
-                'role' => 'Pengurus',
-                'remember_token' => Str::random(10),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            ]
         ]);
-
     }
 }

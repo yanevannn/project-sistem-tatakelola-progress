@@ -18,9 +18,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nama',              // Nama pengguna
+        'email',             // Email pengguna
+        'password',          // Password pengguna
+        'id_periode',        // ID Periode (menghubungkan user dengan periode)
+        'nim',               // NIM pengguna
+        'role',              // Role pengguna (misalnya, Ketua, Bendahara, dll.)
+        'jenis_kelamin',     // Jenis kelamin pengguna (Laki-laki/Perempuan)
+        'no_hp',             // Nomor HP pengguna (opsional)
+        'alamat',            // Alamat pengguna (opsional)
     ];
 
     /**
@@ -44,5 +50,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function periode()
+    {
+        return $this->belongsTo(Periode::class, 'id_periode');
     }
 }
