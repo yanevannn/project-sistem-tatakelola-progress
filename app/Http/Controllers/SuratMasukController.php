@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class SuratMasukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $maxdata = 5;
@@ -25,18 +22,13 @@ class SuratMasukController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $periode = Periode::all();
         return view('surat_masuk.create', compact('periode'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         // $user = auth()->user();
@@ -55,20 +47,20 @@ class SuratMasukController extends Controller
                 'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
             ],
             [
-                'periode.required' => 'Periode wajib dipilih.', // Pesan kesalahan jika periode tidak diisi
-                'periode.exists' => 'Periode yang dipilih tidak valid.', // Pesan kesalahan jika periode tidak ada di database
-                'no_surat_masuk.required' => 'Nomor surat wajib diisi.', // Pesan kesalahan jika nomor surat tidak diisi
-                'no_surat_masuk.unique' => 'Nomor surat sudah ada.', // Pesan kesalahan jika nomor surat sudah ada di database
-                'penerima.required' => 'Penerima wajib diisi.', // Pesan kesalahan jika penerima tidak diisi
-                'pengirim.required' => 'Pengirim wajib diisi.', // Pesan kesalahan jika pengirim tidak diisi
-                'tanggal_masuk.required' => 'Tanggal masuk wajib diisi.', // Pesan kesalahan jika tanggal masuk tidak diisi
-                'tanggal_masuk.date' => 'Tanggal masuk harus dalam format tanggal yang valid.', // Pesan kesalahan jika tanggal masuk tidak valid
-                'tanggal_kegiatan.required' => 'Tanggal kegiatan wajib diisi.', // Pesan kesalahan jika tanggal kegiatan tidak diisi
-                'tanggal_kegiatan.date' => 'Tanggal kegiatan harus dalam format tanggal yang valid.', // Pesan kesalahan jika tanggal kegiatan tidak valid
-                'keterangan.required' => 'Keterangan wajib diisi.', // Pesan kesalahan jika keterangan tidak diisi
-                'file.file' => 'File harus berupa file yang valid.', // Pesan kesalahan jika file tidak valid
-                'file.mimes' => 'File harus berupa format pdf, doc, atau docx.', // Pesan kesalahan jika file bukan jenis yang ditentukan
-                'file.max' => 'Ukuran file maksimal 2MB.' // Pesan kesalahan jika ukuran file lebih dari 2MB
+                'periode.required' => 'Periode wajib dipilih.',
+                'periode.exists' => 'Periode yang dipilih tidak valid.',
+                'no_surat_masuk.required' => 'Nomor surat wajib diisi.',
+                'no_surat_masuk.unique' => 'Nomor surat sudah ada.',
+                'penerima.required' => 'Penerima wajib diisi.',
+                'pengirim.required' => 'Pengirim wajib diisi.',
+                'tanggal_masuk.required' => 'Tanggal masuk wajib diisi.',
+                'tanggal_masuk.date' => 'Tanggal masuk harus dalam format tanggal yang valid.',
+                'tanggal_kegiatan.required' => 'Tanggal kegiatan wajib diisi.',
+                'tanggal_kegiatan.date' => 'Tanggal kegiatan harus dalam format tanggal yang valid.',
+                'keterangan.required' => 'Keterangan wajib diisi.',
+                'file.file' => 'File harus berupa file yang valid.',
+                'file.mimes' => 'File harus berupa format pdf, doc, atau docx.',
+                'file.max' => 'Ukuran file maksimal 2MB.'
             ]
         );
 
@@ -96,21 +88,10 @@ class SuratMasukController extends Controller
             'file' => $fileName
         ]);
 
-
-        return redirect()->route('suratmasuk.index');
+        return redirect()->route('suratmasuk.index')->with('success', 'Data surat masuk berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+   
     public function edit(string $id)
     {
         $suratmasuk = SuratMasuk::findOrfail($id);
@@ -118,50 +99,57 @@ class SuratMasukController extends Controller
         return view('surat_masuk.edit', compact('suratmasuk', 'periode'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $user = Auth::user();
         $suratmasuk = SuratMasuk::findOrFail($id);
         $fileLama = $suratmasuk->file;
 
-        // Validasi Input
-        $request->validate([
-            'periode' => 'required|exists:periode,id',
-            'no_surat_masuk' => 'required|string|max:255|unique:surat_masuk,nomor_surat_masuk,' . $id,
-            'penerima' => 'required|string|max:255',
-            'pengirim' => 'required|string|max:255',
-            'tanggal_terima' => 'required|date',
-            'tanggal_surat' => 'required|date',
-            'keterangan' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
-        ], [
-            'periode.required' => 'Periode wajib dipilih.',
-            'periode.exists' => 'Periode yang dipilih tidak valid.',
-            'no_surat_masuk.required' => 'Nomor surat wajib diisi.',
-            'no_surat_masuk.unique' => 'Nomor surat sudah ada.',
-            'penerima.required' => 'Penerima wajib diisi.',
-            'pengirim.required' => 'Pengirim wajib diisi.',
-            'tanggal_terima.required' => 'Tanggal masuk wajib diisi.',
-            'tanggal_terima.date' => 'Tanggal masuk harus berupa format tanggal yang valid.',
-            'tanggal_surat.required' => 'Tanggal kegiatan wajib diisi.',
-            'tanggal_surat.date' => 'Tanggal kegiatan harus berupa format tanggal yang valid.',
-            'keterangan.required' => 'Keterangan wajib diisi.',
-            'file.file' => 'File harus berupa file yang valid.',
-            'file.mimes' => 'File harus berupa format pdf, doc, atau docx.',
-            'file.max' => 'Ukuran file maksimal 2MB.'
-        ]);
+        $request->validate(
+            [
+                'id_periode' => 'required|exists:periode,id',
+                'nomor_surat_masuk' => 'required|unique:surat_masuk,nomor_surat_masuk,' . $id . '|string|max:255',
+                'nomor_surat_masuk' => 'required||string|max:255',
+                'penerima' => 'required|string|max:255',
+                'pengirim' => 'required|string|max:255',
+                'tanggal_terima' => 'required|date',
+                'tanggal_surat' => 'required|date',
+                'keterangan' => 'required|string',
+                'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
+            ],
+            [
+                'id_periode.required' => 'Periode wajib dipilih.',
+                'id_periode.exists' => 'Periode yang dipilih tidak valid.',
+                'nomor_surat_masuk.required' => 'Nomor surat masuk wajib diisi.',
+                'nomor_surat_masuk.unique' => 'Nomor surat masuk sudah ada.',
+                'nomor_surat_masuk.string' => 'Nomor surat masuk harus berupa teks.',
+                'nomor_surat_masuk.max' => 'Nomor surat masuk maksimal 255 karakter.',
+                'penerima.required' => 'Penerima wajib diisi.',
+                'penerima.string' => 'Penerima harus berupa teks.',
+                'penerima.max' => 'Penerima maksimal 255 karakter.',
+                'pengirim.required' => 'Pengirim wajib diisi.',
+                'pengirim.string' => 'Pengirim harus berupa teks.',
+                'pengirim.max' => 'Pengirim maksimal 255 karakter.',
+                'tanggal_terima.required' => 'Tanggal terima wajib diisi.',
+                'tanggal_terima.date' => 'Tanggal terima harus berupa tanggal yang valid.',
+                'tanggal_surat.required' => 'Tanggal surat wajib diisi.',
+                'tanggal_surat.date' => 'Tanggal surat harus berupa tanggal yang valid.',
+                'keterangan.required' => 'Keterangan wajib diisi.',
+                'keterangan.string' => 'Keterangan harus berupa teks.',
+                'file.file' => 'File harus berupa file yang valid.',
+                'file.mimes' => 'File harus berupa format pdf, doc, atau docx.',
+                'file.max' => 'Ukuran file maksimal 2MB.'
+            ]            
+        );
+        
 
-        // Proses File
         if ($request->hasFile('file')) {
             $originalName = $request->file('file')->getClientOriginalName();
-            $fileWithoutExtension = pathinfo($originalName, PATHINFO_FILENAME);
-            $safeFileName = str_replace(' ', '_', $fileWithoutExtension);
-            $fileName = 'suratmasuk-' . $safeFileName . '-' . uniqid() . '.' . $request->file->extension();
+            $namenoextension = pathinfo($originalName, PATHINFO_FILENAME);
 
-            // Simpan file baru
+            $formattedNama = str_replace(' ', '_', $namenoextension);
+            $fileName = 'suratmasuk-' . $formattedNama . '-' . uniqid() . '.' . $request->file->extension();
+            //Pindahkan file baru
             $request->file->move(public_path('dokumen/suratmasuk/'), $fileName);
 
             // Hapus file lama jika ada
@@ -169,15 +157,13 @@ class SuratMasukController extends Controller
                 unlink(public_path('dokumen/suratmasuk/' . $fileLama));
             }
         } else {
-            // Jika tidak ada file baru, gunakan file lama
             $fileName = $fileLama;
         }
 
-        // Update Data
         $suratmasuk->update([
             'id_user' => $user->id,
-            'id_periode' => $request->periode,
-            'nomor_surat_masuk' => $request->no_surat_masuk,
+            'id_periode' => $request->id_periode,
+            'nomor_surat_masuk' => $request->nomor_surat_masuk,
             'penerima' => $request->penerima,
             'pengirim' => $request->pengirim,
             'tanggal_surat' => $request->tanggal_surat,
@@ -186,14 +172,9 @@ class SuratMasukController extends Controller
             'file' => $fileName
         ]);
 
-        // Redirect atau Response
-        return redirect()->route('suratmasuk.index')->with('success', 'Data surat masuk berhasil diperbarui.');
+        return redirect()->route('suratmasuk.index')->with('success', 'Data surat masuk berhasil diperbarui!');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

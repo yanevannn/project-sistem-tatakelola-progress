@@ -15,7 +15,7 @@
                         @method('PUT')
                         <div class="row coll-lg 12">
                             <div class="form-group col-lg-6">
-                                <label for="periode">Nomor Surat</label>
+                                <label for="nomor_surat_masuk">Nomor Surat</label>
                                 <input type="text" name="nomor_surat_masuk" class="form-control"
                                     placeholder="masukkan no surat" value="{{ $suratmasuk->nomor_surat_masuk }}"required>
                                 @error('nomor_surat_masuk')

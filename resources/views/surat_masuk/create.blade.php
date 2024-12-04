@@ -13,7 +13,6 @@
                         @csrf <!-- Token CSRF untuk keamanan Laravel -->
                         <div class="row">
                             <div class="form-group col-lg-6 mb-0">
-                                <input type="text" name="id_user" value="1" hidden>
                                 <div class="form-group">
                                     <label for="no_surat_masuk">Nomor Surat</label>
                                     <input type="text" name="no_surat_masuk" class="form-control"
