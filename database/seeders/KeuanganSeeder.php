@@ -27,40 +27,10 @@ class KeuanganSeeder extends Seeder
         Keuangan::create([
             'id_user' => 1,
             'id_periode' => 1,
-            'tanggal' => Carbon::create(2023, 1, 15),
-            'keterangan' => 'Penjualan Course',
-            'pemasukan' => 100000,
-            'pengeluaran' => 0,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        Keuangan::create([
-            'id_user' => 1,
-            'id_periode' => 1,
             'tanggal' => Carbon::create(2023, 1, 17),
             'keterangan' => 'Pembelian Materai',
             'pemasukan' => 0,
             'pengeluaran' => 10000,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        Keuangan::create([
-            'id_user' => 1,
-            'id_periode' => 1,
-            'tanggal' => Carbon::create(2023, 1, 17),
-            'keterangan' => 'Uang Tiket',
-            'pemasukan' => 10000000,
-            'pengeluaran' => 0,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        Keuangan::create([
-            'id_user' => 1,
-            'id_periode' => 2,
-            'tanggal' => Carbon::create(2022, 1, 17),
-            'keterangan' => 'Uang Periode Sebelumnya ',
-            'pemasukan' => 1000000,
-            'pengeluaran' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

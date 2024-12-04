@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Periode extends Model
 {
     use HasFactory;
+
+    protected $table = 'periode';
     
     protected $primaryKey = 'id';
 

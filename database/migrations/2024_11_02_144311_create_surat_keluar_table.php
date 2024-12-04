@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('surat_keluar', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_user')->constrained('users'); 
-            $table->foreignId('id_periode')->constrained('periodes');
+            $table->foreignId('id_periode')->constrained('periode');
             $table->string('nomor_surat_keluar')->unique(); 
             $table->string('tertuju'); 
             $table->string('keterangan'); 

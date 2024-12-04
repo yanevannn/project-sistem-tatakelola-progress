@@ -77,6 +77,7 @@
                             <div class="form-group col-lg-6">
                                 <label for="file">File Surat</label>
                                 <input type="file" class="form-control" name="file">
+                            <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB </p>
                                 @error('file')
                                         <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                                     @enderror

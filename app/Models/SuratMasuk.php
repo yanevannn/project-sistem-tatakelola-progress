@@ -11,7 +11,7 @@ class SuratMasuk extends Model
     use HasFactory;
 
     // Tentukan nama tabel jika tidak menggunakan penamaan default (plural)
-    protected $table = 'surat_masuks';
+    protected $table = 'surat_masuk';
 
     // Tentukan primary key jika tidak menggunakan 'id'
     protected $primaryKey = 'id';

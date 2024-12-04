@@ -43,12 +43,12 @@
                     <div class="row">
                         <div class="form-group col-lg-6">
                             <label for="tanggal_surat">Tanggal Surat</label>
-                            <input type="text" name="tanggal_surat" class="form-control"
+                            <input type="date" name="tanggal_surat" class="form-control"
                                 placeholder="masukkan tanggal masuk surat" value="{{ $suratkeluar->tanggal_surat }}"required>
                         </div>
                         <div class="form-group col-lg-6">
                             <label for="tanggal_terkirim">Tanggal Dikirim</label>
-                            <input type="text" name="tanggal_terkirim" class="form-control"
+                            <input type="date" name="tanggal_terkirim" class="form-control"
                                 placeholder="masukkan tanggal dikirim surat" value="{{ $suratkeluar->tanggal_terkirim }}"required>
                         </div>
                     </div>
@@ -56,6 +56,8 @@
                     <div class="form-group">
                         <label for="file">File Surat</label>
                         <input type="file" class="form-control" name="file" value="{{ $suratkeluar->file }}">
+                        <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB </p>
+
                         @error('file')
                             <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan kesalahan -->
                         @enderror

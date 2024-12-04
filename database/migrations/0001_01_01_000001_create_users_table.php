@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->foreignId('id_periode')->constrained('periodes')->cascadeOnDelete(); // Foreign key ke tabel periodes
+            $table->foreignId('id_periode')->constrained('periode')->cascadeOnDelete(); // Foreign key ke tabel periodes
             $table->string('nim'); // NIM
             $table->string('nama'); // Nama pengguna
             $table->enum('role', ['Ketua', 'Bendahara', 'Sekretaris', 'Divisi I', 'Divisi II', 'Divisi III']); // Role

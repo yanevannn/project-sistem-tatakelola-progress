@@ -13,25 +13,13 @@ class PeriodeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('periodes')->insert([
+        DB::table('periode')->insert([
             [
-                'tahun' => 2024,
+                'tahun' => '2023/2024',
                 'status' => 'aktif',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'tahun' => 2023,
-                'status' => 'non-aktif',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'tahun' => 2022,
-                'status' => 'non-aktif',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            ]
         ]);
     }
 }

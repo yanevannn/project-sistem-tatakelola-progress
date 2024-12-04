@@ -46,7 +46,7 @@ class UserController extends Controller
     {
         // Validasi input
         $request->validate([
-            'periode' => 'required|exists:periodes,id', // Periode harus dipilih dan valid di tabel 'periodes'
+            'periode' => 'required|exists:periode,id', // Periode harus dipilih dan valid di tabel 'periodes'
             'csv_file' => 'required|file|mimes:csv,txt' // File harus berupa CSV atau TXT
         ]);
 

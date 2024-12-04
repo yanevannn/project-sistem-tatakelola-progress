@@ -63,7 +63,7 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $p->email }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $p->jabatan }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $p->role }}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">2024</span>
@@ -72,19 +72,14 @@
                                             <span class="text-secondary text-xs font-weight-bold">Aktif</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <button class="btn btn-icon btn-2 btn-info" type="button">
-                                                <a href="" class="text-white">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                            </button>
                                             <button class="btn btn-icon btn-2 btn-warning" type="button">
                                                 <a href="" class="text-white">
-                                                    <i class="fas fa-edit"></i>
+                                                    Edit</i>
                                                 </a>
                                             </button>
                                             <button class="btn btn-icon btn-2 btn-danger" type="button">
                                                 <a href="" class="text-white">
-                                                    <i class="fas fa-trash-alt"></i>
+                                                    Hapus</i>
                                                 </a>
                                             </button>
                                         </td>

@@ -14,14 +14,22 @@
                         <div class="form-group">
                             <label for="periode">Periode</label>
                             <input type="text" name="periode" class="form-control" placeholder="masukkan periode"required>
+                            <!-- Menampilkan pesan error untuk 'periode' -->
+                            @error('periode')
+                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select name="status" class="form-control mb-4" required>
                                 <option value="" disabled selected>Pilih status</option>
-                                <option value="aktif" >Aktif</option>
+                                <option value="aktif">Aktif</option>
                                 <option value="non-aktif">Non-Aktif</option>
                             </select>
+                            <!-- Menampilkan pesan error -->
+                            @error('status')
+                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
                         <button type="submit"
                             class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">Submit</button>

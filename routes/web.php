@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnggotaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\PeriodeController;
@@ -73,5 +74,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/keuangan/edit/{id}', [KeuanganController::class, 'edit'])->name('keuangan.edit');
     Route::put('/keuangan/{id}', [KeuanganController::class, 'update'])->name('keuangan.update');
     
+    // Keuangan
+    Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index');
+    Route::get('/anggota/create', [AnggotaController::class, 'create'])->name('anggota.create');
+    Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');
+    Route::get('/anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota.edit');
+    Route::put('/anggota/{id}', [AnggotaController::class, 'update'])->name('anggota.update');
 
 });

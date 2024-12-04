@@ -43,7 +43,7 @@ class SuratKeluarController extends Controller
 
         $request->validate(
             [
-                'periode' => 'required|exists:periodes,id', // ID periode harus ada di tabel periodes
+                'periode' => 'required|exists:periode,id', // ID periode harus ada di tabel periode
                 'nomor_surat_keluar' => 'required|string|unique:surat_keluar,nomor_surat_keluar', // Nomor surat harus unik
                 'tertuju' => 'required|string', // Tertuju harus diisi
                 'keterangan' => 'nullable|string', // Keterangan opsional
@@ -124,7 +124,7 @@ class SuratKeluarController extends Controller
 
         // $request->validate(
         //     [
-        //         'periode' => 'required|exists:periodes,id', // ID periode harus ada di tabel periodes
+        //         'periode' => 'required|exists:periode,id', // ID periode harus ada di tabel periode
         //         'nomor_surat_keluar' => 'required|string|unique:surat_keluar,nomor_surat_keluar', // Nomor surat harus unik
         //         'tertuju' => 'required|string', // Tertuju harus diisi
         //         'keterangan' => 'nullable|string', // Keterangan opsional

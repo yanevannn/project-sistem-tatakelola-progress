@@ -22,7 +22,7 @@
                                             name="search" placeholder="Kata kunci ..."aria-label="Kata kunci ...">
                                         <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="submit"
                                             id="button-addon2">
-                                            <i class="fas fa-search"></i>
+                                            <i class="fa fa-search"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -47,9 +47,6 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Tertuju</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Pengirim</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Tanggal Surat</th>

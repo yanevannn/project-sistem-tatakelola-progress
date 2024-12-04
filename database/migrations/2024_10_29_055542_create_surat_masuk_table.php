@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('surat_masuks', function (Blueprint $table) {
+        Schema::create('surat_masuk', function (Blueprint $table) {
             $table->id(); // Primary Key
             $table->foreignId('id_user')->constrained('users'); // Foreign Key to users table
-            $table->foreignId('id_periode')->constrained('periodes'); // Foreign Key to periode table
+            $table->foreignId('id_periode')->constrained('periode'); // Foreign Key to periode table
             $table->string('nomor_surat_masuk')->unique(); // Unique constraint for surat number
             $table->string('pengirim'); // Sender's name
             $table->date('tanggal_surat'); // Date of the letter
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('surat_masuks');
+        Schema::dropIfExists('surat_masuk');
     }
 };
