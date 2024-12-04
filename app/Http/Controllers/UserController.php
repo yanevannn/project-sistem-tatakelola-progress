@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
 
@@ -30,24 +27,26 @@ class UserController extends Controller
         return view('pengurus.index', compact('pengurus', 'periode'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $periode = Periode::all();
         return view('pengurus.create', compact('periode'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         // Validasi input
         $request->validate([
-            'periode' => 'required|exists:periode,id', // Periode harus dipilih dan valid di tabel 'periodes'
-            'csv_file' => 'required|file|mimes:csv,txt' // File harus berupa CSV atau TXT
+            'periode' => 'required|exists:periode,id',
+            'csv_file' => 'required|file|mimes:csv,txt|max:10240' // Maksimal 10MB'
+        ], [
+            'periode.required' => 'Periode wajib dipilih.',
+            'periode.exists' => 'Periode yang dipilih tidak valid.',
+            'csv_file.required' => 'File CSV atau TXT wajib diunggah.',
+            'csv_file.file' => 'File yang diunggah harus berupa file.',
+            'csv_file.mimes' => 'File harus berupa format CSV atau TXT.',
+            'csv_file.max' => 'Ukuran file terlalu besar. Maksimal 10MB.'
         ]);
 
         // Ambil ID Periode dari input form untuk dihubungkan dengan user
@@ -101,7 +100,6 @@ class UserController extends Controller
 
     /**
      * Validasi minimal pada record CSV.
-     * 
      * @param array $record
      * @return array Data yang sudah tervalidasi
      */
@@ -120,33 +118,19 @@ class UserController extends Controller
         ])->validate();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         //

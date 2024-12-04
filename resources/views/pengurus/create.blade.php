@@ -15,13 +15,19 @@
                         <select name="periode" class="form-control mb-4" required>
                             <option value="" disabled selected>Pilih periode</option>
                             @foreach ($periode as $p)
-                                <option value="{{ $p->id }}">{{ $p->tahun }}</option>
+                                <option value="{{ $p->id }}" {{ old('periode') == $p->id ? 'selected' : '' }}>{{ $p->tahun }}</option>
                             @endforeach
                         </select>
+                        @error('periode')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="csv_file">Pilih file CSV untuk di-upload:</label>
                         <input type="file" name="csv_file" class="form-control" required>
+                        @error('csv_file')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <button type="submit"
