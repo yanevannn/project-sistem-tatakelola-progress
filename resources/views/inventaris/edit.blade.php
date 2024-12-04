@@ -9,7 +9,8 @@
                     <h6>Edit Data Inventaris</h6>
                 </div>
                 <div class="card-body p-3">
-                    <form action="{{ route('inventaris.update', $inventaris->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('inventaris.update', $inventaris->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="row coll-lg 12">
@@ -18,17 +19,17 @@
                                 <label for="nama_barang">Nama Barang</label>
                                 <input type="text" name="nama_barang" class="form-control"
                                     placeholder="masukan nama barang" value="{{ $inventaris->nama_barang }}"required>
-                                    @error('foto')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                                @error('foto')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="jumlah">Jumlah</label>
                                 <input type="number" name="jumlah" class="form-control"
                                     placeholder="masukkan jumlah barang" value="{{ $inventaris->jumlah }}"required>
-                                    @error('jumlah')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                                @error('jumlah')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
@@ -36,18 +37,18 @@
                                 <label for="satuan">Satuan</label>
                                 <input type="text" name="satuan" class="form-control"
                                     placeholder="masukkan satuan barang" value="{{ $inventaris->satuan }}"required>
-                                    @error('satuan')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                                @error('satuan')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="sumber_pengadaan">Sumber Pengadaan</label>
                                 <input type="text" name="sumber_pengadaan" class="form-control"
                                     placeholder="masukkan sumber pengadaan"
                                     value="{{ $inventaris->sumber_pengadaan }}"required>
-                                    @error('sumber_pengadaan')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                                @error('sumber_pengadaan')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
@@ -55,9 +56,9 @@
                                 <label for="keterangan">Keterangan</label>
                                 <input type="text" name="keterangan" class="form-control"
                                     placeholder="tambahkan keterangan" value="{{ $inventaris->keterangan }}"required>
-                                    @error('keterangan')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                                @error('keterangan')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="status">Kondisi</label>
@@ -72,8 +73,8 @@
                                     </option>
                                 </select>
                                 @error('status')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 

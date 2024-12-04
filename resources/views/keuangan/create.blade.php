@@ -14,10 +14,13 @@
                         <label for="periode">Periode</label>
                         <select name="periode" class="form-control mb-4" required>
                             <option value="" disabled selected>Pilih periode</option>
-                            @foreach ($periode as $p ) 
-                            <option value="{{ $p->id}}">{{ $p->tahun }}</option>
+                            @foreach ($periode as $p)
+                                <option value="{{ $p->id }}">{{ $p->tahun }}</option>
                             @endforeach
                         </select>
+                        @error('periode')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="jenistransaksi">Jenis Transaksi</label>
@@ -26,21 +29,33 @@
                             <option value="pemasukan">pemasukan</option>
                             <option value="pengeluaran">pengeluaran</option>
                         </select>
+                        @error('jenistransaksi')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="tanggal">Tanggal Transaksi</label>
                         <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}"required>
+                        @error('tanggal')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group ">
                         <label for="jumlah_transaksi">Jumlah Transaksi</label>
                         <input type="number" name="jumlah_transaksi" class="form-control"
                             placeholder="masukkan jumlah transaksi" value="{{ old('jumlah_transaksi') }}"required>
+                        @error('jumlah_transaksi')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <input type="text" name="keterangan" class="form-control"
                             placeholder="masukkan keterangan transaksi" value="{{ old('keterangan') }}"required>
+                        @error('keterangan')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <button type="submit"

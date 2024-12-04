@@ -50,13 +50,14 @@ class KeuanganController extends Controller
         $request->validate([
             'periode' => 'required',
             'tanggal' => 'required|date',
-            'jumlah_transaksi' => 'required|numeric',
+            'jumlah_transaksi' => 'required|numeric|min:1',
             'keterangan' => 'required|string'
         ], [
             'periode.required' => 'Periode Wajib Diisi.',
             'tanggal.required' => 'Tanggal Wajib Diisi',
             'jumlah_transaksi.required' => 'Transaksi Wajib Diisi',
             'jumlah_transaksi.numeric' => 'Inputan harus berupa angka',
+            'jumlah_transaksi.min' => 'Jumlah transaksi tidak boleh 0.',
             'keterangan.required' => 'wajib mengisi keterangan transaksi',
             'keterangan.string' => 'keterangan wajib beruka huruf'
         ]);
@@ -77,20 +78,9 @@ class KeuanganController extends Controller
 
         Keuangan::create($data);
 
-        return redirect()->route('keuangan.index');
+        return redirect()->route('keuangan.index')->with('success', 'Transaksi berhasil disimpan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $keuangan = Keuangan::findOrFail($id);
@@ -99,22 +89,20 @@ class KeuanganController extends Controller
         return view('keuangan.edit', compact('keuangan', 'periode'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $user = Auth::user();
         $request->validate([
             'periode' => 'required',
             'tanggal' => 'required|date',
-            'jumlah_transaksi' => 'required|numeric',
+            'jumlah_transaksi' => 'required|numeric|min:1',
             'keterangan' => 'required|string'
         ], [
             'periode.required' => 'Periode Wajib Diisi.',
             'tanggal.required' => 'Tanggal Wajib Diisi',
             'jumlah_transaksi.required' => 'Transaksi Wajib Diisi',
             'jumlah_transaksi.numeric' => 'Inputan harus berupa angka',
+            'jumlah_transaksi.min' => 'Jumlah transaksi tidak boleh 0.',
             'keterangan.required' => 'wajib mengisi keterangan transaksi',
             'keterangan.string' => 'keterangan wajib beruka huruf'
         ]);
@@ -140,12 +128,9 @@ class KeuanganController extends Controller
         }
 
         $keuangan->update($data);
-        return redirect()->route('keuangan.index');
+        return redirect()->route('keuangan.index')->with('success', 'Transaksi berhasil diperbarui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
