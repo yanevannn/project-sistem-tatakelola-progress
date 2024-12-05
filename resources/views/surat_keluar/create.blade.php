@@ -31,8 +31,8 @@
                                     @endforeach
                                 </select>
                                 @error('periode')
-                                        <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                                    @enderror
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
@@ -40,17 +40,17 @@
                                 <label for="tertuju">Tertuju</label>
                                 <input type="text" name="tertuju" class="form-control"
                                     placeholder="masukkan penerima surat" value="{{ old('tertuju') }}"required>
-                                    @error('tertuju')
-                                        <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                                    @enderror
+                                @error('tertuju')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="keterangan">Keterangan</label>
                                 <input type="text" name="keterangan" class="form-control"
                                     placeholder="masukkan keterangan" value="{{ old('keterangan') }}"required>
-                                    @error('keterangan')
-                                        <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                                    @enderror
+                                @error('keterangan')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
@@ -58,33 +58,34 @@
                                 <label for="tanggalmasuk">Tanggal Surat</label>
                                 <input type="date" name="tanggal_surat" class="form-control"
                                     placeholder="masukkan tanggal surat" value="{{ old('tanggal_surat') }}"required>
-                                    @error('tanggalsurat')
-                                        <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                                    @enderror
+                                @error('tanggalsurat')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="tanggal_terkirim">Tanggal Terkirim</label>
                                 <input type="date" name="tanggal_terkirim" class="form-control"
                                     placeholder="masukkan tanggal terkirim surat"
                                     value="{{ old('tanggal_terkirim') }}"required>
-                                    @error('tanggal_terkirim')
-                                        <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                                    @enderror
+                                @error('tanggal_terkirim')
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-6">
                                 <label for="file">File Surat</label>
                                 <input type="file" class="form-control" name="file">
-                            <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB </p>
+                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB
+                                </p>
 
                                 @error('file')
-                                        <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                                    @enderror
+                                    <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <button type="submit"
-                            class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">Tambah</button>
+                            class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">SIMPAN</button>
                     </form>
                 </div>
             </div>

@@ -54,7 +54,7 @@
                             <tbody>
                                 @foreach ($pengurus as $p)
                                     <tr>
-                                        <td class="align-middle text-center">1</td>
+                                        <td class="text-xs align-middle text-center">{{ $loop->iteration }}</td>
                                         <td>
                                             <p class="text-xs text-center font-weight-bold mb-0">{{ $p->nama }}</p>
                                         </td>

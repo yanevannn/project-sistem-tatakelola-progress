@@ -76,6 +76,24 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link  {{ request()->is('dokumen_ukm*') ? 'active' : '' }}" href="/dokumen_ukm">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-archive-2 bg-secondary"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dokumen UKM</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  {{ request()->is('dokumen_event*') ? 'active' : '' }}" href="/dokumen_event">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-archive-2 bg-secondary"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dokumen Event</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link  {{ request()->is('anggota*') ? 'active' : '' }}" href="/anggota">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

@@ -90,7 +90,7 @@
                             @enderror
                         </div>
                         <button type="submit"
-                            class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">Tambah</button>
+                            class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">SIMPAN</button>
                     </form>
                 </div>
             </div>
