@@ -10,6 +10,7 @@ use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DataPengurusController;
+use App\Http\Controllers\DokumenUkmController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
@@ -80,5 +81,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');
     Route::get('/anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota.edit');
     Route::put('/anggota/{id}', [AnggotaController::class, 'update'])->name('anggota.update');
+
+    // Dokumen UKM
+    Route::get('/dokumen_ukm', [DokumenUkmController::class, 'index'])->name('dokumen_ukm.index');
+    Route::get('/dokumen_ukm/view', [DokumenUkmController::class, 'view'])->name('dokumen_ukm.view');
+    Route::get('/dokumen_ukm/create', [DokumenUkmController::class, 'create'])->name('dokumen_ukm.create');
+    Route::post('/dokumen_ukm/store', [DokumenUkmController::class, 'store'])->name('dokumen_ukm.store');
+    Route::get('/dokumen_ukm/edit/{id}', [DokumenUkmController::class, 'edit'])->name('dokumen_ukm.edit');
+    Route::put('/dokumen_ukm/{id}', [DokumenUkmController::class, 'update'])->name('dokumen_ukm.update');
 
 });

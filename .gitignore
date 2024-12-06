@@ -22,8 +22,6 @@ yarn-error.log
 /.vscode
 /.zed
 .DS_Store
-public/dokumen/suratmasuk/*
-public/dokumen/suratkeluar/*
 public/image/keuangan/*
 public/image/inventaris/*
 public/dokumen/*
