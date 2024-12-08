@@ -91,17 +91,106 @@ class DokumenUkmController extends Controller
         }
 
         $fileName = ($type === 'rka') ? $dokumen->rka : $dokumen->adart;
-    $absolutePath = public_path("dokumen/ukm/{$type}/{$fileName}");
-    $filePath = asset("dokumen/ukm/{$type}/{$fileName}");
+        $absolutePath = public_path("dokumen/ukm/{$type}/{$fileName}");
+        $filePath = asset("dokumen/ukm/{$type}/{$fileName}");
 
-    if (!file_exists($absolutePath)) {
-        abort(404, 'File dokumen tidak ditemukan.');
+        if (!file_exists($absolutePath)) {
+            abort(404, 'File dokumen tidak ditemukan.');
+        }
+
+        return view('dokumen_ukm.view', [
+            'filePath' => $filePath,
+            'type' => strtoupper($type),
+            'periode' => $dokumen->periode->tahun,
+        ]);
     }
 
-    return view('dokumen_ukm.view', [
-        'filePath' => $filePath,
-        'type' => strtoupper($type),
-        'periode' => $dokumen->periode->tahun,
-    ]);
+    public function edit(string $id)
+    {
+        $dokumen_ukm = DokumenUkm::findOrFail($id);
+        $periode = Periode::all();
+        return view('dokumen_ukm.edit', compact('id', 'dokumen_ukm', 'periode'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'periode' => 'required|exists:periode,id',
+            'nama_ketua' => 'required|string',
+            'rka' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'adart' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ],
+        [
+            'periode.required' => 'Periode wajib dipilih.',
+            'periode.exists' => 'Periode yang dipilih tidak valid.',
+            'nama_ketua.required' => 'Nama ketua wajib diisi.',
+            'nama_ketua.string' => 'Nama ketua harus berupa teks.',
+            'rka.nullable' => 'File RKA bersifat opsional, tetapi jika diunggah, pastikan formatnya benar.',
+            'rka.mimes' => 'File RKA harus dalam format PDF, DOC, atau DOCX.',
+            'rka.max' => 'Ukuran file RKA tidak boleh lebih dari 2MB.',
+            'adart.nullable' => 'File ADART bersifat opsional, tetapi jika diunggah, pastikan formatnya benar.',
+            'adart.mimes' => 'File ADART harus dalam format PDF, DOC, atau DOCX.',
+            'adart.max' => 'Ukuran file ADART tidak boleh lebih dari 2MB.',
+        ]);
+
+        $dokume_ukm = DokumenUkm::findOrfail($id);
+        $dokumen_rka = $dokume_ukm->rka;
+        $dokumen_adart = $dokume_ukm->adart;
+
+        /// Periksa apakah ada file RKA baru
+        if ($request->hasFile('rka')) {
+            // Ambil nama asli file RKA yang diunggah
+            $originalNameRka = $request->file('rka')->getClientOriginalName();
+            $namenoextensionRka = pathinfo($originalNameRka, PATHINFO_FILENAME);
+            // Format nama file RKA (ganti spasi dengan underscore)
+            $formattedNamaRka = str_replace(' ', '_', $namenoextensionRka);
+            // Buat nama file RKA unik dengan format yang diinginkan
+            $fileNameRka = 'rka-' . $formattedNamaRka . '-' . uniqid() . '.' . $request->file('rka')->extension();
+            // Pindahkan file RKA baru
+            $request->file('rka')->move(public_path('dokumen/ukm/rka/'), $fileNameRka);
+            // Hapus file RKA lama jika ada
+            if ($dokumen_rka && file_exists(public_path('dokumen/ukm/rka/' . $dokumen_rka))) {
+                unlink(public_path('dokumen/ukm/rka/' . $dokumen_rka));
+            }
+            // Perbarui nama file RKA
+            $dokumen_rka = $fileNameRka;
+        }
+
+        // Periksa apakah ada file ADART baru
+        if ($request->hasFile('adart')) {
+            // Ambil nama asli file ADART yang diunggah
+            $originalNameAdart = $request->file('adart')->getClientOriginalName();
+            $namenoextensionAdart = pathinfo($originalNameAdart, PATHINFO_FILENAME);
+
+            // Format nama file ADART (ganti spasi dengan underscore)
+            $formattedNamaAdart = str_replace(' ', '_', $namenoextensionAdart);
+
+            // Buat nama file ADART unik dengan format yang diinginkan
+            $fileNameAdart = 'adart-' . $formattedNamaAdart . '-' . uniqid() . '.' . $request->file('adart')->extension();
+
+            // Pindahkan file ADART baru
+            $request->file('adart')->move(public_path('dokumen/ukm/adart/'), $fileNameAdart);
+
+            // Hapus file ADART lama jika ada
+            if ($dokumen_adart && file_exists(public_path('dokumen/ukm/adart/' . $dokumen_adart))) {
+                unlink(public_path('dokumen/ukm/adart/' . $dokumen_adart));
+            }
+            // Perbarui nama file ADART
+            $dokumen_adart = $fileNameAdart;
+        }
+
+        $dokume_ukm -> update (
+            [
+                'id_user' => $user->id,
+                'id_periode' => $request->periode,
+                'nama_ketua' => $request->nama_ketua,
+                'rka' => $dokumen_rka,
+                'adart' => $dokumen_adart
+            ]
+        );
+
+        return redirect()->route('dokumen_ukm.index')->with('success', 'Data UKM berhasil diperbarui!');
     }
 }

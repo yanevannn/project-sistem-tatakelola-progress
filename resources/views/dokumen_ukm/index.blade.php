@@ -72,20 +72,22 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="{{ route('dokumen_ukm.view', ['type' => 'rka', 'id' => $dokumen->id]) }}" 
-                                                        class="btn btn-success btn-sm text-center">
+                                                        class="btn btn-info btn-sm text-center">
                                                          Lihat RKA
                                                      </a>
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="{{ route('dokumen_ukm.view', ['type' => 'adart', 'id' => $dokumen->id]) }}" 
-                                                        class="btn btn-success btn-sm text-center">
+                                                        class="btn btn-info btn-sm text-center">
                                                          Lihat ADART
                                                      </a>
                                                 </td>
-                                                <td>
-                                                    <p class="text-xs text-center font-weight-bold mb-0">
-                                                        {{ $dokumen->periode->status }}
-                                                    </p>
+                                                <td class="align-middle text-center text-sm" >
+                                                    @if ($dokumen->periode->status === 'aktif')
+                                                    <span class="badge badge-sm bg-success">{{ $dokumen->periode->status }}</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-danger">{{ $dokumen->periode->status }}</span>
+                                                @endif
                                                 </td>
                                                 <td class="align-middle text-center m-0">
                                                     <a href="{{ route('dokumen_ukm.edit', $dokumen->id) }}"
