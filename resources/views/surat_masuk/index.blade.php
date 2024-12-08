@@ -113,7 +113,11 @@
                                                     </p>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <button type="button" class="btn btn-secondary mb-0">Download</button>
+                                                    <button type="button" class="btn btn-secondary mb-0">
+                                                        <a href="{{ asset('dokumen/suratmasuk/' . $sm->file) }}" download="{{ $sm->file }}" class="text-white">
+                                                            Download
+                                                        </a>
+                                                    </button>
                                                 </td>
                                                 <td class="align-middle text-center m-0">
                                                         <a href="{{ route('suratmasuk.edit', $sm->id) }}"
