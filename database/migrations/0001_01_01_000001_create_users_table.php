@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_periode')->constrained('periode')->cascadeOnDelete(); // Foreign key ke tabel periodes
             $table->string('nim'); // NIM
             $table->string('nama'); // Nama pengguna
-            $table->enum('role', ['Ketua', 'Bendahara', 'Sekretaris', 'Divisi I', 'Divisi II', 'Divisi III']); // Role
+            $table->enum('role', ['Ketua','Wakil Ketua', 'Bendahara', 'Sekretaris', 'Divisi I', 'Divisi II', 'Divisi III']); // Role
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']); // Jenis kelamin
             $table->string('email'); // Email
             $table->string('no_hp')->nullable(); // Nomor HP opsional

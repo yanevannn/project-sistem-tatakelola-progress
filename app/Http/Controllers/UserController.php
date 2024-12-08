@@ -20,11 +20,18 @@ class UserController extends Controller
         return view('dashboard', compact('user'));
     }
 
-    public function indexPengurus()
+    public function indexPengurus(Request $request)
     {
+        $selectedPeriode = $request->input('periode', auth()->user()->id_periode);
+
         $periode = Periode::all();
-        $pengurus = User::all();
-        return view('pengurus.index', compact('pengurus', 'periode'));
+
+        // Urutan berdasarkan Role
+        $pengurus = User::where('id_periode', $selectedPeriode)
+            ->orderByRaw("FIELD(role, 'Ketua', 'Wakil Ketua', 'Bendahara', 'Sekretaris', 'Divisi I', 'Divisi II', 'Divisi III')")
+            ->get();
+
+        return view('pengurus.index', compact('pengurus', 'periode', 'selectedPeriode'));
     }
 
 
@@ -109,7 +116,7 @@ class UserController extends Controller
         return validator($record, [
             'nim' => 'required|string|max:255', // NIM wajib diisi, maksimal 255 karakter
             'nama' => 'required|string|max:255', // Nama wajib diisi, maksimal 255 karakter
-            'jabatan' => 'required|in:Ketua,Bendahara,Sekretaris,Divisi I,Divisi II,Divisi III', // Role harus sesuai daftar
+            'jabatan' => 'required|in:Ketua,Wakil Ketua,Bendahara,Sekretaris,Divisi I,Divisi II,Divisi III', // Role harus sesuai daftar
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan', // Jenis kelamin harus salah satu dari opsi
             'email' => 'required|email|max:255', // Email wajib diisi dan valid
             'no_hp' => 'nullable|string|max:15', // No HP opsional, maksimal 15 karakter
@@ -121,13 +128,55 @@ class UserController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $pengurus = User::findOrFail($id);
+        $periode = Periode::all();
+
+        return view('pengurus.edit', compact('pengurus', 'periode'));
     }
 
 
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate(
+            [
+                'nim' => 'required|string|max:255',
+                'nama' => 'required|string|max:255',
+                'role' => 'required|in:Ketua,Wakil Ketua,Bendahara,Sekretaris,Divisi I,Divisi II,Divisi III',
+                'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+                'no_hp' => 'nullable|string|max:15',
+                'alamat' => 'nullable|string',
+            ],
+            [
+                'nim.required' => 'NIM wajib diisi.',
+                'nim.string' => 'NIM harus berupa teks.',
+                'nim.max' => 'NIM tidak boleh lebih dari 255 karakter.',
+
+                'nama.required' => 'Nama wajib diisi.',
+                'nama.string' => 'Nama harus berupa teks.',
+                'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
+                'jabatan.required' => 'Jabatan wajib dipilih.',
+                'jabatan.in' => 'Jabatan yang dipilih tidak valid.',
+
+                'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
+                'jenis_kelamin.in' => 'Jenis kelamin harus Laki-laki atau Perempuan.',
+
+            ]
+        );
+        // dd($request);
+        $pengurus = User::findOrFail($id);
+
+        $pengurus->update([
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'role' => $request->role,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat
+
+        ]);
+
+        return redirect()->route('user.index')->with('updated', 'Data Pengurus Berhasil Diperbarui!');
     }
 
 
