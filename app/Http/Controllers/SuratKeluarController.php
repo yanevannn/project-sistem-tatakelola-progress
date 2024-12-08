@@ -71,7 +71,7 @@ class SuratKeluarController extends Controller
             $request->file->move(public_path('dokumen/suratkeluar/'), $fileName);
         } else {
             $fileName = 'nosuratkeluar.pdf';
-
+        }
             SuratKeluar::create([
                 'id_user' => $user->id,
                 'id_periode' => $request->periode,
@@ -84,8 +84,8 @@ class SuratKeluarController extends Controller
             ]);
 
             return redirect()->route('suratkeluar.index')->with('success', 'Data Surat Kasuk berhasil ditambahkan!');
-        }
     }
+    
 
     public function edit(string $id)
     {
