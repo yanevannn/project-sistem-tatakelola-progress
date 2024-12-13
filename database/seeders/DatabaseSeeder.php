@@ -19,19 +19,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call(PeriodeSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(InventarisSeeder::class);
-        $this->call(SuratMasukSeeder::class);
-        $this->call(SuratKeluarSeeder::class);
-        $this->call(KeuanganSeeder::class);
-        $this->call(AnggotaSeeder::class);
-
-        
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // $this->call(InventarisSeeder::class);
+        // $this->call(SuratMasukSeeder::class);
+        // $this->call(SuratKeluarSeeder::class);
+        // $this->call(KeuanganSeeder::class);
+        // $this->call(AnggotaSeeder::class);
     }
 }

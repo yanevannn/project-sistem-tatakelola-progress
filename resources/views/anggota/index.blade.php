@@ -25,7 +25,7 @@
                         <div class="col-lg-3">
                             <form action="{{ route('anggota.index') }}" method="GET" class="d-flex">
                                 <input type="text" value="{{ request('search') }}" class="form-control"
-                                    name="search" placeholder="Kata kunci ..."aria-label="Kata kunci ...">
+                                    name="search" placeholder="Masukkan NIM atau Nama Anggota ..."aria-label="Kata kunci ...">
                                 <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="submit"
                                     id="button-addon2">
                                     <i class="fas fa-search"></i>
@@ -89,21 +89,22 @@
                                                 <span class="text-secondary text-xs font-weight-bold">{{ $a->kelas }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <button class="btn btn-icon btn-2 btn-info" type="button">
-                                                    <a href="" class="text-white">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                </button>
-                                                <button class="btn btn-icon btn-2 btn-warning" type="button">
+                                                <button class="btn btn-icon btn-warning" type="button">
                                                     <a href="{{ route('anggota.edit',$a->id) }}" class="text-white">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                 </button>
-                                                <button class="btn btn-icon btn-2 btn-danger" type="button">
-                                                    <a href="" class="text-white">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </a>
+                                            <form action="{{ route('anggota.destroy', $a->id) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-danger font-weight-bold text-xs delete "
+                                                    data-name="{{ $a->nama }}" data-toggle="tooltip"
+                                                    data-original-title="Delete">
+                                                    <i class="fas fa-trash-alt"></i>
                                                 </button>
+                                            </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -121,3 +122,36 @@
             data-original-title="tambah">Tambah Data</a>
     </button>
 @endsection
+@section('script')
+    <script>
+        // Event handler untuk tombol delete
+        document.querySelectorAll('.delete').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Mencegah submit form otomatis
+
+                const form = this.closest('form'); // Ambil form terdekat dari tombol
+                const dataName = this.getAttribute('data-name'); // Ambil nilai data-name dari atribut
+
+                // SweetAlert dengan tombol konfirmasi dan pembatalan yang disesuaikan
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: 'Data ' + dataName + ' yang dihapus tidak bisa dikembalikan!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit(); // Submit form jika dikonfirmasi
+                    } else {
+                        Swal.fire('Data Anda aman!', '',
+                        'info'); // Tampilkan pesan jika dibatalkan
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
+

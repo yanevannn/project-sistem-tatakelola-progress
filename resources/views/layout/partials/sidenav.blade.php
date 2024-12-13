@@ -85,12 +85,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ request()->is('dokumen_event*') ? 'active' : '' }}" href="/dokumen_event">
+                <a class="nav-link  {{ request()->is('dokumen_kegiatan*') ? 'active' : '' }}" href="/dokumen_kegiatan">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-archive-2 bg-secondary"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Dokumen Event</span>
+                    <span class="nav-link-text ms-1">Dokumen Kegiatan</span>
                 </a>
             </li>
             <li class="nav-item">
