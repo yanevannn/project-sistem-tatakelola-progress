@@ -89,7 +89,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">Tidak ada data untuk periode ini</td>
+                                <td colspan="6" class="text-center text-sm font-weight-bold">Tidak ada data keuangan untuk periode ini</td>
                             </tr>
                         @endforelse
                     </tbody>
