@@ -95,7 +95,7 @@
                                                     </a>
                                                 </button>
                                                 <button class="btn btn-icon btn-2 btn-warning" type="button">
-                                                    <a href="" class="text-white">
+                                                    <a href="{{ route('anggota.edit',$a->id) }}" class="text-white">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                 </button>

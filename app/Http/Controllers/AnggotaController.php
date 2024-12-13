@@ -101,7 +101,9 @@ class AnggotaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $anggota = Anggota::findOrFail($id);
+        $periode = Periode::all();
+        return view('anggota.edit', compact('anggota','periode'));
     }
 
     /**

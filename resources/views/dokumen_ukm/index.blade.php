@@ -70,13 +70,13 @@
                                                     <p class="text-xs text-center font-weight-bold mb-0">
                                                         {{ $dokumen->nama_ketua }}</p>
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="align-middle text-center">
                                                     <a href="{{ route('dokumen_ukm.view', ['type' => 'rka', 'id' => $dokumen->id]) }}" 
                                                         class="btn btn-info btn-sm text-center">
                                                          Lihat RKA
                                                      </a>
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="align-middle text-center">
                                                     <a href="{{ route('dokumen_ukm.view', ['type' => 'adart', 'id' => $dokumen->id]) }}" 
                                                         class="btn btn-info btn-sm text-center">
                                                          Lihat ADART

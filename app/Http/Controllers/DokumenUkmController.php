@@ -30,8 +30,8 @@ class DokumenUkmController extends Controller
             [
                 'periode' => 'required|exists:periode,id',
                 'nama_ketua' => 'required|string',
-                'rka' => 'required|file|mimes:pdf,doc,docx|max:2048',
-                'adart' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                'rka' => 'required|file|mimes:pdf|max:2048',
+                'adart' => 'required|file|mimes:pdf|max:2048',
             ],
             [
                 'periode.required' => 'Silakan pilih periode terlebih dahulu.',
@@ -40,11 +40,11 @@ class DokumenUkmController extends Controller
                 'nama_ketua.string' => 'Nama ketua harus berupa teks yang valid.',
                 'rka.required' => 'File RKA wajib diunggah. Mohon unggah file RKA Anda.',
                 'rka.file' => 'File RKA yang diunggah tidak valid. Pastikan Anda mengunggah file yang benar.',
-                'rka.mimes' => 'Format file RKA tidak didukung. Harap unggah file dalam format pdf, doc, atau docx.',
+                'rka.mimes' => 'Format file RKA tidak didukung. Harap unggah file dalam format pdf!',
                 'rka.max' => 'Ukuran file RKA terlalu besar. Maksimum ukuran file adalah 2MB.',
                 'adart.required' => 'File AD/ART wajib diunggah. Mohon unggah file AD/ART Anda.',
                 'adart.file' => 'File AD/ART yang diunggah tidak valid. Pastikan Anda mengunggah file yang benar.',
-                'adart.mimes' => 'Format file AD/ART tidak didukung. Harap unggah file dalam format pdf, doc, atau docx.',
+                'adart.mimes' => 'Format file AD/ART tidak didukung. Harap unggah file dalam format pdf!.',
                 'adart.max' => 'Ukuran file AD/ART terlalu besar. Maksimum ukuran file adalah 2MB.',
             ]
         );
@@ -119,8 +119,8 @@ class DokumenUkmController extends Controller
         $request->validate([
             'periode' => 'required|exists:periode,id',
             'nama_ketua' => 'required|string',
-            'rka' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'adart' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'rka' => 'nullable|file|mimes:pdf|max:2048',
+            'adart' => 'nullable|file|mimes:pdf|max:2048',
         ],
         [
             'periode.required' => 'Periode wajib dipilih.',
@@ -128,10 +128,10 @@ class DokumenUkmController extends Controller
             'nama_ketua.required' => 'Nama ketua wajib diisi.',
             'nama_ketua.string' => 'Nama ketua harus berupa teks.',
             'rka.nullable' => 'File RKA bersifat opsional, tetapi jika diunggah, pastikan formatnya benar.',
-            'rka.mimes' => 'File RKA harus dalam format PDF, DOC, atau DOCX.',
+            'rka.mimes' => 'File RKA harus dalam format PDF!',
             'rka.max' => 'Ukuran file RKA tidak boleh lebih dari 2MB.',
             'adart.nullable' => 'File ADART bersifat opsional, tetapi jika diunggah, pastikan formatnya benar.',
-            'adart.mimes' => 'File ADART harus dalam format PDF, DOC, atau DOCX.',
+            'adart.mimes' => 'File ADART harus dalam format PDF!.',
             'adart.max' => 'Ukuran file ADART tidak boleh lebih dari 2MB.',
         ]);
 

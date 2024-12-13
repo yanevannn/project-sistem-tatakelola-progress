@@ -54,7 +54,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/suratkeluar/edit/{id}', [SuratKeluarController::class, 'edit'])->name('suratkeluar.edit');
     Route::put('/suratkeluar/{id}', [SuratKeluarController::class, 'update'])->name('suratkeluar.update');
 
-
     // Periode
     Route::get('/periode', [PeriodeController::class, 'index'])->name('periode.index');
     Route::post('/periode', [PeriodeController::class, 'store'])->name('periode.store');
@@ -77,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/keuangan/edit/{id}', [KeuanganController::class, 'edit'])->name('keuangan.edit');
     Route::put('/keuangan/{id}', [KeuanganController::class, 'update'])->name('keuangan.update');
     
-    // Keuangan
+    // Anggota
     Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index');
     Route::get('/anggota/create', [AnggotaController::class, 'create'])->name('anggota.create');
     Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');

@@ -39,7 +39,7 @@
                             <div class="form-group col-lg-6">
                                 <label for="rka">File RKA</label>
                                 <input type="file" class="form-control" name="rka">
-                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB
+                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB dan berformat PDF
                                 </p>
 
                                 @error('rka')
@@ -49,7 +49,7 @@
                             <div class="form-group col-lg-6">
                                 <label for="adart">File AD/ART</label>
                                 <input type="file" class="form-control" name="adart">
-                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB
+                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB dan berformat PDF
                                 </p>
 
                                 @error('adart')

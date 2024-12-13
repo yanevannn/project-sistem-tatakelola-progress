@@ -40,7 +40,7 @@ class SuratKeluarController extends Controller
                 'keterangan' => 'nullable|string',
                 'tanggal_surat' => 'required|date',
                 'tanggal_terkirim' => 'required|date|after_or_equal:tanggal_surat',
-                'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+                'file' => 'required|file|mimes:pdf,doc,docx|max:2048',
             ],
             [
                 'periode.required' => 'ID periode harus diisi.',

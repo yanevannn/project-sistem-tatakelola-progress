@@ -43,7 +43,7 @@
                                 <input type="file" class="form-control" name="rka">
                                 <p class="text-secondary font-weight-bold text-xs mt-2">Dokumen saat Ini : <a href="{{ asset("dokumen/ukm/rka/". $dokumen_ukm->rka) }}" target="_blank">Klik Disini</a></p>
 
-                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB
+                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB dan berformat PDF
                                 </p>
 
                                 @error('rka')
@@ -54,7 +54,7 @@
                                 <label for="adart">File AD/ART</label>
                                 <input type="file" class="form-control" name="adart">
                                 <p class="text-secondary font-weight-bold text-xs mt-2">Dokumen saat Ini : <a href="{{ asset('dokumen/ukm/adart/'. $dokumen_ukm->adart) }}" target="_blank">Klik Disini</a></p>
-                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB
+                                <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB dan berformat PDF
                                 </p>
                                 @error('adart')
                                     <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
