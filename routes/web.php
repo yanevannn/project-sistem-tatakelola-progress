@@ -10,6 +10,7 @@ use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DataPengurusController;
+use App\Http\Controllers\DokumenKegiatanController;
 use App\Http\Controllers\DokumenUkmController;
 use App\Http\Controllers\UserController;
 
@@ -82,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');
     Route::get('/anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota.edit');
     Route::put('/anggota/{id}', [AnggotaController::class, 'update'])->name('anggota.update');
+    Route::delete('/anggota{id}', [AnggotaController::class, 'destroy'])->name('anggota.destroy');
 
     // Dokumen UKM
     Route::get('/dokumen_ukm', [DokumenUkmController::class, 'index'])->name('dokumen_ukm.index');
@@ -90,5 +92,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dokumen_ukm/store', [DokumenUkmController::class, 'store'])->name('dokumen_ukm.store');
     Route::get('/dokumen_ukm/edit/{id}', [DokumenUkmController::class, 'edit'])->name('dokumen_ukm.edit');
     Route::put('/dokumen_ukm/{id}', [DokumenUkmController::class, 'update'])->name('dokumen_ukm.update');
+
+    // DOkumen Kegiatan
+    Route::get('/dokumen_kegiatan', [DokumenKegiatanController::class, 'index'])->name('dokumen_kegiatan.index');
+    Route::get('/dokumen_kegiatan/create', [DokumenKegiatanController::class, 'create'])->name('dokumen_kegiatan.create');
+    Route::post('/dokumen_kegiatan/store', [DokumenKegiatanController::class, 'store'])->name('dokumen_kegiatan.store');
+    Route::get('/dokumen_kegiatan/edit/{id}', [DokumenKegiatanController::class, 'edit'])->name('dokumen_kegiatan.edit');
+    Route::put('/dokumen_kegiatan/{id}', [DokumenKegiatanController::class, 'update'])->name('dokumen_kegiatan.update');
+    Route::delete('/dokumen_kegiatan{id}', [DokumenKegiatanController::class, 'destroy'])->name('dokumen_kegiatan.destroy');
+
+
 
 });
