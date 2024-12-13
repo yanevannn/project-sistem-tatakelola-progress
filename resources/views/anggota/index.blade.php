@@ -2,8 +2,11 @@
 @section('page-title', 'Data Anggota UKM')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
+    <div class="row mb-4">
+        <div class="mb-lg-0 mb-4">
+
+        </div>
+        <div class="col-lg-12">
             <div class="form-group col-lg-2">
                 <label for="periode">PERIODE</label>
                 <select name="periode" class="form-control mb-4" required onchange="this.form.submit()">
@@ -16,25 +19,28 @@
                     @endforeach
                 </select>
             </div>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <h6>Tabel Anggota</h6>
-                        </div>
-                        <div class="col-lg-3">
-                            <form action="{{ route('anggota.index') }}" method="GET" class="d-flex">
-                                <input type="text" value="{{ request('search') }}" class="form-control"
-                                    name="search" placeholder="Masukkan NIM atau Nama Anggota ..."aria-label="Kata kunci ...">
-                                <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="submit"
-                                    id="button-addon2">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </form>
+            <div class="card p-3">
+                <div class="container-fluid px-0">
+                    <div class="card-header pb-0">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h6 class="mb-0">Tabel Anggota</h6>
+                            </div>
+                            <div class="col-lg-3">
+                                <form action="{{ route('anggota.index') }}" method="GET" class="d-flex">
+                                    <input type="text" value="{{ request('search') }}" class="form-control" name="search"
+                                        placeholder="Masukkan NIM atau Nama Anggota ..." aria-label="Kata kunci ...">
+                                    <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="submit"
+                                        id="button-addon2">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
+
+                <div class="card-body">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
@@ -72,39 +78,29 @@
                                 @else
                                     @foreach ($anggota as $a)
                                         <tr>
-                                            <td class="align-middle text-center">{{ $loop->iteration }}</td>
-                                            <td>
-                                                <p class="text-xs text-center font-weight-bold mb-0">{{ $a->nama }}</p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">{{ $a->nim }}</td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $a->email }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $a->no_hp }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $a->kelas }}</span>
-                                            </td>
+                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $loop->iteration }}</td>
+                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $a->nama }}</td>
+                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $a->nim }}</td>
+                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $a->email }}</td>
+                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $a->no_hp }}</td>
+                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $a->kelas }}</td>
                                             <td class="align-middle text-center">
                                                 <button class="btn btn-icon btn-warning" type="button">
-                                                    <a href="{{ route('anggota.edit',$a->id) }}" class="text-white">
+                                                    <a href="{{ route('anggota.edit', $a->id) }}" class="text-white">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                 </button>
-                                            <form action="{{ route('anggota.destroy', $a->id) }}" method="POST"
-                                                style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-danger font-weight-bold text-xs delete "
-                                                    data-name="{{ $a->nama }}" data-toggle="tooltip"
-                                                    data-original-title="Delete">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form>
+                                                <form action="{{ route('anggota.destroy', $a->id) }}" method="POST"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="btn btn-danger font-weight-bold text-xs delete "
+                                                        data-name="{{ $a->nama }}" data-toggle="tooltip"
+                                                        data-original-title="Delete">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -113,15 +109,20 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="px-3">
+                    {{ $anggota->links() }}
+                </div>
             </div>
 
         </div>
     </div>
     <button class="btn bg-gradient-success">
         <a href="{{ route('anggota.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
-            data-original-title="tambah">Tambah Data</a>
+            data-original-title="Tambah Data">Tambah Data</a>
     </button>
 @endsection
+
 @section('script')
     <script>
         // Event handler untuk tombol delete
@@ -147,11 +148,10 @@
                         form.submit(); // Submit form jika dikonfirmasi
                     } else {
                         Swal.fire('Data Anda aman!', '',
-                        'info'); // Tampilkan pesan jika dibatalkan
+                            'info'); // Tampilkan pesan jika dibatalkan
                     }
                 });
             });
         });
     </script>
 @endsection
-
