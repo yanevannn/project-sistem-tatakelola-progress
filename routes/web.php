@@ -12,7 +12,9 @@ use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DataPengurusController;
 use App\Http\Controllers\DokumenKegiatanController;
 use App\Http\Controllers\DokumenUkmController;
+use App\Http\Controllers\PrestasiAnggotaController;
 use App\Http\Controllers\UserController;
+use App\Models\PrestasiAnggota;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -84,6 +86,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota.edit');
     Route::put('/anggota/{id}', [AnggotaController::class, 'update'])->name('anggota.update');
     Route::delete('/anggota{id}', [AnggotaController::class, 'destroy'])->name('anggota.destroy');
+    // Anggota
+    Route::get('/prestasianggota', [PrestasiAnggotaController::class, 'index'])->name('prestasi_anggota.index');
+    Route::get('/prestasi-anggota/search', [PrestasiAnggotaController::class, 'searchAnggota'])->name('prestasi_anggota.search');
+    Route::get('/prestasianggota/create', [PrestasiAnggotaController::class, 'create'])->name('prestasi_anggota.create');
+    Route::post('/prestasianggota/store', [PrestasiAnggotaController::class, 'store'])->name('prestasi_anggota.store');
+    Route::get('/prestasianggota/edit{id}', [PrestasiAnggotaController::class, 'edit'])->name('prestasi_anggota.edit');
+    Route::put('/prestasianggota/{id}', [PrestasiAnggotaController::class, 'update'])->name('prestasi_anggota.update');
+    Route::delete('/prestasianggota{id}', [PrestasiAnggotaController::class, 'delete'])->name('prestasi_anggota.delete');
 
     // Dokumen UKM
     Route::get('/dokumen_ukm', [DokumenUkmController::class, 'index'])->name('dokumen_ukm.index');
