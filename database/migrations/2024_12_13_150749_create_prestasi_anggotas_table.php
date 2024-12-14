@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('keterangan')->nullable();
             $table->string('file')->nullable(); // Path to the file
             $table->timestamps();
+
+            $table->foreign('id_anggota')->references('id')->on('anggota')->onDelete('cascade');
         });
     }
 

@@ -86,19 +86,12 @@
                                                 <td class="text-center font-weight-bold text-xs mb-0">{{ $p->keterangan }}
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    @if ($p->file)
-                                                        <button type="button" class="btn btn-secondary mb-0">
-                                                            <a href="{{ asset('storage/' . $p->file) }}"
-                                                                download="{{ $p->file }}"
-                                                                class="text-white">Download</a>
-                                                        </button>
-                                                    @else
-                                                        <span class="text-secondary text-xs font-weight-bold">Tidak ada
-                                                            file</span>
-                                                    @endif
+                                                    <a href="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" target="_blank">
+                                                        <img src="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" alt="Prestasi" class="img-fluid" style="max-width: 100%; height: 100px;">
+                                                    </a>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a href="{{ route('prestasi.edit', $p->id) }}"
+                                                    <a href="{{ route('prestasi_anggota.edit', $p->id) }}"
                                                         class="font-weight-bold text-xs text-white btn btn-warning mb-0"
                                                         data-toggle="tooltip" data-original-title="Edit">EDIT</a>
                                                 </td>
