@@ -25,4 +25,5 @@ yarn-error.log
 public/image/keuangan/*
 public/image/inventaris/*
 public/dokumen/*
+public/assets/scss/*
 !public/image/inventaris/nophoto.jpg
