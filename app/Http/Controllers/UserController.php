@@ -26,10 +26,26 @@ class UserController extends Controller
 
         $periode = Periode::all();
 
-        // Urutan berdasarkan Role
+        // Urutan berdasarkan Role MYSQL
+        // $pengurus = User::where('id_periode', $selectedPeriode)
+        //     ->orderByRaw("FIELD(role, 'Ketua', 'Wakil Ketua', 'Bendahara', 'Sekretaris', 'Divisi I', 'Divisi II', 'Divisi III')")
+        //     ->get();
+
+        // Menggunakan PGsql karena tidak mendukung FIELD()
         $pengurus = User::where('id_periode', $selectedPeriode)
-            ->orderByRaw("FIELD(role, 'Ketua', 'Wakil Ketua', 'Bendahara', 'Sekretaris', 'Divisi I', 'Divisi II', 'Divisi III')")
-            ->get();
+            ->orderByRaw("
+            CASE role
+                WHEN 'Ketua' THEN 1
+                WHEN 'Wakil Ketua' THEN 2
+                WHEN 'Bendahara' THEN 3
+                WHEN 'Sekretaris' THEN 4
+                WHEN 'Divisi I' THEN 5
+                WHEN 'Divisi II' THEN 6
+                WHEN 'Divisi III' THEN 7
+                ELSE 8
+            END
+        ")->get();
+
 
         return view('pengurus.index', compact('pengurus', 'periode', 'selectedPeriode'));
     }
