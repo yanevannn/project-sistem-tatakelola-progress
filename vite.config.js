@@ -8,4 +8,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        sourcemap: false, // Nonaktifkan source map untuk mencegah error
+    },
 });

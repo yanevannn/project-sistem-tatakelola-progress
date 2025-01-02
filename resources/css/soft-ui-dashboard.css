@@ -23330,6 +23330,7 @@ html {
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active {
   color: #344767;
   background-color: #fff;
+  
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
@@ -23423,6 +23424,7 @@ html {
   height: 8px;
   width: 8px;
   background: #3A416F;
+  
 }
 
 .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item.active .nav-link,
@@ -23435,6 +23437,7 @@ html {
   height: 8px;
   width: 8px;
   background: #3A416F;
+  
 }
 
 .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-item .nav-link:before,
@@ -26696,4 +26699,3 @@ pre[class*="language-"] {
   }
 }
 
-/*# sourceMappingURL=dashboard-free.css.map */
