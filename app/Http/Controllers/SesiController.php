@@ -11,13 +11,13 @@ class SesiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function login()
     {
         return view('login');
     }
 
 
-    public function login(Request $request)
+    public function doLogin(Request $request)
     {
         $request->validate([
             'email'=>'required',
@@ -49,9 +49,10 @@ class SesiController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function dashboard()
     {
-        //
+        $user = Auth::user();
+        return view('dashboard', compact('user'));
     }
 
     /**

@@ -7,18 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserAccess
+class GuestMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role == $role ) {
-            return $next($request);
+        if (Auth::check()){
+            return redirect()->route('dashboard')->with('loginTrue', "Anda telah berhasil login dan sekarang diarahkan ke dashboard Anda.");
         }
-        return response()->json(['Kamu tidak dapat mengakses halaman ini']);
+        return $next($request);
     }
 }

@@ -56,4 +56,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Periode::class, 'id_periode');
     }
+
+    public function isPengurusInti(): bool
+    {
+        return in_array($this->role, ['Ketua', 'Wakil Ketua', 'Bendahara', 'Sekretaris']);
+    }
+
+    // Periksa apakah pengguna adalah pengurus biasa
+    public function isPengurus(): bool
+    {
+        return in_array($this->role, ['Divisi I', 'Divisi II', 'Divisi III']);
+    }
 }

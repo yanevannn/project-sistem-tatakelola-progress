@@ -13,14 +13,7 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-
-        $user = Auth::user();
-        return view('dashboard', compact('user'));
-    }
-
-    public function indexPengurus(Request $request)
+    public function index(Request $request)
     {
         $selectedPeriode = $request->input('periode', auth()->user()->id_periode);
 
