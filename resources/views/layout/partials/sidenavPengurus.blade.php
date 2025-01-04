@@ -22,15 +22,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ request()->is('inventaris*') ? 'active' : '' }}" href="/inventaris">
-                    <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" stroke="{{ request()->is('inventaris*') ? 'white' : 'black' }}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"/><path d="m7.5 4.27 9 5.15"/></svg>
-                    </div>
-                    <span class="nav-link-text ms-1">Inventaris</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link  {{ request()->is('anggota*') ? 'active' : '' }}" href="/anggota">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -46,6 +37,15 @@
                         <svg xmlns="http://www.w3.org/2000/svg" stroke="{{ request()->is('prestasianggota*') ? 'white' : 'black' }}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
                     </div>
                     <span class="nav-link-text ms-1">Prestasi Anggota</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  {{ request()->is('inventaris*') ? 'active' : '' }}" href="/inventaris">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke="{{ request()->is('inventaris*') ? 'white' : 'black' }}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"/><path d="m7.5 4.27 9 5.15"/></svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Inventaris</span>
                 </a>
             </li>
         </ul>
