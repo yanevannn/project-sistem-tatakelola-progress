@@ -29,7 +29,7 @@
     </div>
     <div class="card p-3">
         <div class="card-header pb-0">
-            <h6>Tabel Inventaris</h6>
+            <h6>Tabel Keuangan UKM</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive p-0">

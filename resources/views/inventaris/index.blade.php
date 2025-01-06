@@ -15,7 +15,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-lg-9">
-                                    <h6>Tabel Inventaris</h6>
+                                    <h6>Tabel Inventaris UKM</h6>
                                 </div>
                                 <div class="col-lg-3">
                                     <form action="{{ route('inventaris.index') }}" method="GET" class="d-flex">

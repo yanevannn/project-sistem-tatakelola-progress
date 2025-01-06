@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('page-title', 'Dokumen Kegiatan UKM')
+@section('page-title', 'Dokumen Event UKM')
 
 @section('content')
     <div class="row mb-4">
@@ -14,7 +14,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-lg-9">
-                                    <h6>Tabel Dokumen Kegiatan UKM</h6>
+                                    <h6>Tabel Dokumen Event UKM</h6>
                                 </div>
                             </div>
                         </div>

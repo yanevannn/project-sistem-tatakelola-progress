@@ -24,7 +24,7 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-9">
-                                <h6 class="mb-0">Tabel Anggota</h6>
+                                <h6 class="mb-0">Tabel Anggota UKM</h6>
                             </div>
                             <div class="col-lg-3">
                                 <form action="{{ route('anggota.index') }}" method="GET" class="d-flex">

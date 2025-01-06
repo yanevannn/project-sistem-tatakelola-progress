@@ -14,7 +14,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-lg-9">
-                                    <h6>Tabel Surat Keluar</h6>
+                                    <h6>Tabel Surat Keluar UKM</h6>
                                 </div>
                                 <div class="col-lg-3">
                                     <form action="{{ route('suratkeluar.index') }}" method="POST" class="d-flex">
