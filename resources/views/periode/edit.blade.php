@@ -35,7 +35,7 @@
                             @enderror
                         </div>
                         <button type="submit"
-                            class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">PERBARUI</button>
+                            class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">UPDATE</button>
                     </form>
                 </div>
             </div>

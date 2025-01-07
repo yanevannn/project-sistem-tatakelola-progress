@@ -96,7 +96,7 @@
                                 @enderror
                             </div>
                                                     
-                            <button type="submit" class="btn btn-success">Simpan Prestasi</button>
+                            <button type="submit" class="btn btn-success">UPDATE</button>
                         </form>
                         
                     </div>
