@@ -15,11 +15,15 @@ use App\Http\Controllers\PrestasiAnggotaController;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'login'])->name('login');
+    Route::get('/' ,function() {
+        return redirect('login');
+    });
     Route::post('/login', [SesiController::class, 'doLogin'])->name('doLogin');
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[SesiController::class,'dashboard'])->name('dashboard');
+    Route::get('/dashboard/profile',[SesiController::class,'dashboardProfile'])->name('dashboard.profile');
     Route::get('/logout', [SesiController::class, 'logout']);
 });
 
@@ -60,7 +64,6 @@ Route::middleware('auth', 'role:pengurus-inti')->group(function () {
     Route::post('/keuangan/store', [KeuanganController::class, 'store'])->name('keuangan.store');
     Route::get('/keuangan/edit/{id}', [KeuanganController::class, 'edit'])->name('keuangan.edit');
     Route::put('/keuangan/{id}', [KeuanganController::class, 'update'])->name('keuangan.update');
-
 
 
     // Dokumen UKM

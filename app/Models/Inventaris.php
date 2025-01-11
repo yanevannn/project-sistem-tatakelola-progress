@@ -20,4 +20,7 @@ class Inventaris extends Model
         'kondisi'
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

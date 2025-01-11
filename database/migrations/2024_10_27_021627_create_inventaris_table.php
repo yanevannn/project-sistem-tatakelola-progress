@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventaris', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('id_user')->constrained('users');
-            // $table->unsignedBigInteger('id_user'); // Menggunakan id_user bukan user_id
-            // $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->string('id_user'); 
+            $table->foreignId('id_user')->constrained('users'); // Foreign Key to users table
             $table->string('gambar'); 
             $table->string('nama_barang'); 
             $table->integer('jumlah'); 

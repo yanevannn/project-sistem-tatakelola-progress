@@ -5,10 +5,12 @@
     <div class="row mb-4">
         <div class=" mb-lg-0 mb-4">
             <div class="col-lg-12">
+                @if(auth()->user()->isPengurus())
                 <button class="btn bg-gradient-success ">
                     <a href="{{ route('inventaris.create') }}" class="font-weight-bold text-xs text-white"
                         data-toggle="tooltip" data-original-title="Edit user">Tambah Data</a>
                 </button>
+                @endif
                 </form>
                 <div class="card p-3">
                     <div class="container-fluid px-0">
@@ -58,10 +60,11 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Keterangan</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Aksi</th>
-                                        <th class="text-secondary opacity-7"></th>
+                                        @if (auth()->user()->isPengurus())
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
