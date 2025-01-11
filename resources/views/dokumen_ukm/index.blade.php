@@ -71,16 +71,12 @@
                                                         {{ $dokumen->nama_ketua }}</p>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a href="{{ route('dokumen_ukm.view', ['type' => 'rka', 'id' => $dokumen->id]) }}" 
-                                                        class="btn btn-info btn-sm text-center">
-                                                         Lihat RKA
-                                                     </a>
+                                                     <a href="{{ asset('dokumen/ukm/rka/' . $dokumen->rka) }}" target="_blank"
+                                                        class="btn btn-sm btn-info mb-0">Lihat</a>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a href="{{ route('dokumen_ukm.view', ['type' => 'adart', 'id' => $dokumen->id]) }}" 
-                                                        class="btn btn-info btn-sm text-center">
-                                                         Lihat ADART
-                                                     </a>
+                                                     <a href="{{ asset('dokumen/ukm/adart/' . $dokumen->adart) }}" target="_blank"
+                                                        class="btn btn-sm btn-info mb-0">Lihat</a>
                                                 </td>
                                                 <td class="align-middle text-center text-sm" >
                                                     @if ($dokumen->periode->status === 'aktif')

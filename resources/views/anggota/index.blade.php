@@ -28,8 +28,9 @@
                             </div>
                             <div class="col-lg-3">
                                 <form action="{{ route('anggota.index') }}" method="GET" class="d-flex">
-                                    <input type="text" value="{{ request('search') }}" class="form-control" name="search"
-                                        placeholder="Masukkan NIM atau Nama Anggota ..." aria-label="Kata kunci ...">
+                                    <input type="text" value="{{ request('search') }}" class="form-control"
+                                        name="search" placeholder="Masukkan NIM atau Nama Anggota ..."
+                                        aria-label="Kata kunci ...">
                                     <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="submit"
                                         id="button-addon2">
                                         <i class="fas fa-search"></i>
@@ -63,9 +64,11 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Kelas</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
-                                        Aksi</th>
+                                    @if (auth()->user()->isPengurus())
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                            Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,30 +81,33 @@
                                 @else
                                     @foreach ($anggota as $a)
                                         <tr>
-                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $loop->iteration }}</td>
+                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $loop->iteration }}
+                                            </td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->nama }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->nim }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->email }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->no_hp }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->kelas }}</td>
-                                            <td class="align-middle text-center">
-                                                <button class="btn btn-icon btn-warning" type="button">
-                                                    <a href="{{ route('anggota.edit', $a->id) }}" class="text-white">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                </button>
-                                                <form action="{{ route('anggota.destroy', $a->id) }}" method="POST"
-                                                    style="display: inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="btn btn-danger font-weight-bold text-xs delete "
-                                                        data-name="{{ $a->nama }}" data-toggle="tooltip"
-                                                        data-original-title="Delete">
-                                                        <i class="fas fa-trash-alt"></i>
+                                            @if (auth()->user()->isPengurus())
+                                                <td class="align-middle text-center">
+                                                    <button class="btn btn-icon btn-warning" type="button">
+                                                        <a href="{{ route('anggota.edit', $a->id) }}" class="text-white">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
                                                     </button>
-                                                </form>
-                                            </td>
+                                                    <form action="{{ route('anggota.destroy', $a->id) }}" method="POST"
+                                                        style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-danger font-weight-bold text-xs delete "
+                                                            data-name="{{ $a->nama }}" data-toggle="tooltip"
+                                                            data-original-title="Delete">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 @endif
@@ -117,10 +123,12 @@
 
         </div>
     </div>
-    <button class="btn bg-gradient-success">
-        <a href="{{ route('anggota.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
-            data-original-title="Tambah Data">Tambah Data</a>
-    </button>
+    @if (auth()->user()->isPengurus())
+        <button class="btn bg-gradient-success">
+            <a href="{{ route('anggota.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
+                data-original-title="Tambah Data">Tambah Data</a>
+        </button>
+    @endif
 @endsection
 
 @section('script')

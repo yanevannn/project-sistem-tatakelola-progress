@@ -5,10 +5,12 @@
     <div class="row mb-4">
         <div class="mb-lg-0 mb-4">
             <div class="col-lg-12">
+                @if(auth()->user()->isPengurus())
                 <button class="btn bg-gradient-success">
                     <a href="{{ route('prestasi_anggota.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
                         data-original-title="Tambah prestasi">Tambah Data</a>
                 </button>
+                @endif
                 <div class="card p-3">
                     <div class="container-fluid px-0">
                         <div class="card-header">
@@ -56,10 +58,12 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             File</th>
+                                            @if(auth()->user()->isPengurus())
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Aksi</th>
                                         <th class="text-secondary opacity-7"></th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody class="mb-0">
@@ -90,11 +94,13 @@
                                                         <img src="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" alt="Prestasi" class="img-fluid" style="max-width: 100%; height: 100px;">
                                                     </a>
                                                 </td>
+                                                @if(auth()->user()->isPengurus())
                                                 <td class="align-middle text-center">
                                                     <a href="{{ route('prestasi_anggota.edit', $p->id) }}"
                                                         class="font-weight-bold text-xs text-white btn btn-warning mb-0"
                                                         data-toggle="tooltip" data-original-title="Edit">EDIT</a>
                                                 </td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     @endif

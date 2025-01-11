@@ -67,14 +67,14 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
                                         Lupa Password?
                                         <a href=""
                                             class="text-info text-gradient font-weight-bold"style="background: linear-gradient(to right, red, darkred); -webkit-background-clip: text; color: transparent;">Reset
                                             Password</a>
                                     </p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-md-6">
