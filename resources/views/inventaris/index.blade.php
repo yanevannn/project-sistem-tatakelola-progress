@@ -103,6 +103,7 @@
                                                     <p class="text-xs text-center font-weight-bold mb-0">
                                                         {{ $i->keterangan }}</p>
                                                 </td>
+                                                @if (auth()->user()->isPengurus())
                                                 <td class="align-middle text-center">
 
                                                     <a href="{{ route('inventaris.edit', $i->id) }}"
@@ -121,6 +122,7 @@
                                                         </button>
                                                     </form>
                                                 </td>
+                                                @endif
                                             </tr>
                                         @endforeach
 
