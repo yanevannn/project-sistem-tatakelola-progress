@@ -26,43 +26,54 @@
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="nim">NIM</label>
-                        <input type="text" name="nim" class="form-control"
-                            placeholder="nim anggota" value="{{ $anggota->nim }}"required>
-                            @error('nim')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                        <input type="text" name="nim" class="form-control" placeholder="nim anggota"
+                            value="{{ $anggota->nim }}"required>
+                        @error('nim')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="nama">Nama</label>
-                        <input type="text" name="nama" class="form-control"
-                            placeholder="nama anggota" value="{{ $anggota->nama }}"required>
-                            @error('nama')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                        <input type="text" name="nama" class="form-control" placeholder="nama anggota"
+                            value="{{ $anggota->nama }}"required>
+                        @error('nama')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control"
-                            placeholder="email anggota" value="{{ $anggota->email }}"required>
-                            @error('email')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                        <input type="email" name="email" class="form-control" placeholder="email anggota"
+                            value="{{ $anggota->email }}"required>
+                        @error('email')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="kelas">Kelas</label>
-                        <input type="text" name="kelas" class="form-control"
-                            placeholder="Kelas anggota" value="{{ $anggota->kelas }}"required>
-                            @error('kelas')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                        <input type="text" name="kelas" class="form-control" placeholder="Kelas anggota"
+                            value="{{ $anggota->kelas }}"required>
+                        @error('kelas')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="no_hp">Nomor Handphone</label>
-                        <input type="text" name="no_hp" class="form-control"
-                            placeholder="nomor telephone" value="{{ $anggota->no_hp }}"required>
-                            @error('no_hp')
-                                <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                            @enderror
+                        <input type="text" name="no_hp" class="form-control" placeholder="nomor telephone"
+                            value="{{ $anggota->no_hp }}"required>
+                        @error('no_hp')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="status_keanggotaan">Status Kenggotaan</label>
+                        <select name="status_keanggotaan" class="form-control" required>
+                            <option value="aktif" {{ $anggota->status_keanggotaan == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                            <option value="lulus" {{ $anggota->status_keanggotaan == 'lulus' ? 'selected' : '' }}>Lulus</option>
+                            <option value="drop out" {{ $anggota->status_keanggotaan == 'drop out' ? 'selected' : '' }}>Drop Out</option>
+                        </select>
+                        @error('status_keanggotaan')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <button type="submit"

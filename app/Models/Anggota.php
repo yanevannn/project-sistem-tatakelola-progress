@@ -28,6 +28,7 @@ class Anggota extends Model
         'email',
         'no_hp',
         'kelas',
+        'status_keanggotaan'
     ];
 
     /**

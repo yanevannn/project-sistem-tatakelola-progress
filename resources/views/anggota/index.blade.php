@@ -64,6 +64,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Kelas</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Status Keanggotaan</th>
                                     @if (auth()->user()->isPengurus())
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
@@ -88,6 +91,7 @@
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->email }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->no_hp }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->kelas }}</td>
+                                            <td class="text-center font-weight-bold text-xs mb-0 text-uppercase">{{ $a->status_keanggotaan }}</td>
                                             @if (auth()->user()->isPengurus())
                                                 <td class="align-middle text-center">
                                                     <button class="btn btn-icon btn-warning" type="button">

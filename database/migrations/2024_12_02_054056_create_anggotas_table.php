@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('email');
             $table->string('no_hp', 15);
+            $table->enum('status_keanggotaan', ['aktif', 'lulus', 'drop out'])->default('aktif');
             $table->string('kelas', 50);
             $table->timestamps();
 

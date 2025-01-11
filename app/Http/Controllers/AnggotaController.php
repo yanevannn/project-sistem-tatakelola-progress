@@ -96,7 +96,8 @@ class AnggotaController extends Controller
             'nama' => 'required|string|max:255',
             'kelas' => 'required|string|max:100',
             'email' => 'required|email|max:255',
-            'no_hp' => 'nullable|string|max:15'
+            'no_hp' => 'nullable|string|max:15',
+            'status_keanggotaan' => 'required|in:aktif,lulus,drop out'
         ], [
             'nim.required' => 'NIM wajib diisi.',
             'nim.string' => 'NIM harus berupa teks.',
@@ -115,7 +116,10 @@ class AnggotaController extends Controller
             'email.max' => 'Email tidak boleh lebih dari 255 karakter.',
 
             'no_hp.string' => 'Nomor HP harus berupa teks.',
-            'no_hp.max' => 'Nomor HP tidak boleh lebih dari 15 karakter.'
+            'no_hp.max' => 'Nomor HP tidak boleh lebih dari 15 karakter.',
+
+            'status_keanggotaan.required' => 'Status keanggotaan wajib diisi.',
+            'status_keanggotaan.in' => 'Status keanggotaan harus salah satu dari: aktif, lulus, drop out.'
         ]);
 
         $data = [
@@ -123,7 +127,8 @@ class AnggotaController extends Controller
             'nama' => $request->nama,
             'kelas' => $request->kelas,
             'email' => $request->email,
-            'no_hp' => $request->no_hp
+            'no_hp' => $request->no_hp,
+            'status_keanggotaan' => $request->status_keanggotaan
         ];
 
         $anggota = Anggota::findOrFail($id);
