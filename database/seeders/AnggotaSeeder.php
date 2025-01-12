@@ -14,7 +14,7 @@ class AnggotaSeeder extends Seeder
     public function run(): void
     {
         Anggota::create([
-            'id_periode' => 3,
+            'id_periode' => 1,
             'nim' => '210030300',
             'nama' => 'John Doe',
             'no_hp' => '081234567890',
@@ -22,7 +22,7 @@ class AnggotaSeeder extends Seeder
             'kelas' => 'Web Dev',
         ]);
         Anggota::create([
-            'id_periode' => 3,
+            'id_periode' => 1,
             'nim' => '210030301',
             'nama' => 'John Doe',
             'no_hp' => '081234567890',
@@ -31,7 +31,7 @@ class AnggotaSeeder extends Seeder
         ]);
         // Data anggota baru dengan email
         Anggota::create([
-            'id_periode' => 3,
+            'id_periode' => 1,
             'nim' => '210030302',
             'nama' => 'Yan Evan',
             'no_hp' => '081345678901',
@@ -40,7 +40,7 @@ class AnggotaSeeder extends Seeder
         ]);
 
         Anggota::create([
-            'id_periode' => 3,
+            'id_periode' => 1,
             'nim' => '210030303',
             'nama' => 'Wayan Munayana',
             'no_hp' => '081456789012',
