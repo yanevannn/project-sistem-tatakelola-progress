@@ -26,11 +26,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script src="{{ asset('assets/js/jquery-3.6.0.js') }}"></script>
     <!-- DataTables CSS -->
-    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    {{-- <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
+    <link href="{{ asset('assets/css/jquery.dataTables.css') }}" rel="stylesheet">
     <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> --}}
+    <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
 
 
 </head>
