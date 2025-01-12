@@ -12,7 +12,7 @@ use App\Models\Inventaris;
 use App\Models\SuratMasuk;
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
-use App\Models\DokumenKegiatan;
+use App\Models\DokumenEvent;
 use App\Models\PrestasiAnggota;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -71,17 +71,17 @@ class SesiController extends Controller
         $dokumenukm = DokumenUkm::count() * 2;
 
         // Hitung jumlah dokumen berdasarkan keberadaan data di kolom proposal, lpj, dan lpjk
-        $totalProposal = DokumenKegiatan::where('id_periode', $currentPeriodeId)
+        $totalProposal = DokumenEvent::where('id_periode', $currentPeriodeId)
             ->whereNotNull('proposal')
             ->count();
-        $totalLpj = DokumenKegiatan::where('id_periode', $currentPeriodeId)
+        $totalLpj = DokumenEvent::where('id_periode', $currentPeriodeId)
             ->whereNotNull('lpj')
             ->count();
-        $totalLpjk = DokumenKegiatan::where('id_periode', $currentPeriodeId)
+        $totalLpjk = DokumenEvent::where('id_periode', $currentPeriodeId)
             ->whereNotNull('lpjk')
             ->count();
         // Hitung total dokumen event (hanya hitung sekali untuk lpj dan lpjk)
-        $dokumenevent = DokumenKegiatan::where('id_periode', $currentPeriodeId)
+        $dokumenevent = DokumenEvent::where('id_periode', $currentPeriodeId)
             ->where(function ($query) {
                 $query->whereNotNull('proposal')
                     ->orWhereNotNull('lpj')
@@ -120,15 +120,6 @@ class SesiController extends Controller
     public function dashboardProfile()
     {
         $user = Auth::user();
-        $filteredUser = [
-            'nama' => $user->nama,
-            'email' => $user->email,
-            'role' => $user->role,
-            'jenis_kelamin' => $user->jenis_kelamin,
-            'no_hp' => $user->no_hp,
-            'alamat' => $user->alamat,
-        ];
-
         return view('dashboard-profile', compact('user'));
     }
 }

@@ -35,36 +35,43 @@
                             <div class="col-6">
                                 <h6>INFORMATION</h6>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 d-none d-md-block">
                                 <h6 class="text-uppercase">Reset Password</h6>
                             </div>
                         </div>
                     </div>
                     <div class="card-body px-4 pt-0 pb-2 mb-4">
                         <div class="row">
-                            <div class="col-6">
-                                <ul class="list-group list-group-flush ml-4">
-                                    <li class="list-group-item border-0 p-0 mb-2">
-                                        <strong>Name:</strong> {{ $user->nama }}
-                                    </li>
-                                    <li class="list-group-item border-0 p-0 mb-2">
-                                        <strong>Email:</strong> {{ $user->email }}
-                                    </li>
-                                    <li class="list-group-item border-0 p-0 mb-2">
-                                        <strong>Role:</strong> {{ $user->role }}
-                                    </li>
-                                    <li class="list-group-item border-0 p-0 mb-2">
-                                        <strong>Gender:</strong> {{ $user->jenis_kelamin }}
-                                    </li>
-                                    <li class="list-group-item border-0 p-0 mb-2">
-                                        <strong>Phone:</strong> {{ $user->no_hp }}
-                                    </li>
-                                    <li class="list-group-item border-0 p-0 mb-2">
-                                        <strong>Address:</strong> {{ $user->alamat }}
-                                    </li>
-                                </ul>
+                            <div class="col-md-6">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" class="text-right" style="width: 30%;"><strong>Name:</strong></th>
+                                            <td>{{ $user->anggota->nama }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="text-right"><strong>Jabatan:</strong></th>
+                                            <td>{{ $user->role }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="text-right"><strong>Nim:</strong></th>
+                                            <td>{{ $user->anggota->nim }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="text-right"><strong>Email:</strong></th>
+                                            <td>{{ $user->email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="text-right"><strong>Phone:</strong></th>
+                                            <td>{{ $user->anggota->no_hp }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
+                                <div class="d-block d-md-none">
+                                    <h6 class="text-uppercase">Reset Password</h6>
+                                </div>
                             <form action="" method="POST">
                                 @csrf
                                 <div class="form-group">

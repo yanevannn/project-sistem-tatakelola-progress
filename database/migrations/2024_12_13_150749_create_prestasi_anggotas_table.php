@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nama_prestasi');
             $table->enum('tingkat', ['lokal', 'nasional', 'internasional']);
             $table->year('tahun_prestasi');
-            $table->text('keterangan')->nullable();
             $table->string('file')->nullable(); // Path to the file
             $table->timestamps();
 

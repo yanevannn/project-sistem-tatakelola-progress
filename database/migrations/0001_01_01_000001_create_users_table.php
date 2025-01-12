@@ -14,27 +14,23 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->foreignId('id_periode')->constrained('periode')->cascadeOnDelete(); // Foreign key ke tabel periodes
-            $table->string('nim'); // NIM
-            $table->string('nama'); // Nama pengguna
+            $table->foreignId('id_anggota')->constrained('anggota')->cascadeOnDelete(); // Foreign key ke tabel anggota
             $table->enum('role', ['Ketua','Wakil Ketua', 'Bendahara', 'Sekretaris', 'Divisi I', 'Divisi II', 'Divisi III']); // Role
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']); // Jenis kelamin
             $table->string('email'); // Email
-            $table->string('no_hp')->nullable(); // Nomor HP opsional
-            $table->text('alamat')->nullable(); // Alamat opsional
             $table->string('password'); // Kata sandi
             $table->timestamps(); // Kolom created_at dan updated_at otomatis
         
             // Membuat constraint unik berdasarkan kombinasi id_periode dan nim/email
-            $table->unique(['id_periode', 'nim'], 'unique_nim_periode');
             $table->unique(['id_periode', 'email'], 'unique_email_periode');
+            $table->unique(['id_periode', 'id_anggota'], 'unique_anggota_periode'); // Unik untuk id_anggota per periode
         });
         
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
+        // Schema::create('password_reset_tokens', function (Blueprint $table) {
+        //     $table->string('email')->primary();
+        //     $table->string('token');
+        //     $table->timestamp('created_at')->nullable();
+        // });
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
@@ -52,7 +48,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
+        // Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
 };

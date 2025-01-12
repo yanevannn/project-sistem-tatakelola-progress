@@ -10,7 +10,7 @@ use App\Http\Controllers\DokumenUkmController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
-use App\Http\Controllers\DokumenKegiatanController;
+use App\Http\Controllers\DokumenEventController;
 use App\Http\Controllers\PrestasiAnggotaController;
 
 Route::middleware(['guest'])->group(function () {
@@ -76,12 +76,12 @@ Route::middleware('auth', 'role:pengurus-inti')->group(function () {
 
 
     // DOkumen Kegiatan
-    Route::get('/dokumen_kegiatan', [DokumenKegiatanController::class, 'index'])->name('dokumen_kegiatan.index');
-    Route::get('/dokumen_kegiatan/create', [DokumenKegiatanController::class, 'create'])->name('dokumen_kegiatan.create');
-    Route::post('/dokumen_kegiatan/store', [DokumenKegiatanController::class, 'store'])->name('dokumen_kegiatan.store');
-    Route::get('/dokumen_kegiatan/edit/{id}', [DokumenKegiatanController::class, 'edit'])->name('dokumen_kegiatan.edit');
-    Route::put('/dokumen_kegiatan/{id}', [DokumenKegiatanController::class, 'update'])->name('dokumen_kegiatan.update');
-    Route::delete('/dokumen_kegiatan{id}', [DokumenKegiatanController::class, 'destroy'])->name('dokumen_kegiatan.destroy');
+    Route::get('/dokumen_kegiatan', [DokumenEventController::class, 'index'])->name('dokumen_kegiatan.index');
+    Route::get('/dokumen_kegiatan/create', [DokumenEventController::class, 'create'])->name('dokumen_kegiatan.create');
+    Route::post('/dokumen_kegiatan/store', [DokumenEventController::class, 'store'])->name('dokumen_kegiatan.store');
+    Route::get('/dokumen_kegiatan/edit/{id}', [DokumenEventController::class, 'edit'])->name('dokumen_kegiatan.edit');
+    Route::put('/dokumen_kegiatan/{id}', [DokumenEventController::class, 'update'])->name('dokumen_kegiatan.update');
+    Route::delete('/dokumen_kegiatan{id}', [DokumenEventController::class, 'destroy'])->name('dokumen_kegiatan.destroy');
 
     Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris.index');
     Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index');

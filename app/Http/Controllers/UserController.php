@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use League\Csv\Reader;
+use App\Models\Anggota;
 use App\Models\Periode;
 use App\Mail\WelcomeEmail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -81,8 +83,6 @@ class UserController extends Controller
         //     'id_periode' => $idPeriode,
         // ]);
 
-
-
         // Iterasi setiap record dalam file CSV
         foreach ($csv as $record) {
             // Validasi minimal pada data dalam CSV
@@ -90,20 +90,19 @@ class UserController extends Controller
             // dd($validatedData); // Melihat data setelah divalidasi
 
             // Generate plain password (You should decide how to handle plain passwords)
-            $plainPassword = $validatedData['password']; // Store plain password temporarily
+            // $plainPassword = $validatedData['password']; // Store plain password 
+            
+            // Generate random password
+            $plainPassword = Str::random(10);
 
 
             // Membuat user baru dengan data yang sudah tervalidasi
             $user = User::create([
                 'id_periode' => $idPeriode, // Hubungkan user dengan periode yang dipilih
-                'nim' => $validatedData['nim'], // NIM pengguna
-                'nama' => $validatedData['nama'], // Nama pengguna
-                'role' => $validatedData['jabatan'], // Jabatan/Role di organisasi
-                'jenis_kelamin' => $validatedData['jenis_kelamin'], // Jenis kelamin pengguna
-                'email' => $validatedData['email'], // Email pengguna
-                'no_hp' => $validatedData['no_hp'], // Nomor HP (opsional)
-                'alamat' => $validatedData['alamat'], // Alamat (opsional)
-                'password' => Hash::make($validatedData['password']), // Hash password untuk keamanan
+                'id_anggota' => $validatedData['id_anggota'], // NIM pengguna
+                'role' => $validatedData['role'], // Jabatan/Role di organisasi
+                'email' => $validatedData['email'], // Jabatan/Role di organisasi
+                'password' => Hash::make($plainPassword), // Hash password untuk keamanan
             ]);
 
             // Mengirimkan email sambutan ke pengguna baru
@@ -119,20 +118,39 @@ class UserController extends Controller
      * @param array $record
      * @return array Data yang sudah tervalidasi
      */
+    // private function validateCsvRecord(array $record)
+    // {
+    //     // Menggunakan validator untuk memastikan data sesuai aturan
+    //     return validator($record, [
+    //         'nim' => 'required|string|max:255', // NIM wajib diisi, maksimal 255 karakter
+    //         'role' => 'required|in:Ketua,Wakil Ketua,Bendahara,Sekretaris,Divisi I,Divisi II,Divisi III', // Role harus sesuai daftar
+    //         'email' => 'required|email|max:255', // Email wajib diisi dan valid
+    //     ])->validate();
+    // }
+
     private function validateCsvRecord(array $record)
-    {
-        // Menggunakan validator untuk memastikan data sesuai aturan
-        return validator($record, [
-            'nim' => 'required|string|max:255', // NIM wajib diisi, maksimal 255 karakter
-            'nama' => 'required|string|max:255', // Nama wajib diisi, maksimal 255 karakter
-            'jabatan' => 'required|in:Ketua,Wakil Ketua,Bendahara,Sekretaris,Divisi I,Divisi II,Divisi III', // Role harus sesuai daftar
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan', // Jenis kelamin harus salah satu dari opsi
-            'email' => 'required|email|max:255', // Email wajib diisi dan valid
-            'no_hp' => 'nullable|string|max:15', // No HP opsional, maksimal 15 karakter
-            'alamat' => 'nullable|string', // Alamat opsional
-            'password' => 'required|string|min:8', // Password wajib, minimal 8 karakter
-        ])->validate();
+{
+    // Validasi data dasar
+    $validatedData = validator($record, [
+        'nim' => 'required|string|max:255', // NIM wajib diisi, maksimal 255 karakter
+        'role' => 'required|in:Ketua,Wakil Ketua,Bendahara,Sekretaris,Divisi I,Divisi II,Divisi III', // Role harus sesuai daftar
+        'email' => 'required|email|max:255', // Email wajib diisi dan valid
+    ])->validate();
+
+    // Cek apakah NIM ada di tabel anggota
+    $anggota = Anggota::where('nim', $validatedData['nim'])->first();
+
+    if (!$anggota) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'nim' => "NIM {$validatedData['nim']} tidak ditemukan di tabel anggota.",
+        ]);
     }
+
+    // Tambahkan ID anggota ke data yang divalidasi
+    $validatedData['id_anggota'] = $anggota->id;
+
+    return $validatedData;
+}
 
 
     public function edit(string $id)

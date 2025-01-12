@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class DokumenKegiatan extends Model
+class DokumenEvent extends Model
 {
     use HasFactory;
 
     // Nama tabel yang digunakan oleh model ini
-    protected $table = 'dokumen_kegiatan';
+    protected $table = 'dokumen_event';
 
     // Kolom yang dapat diisi
     protected $fillable = [

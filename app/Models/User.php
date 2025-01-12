@@ -18,15 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nama',              // Nama pengguna
-        'email',             // Email pengguna
-        'password',          // Password pengguna
-        'id_periode',        // ID Periode (menghubungkan user dengan periode)
-        'nim',               // NIM pengguna
-        'role',              // Role pengguna (misalnya, Ketua, Bendahara, dll.)
-        'jenis_kelamin',     // Jenis kelamin pengguna (Laki-laki/Perempuan)
-        'no_hp',             // Nomor HP pengguna (opsional)
-        'alamat',            // Alamat pengguna (opsional)
+        'id_periode',          // ID Periode (foreign key menghubungkan anggota dengan periode)
+        'id_anggota',                 // Nomor Induk Mahasiswa (NIM)
+        'nama',                // Nama anggota
+        'role',                // Jabatan anggota
+        'email',               // Alamat email anggota
+        'password',            // Kata sandi anggota
     ];
 
     /**
@@ -55,6 +52,11 @@ class User extends Authenticatable
     public function periode()
     {
         return $this->belongsTo(Periode::class, 'id_periode');
+    }
+
+    public function anggota()
+    {
+        return $this->belongsTo(Anggota::class, 'id_anggota');
     }
 
     public function isPengurusInti(): bool

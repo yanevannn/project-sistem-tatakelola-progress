@@ -66,9 +66,9 @@
                                     <tr>
                                         <td class="text-xs align-middle text-center">{{ $loop->iteration }}</td>
                                         <td>
-                                            <p class="text-xs text-center font-weight-bold mb-0">{{ $p->nama }}</p>
+                                            <p class="text-xs text-center font-weight-bold mb-0">{{ $p->anggota->nama }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm">{{ $p->nim }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $p->anggota->nim }}</td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ $p->email }}</span>
                                         </td>

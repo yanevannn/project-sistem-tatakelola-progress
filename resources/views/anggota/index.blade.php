@@ -57,9 +57,6 @@
                                         Nim</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Email</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         No Whatsapp</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -88,7 +85,6 @@
                                             </td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->nama }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->nim }}</td>
-                                            <td class="text-center font-weight-bold text-xs mb-0">{{ $a->email }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->no_hp }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->kelas }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0 text-uppercase">{{ $a->status_keanggotaan }}</td>

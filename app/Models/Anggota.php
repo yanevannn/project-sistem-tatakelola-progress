@@ -25,7 +25,6 @@ class Anggota extends Model
         'id_periode',
         'nim',
         'nama',
-        'email',
         'no_hp',
         'kelas',
         'status_keanggotaan'

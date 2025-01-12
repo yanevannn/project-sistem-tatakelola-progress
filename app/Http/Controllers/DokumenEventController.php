@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DokumenKegiatan;
+use App\Models\DokumenEvent;
 use App\Models\Periode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class DokumenKegiatanController extends Controller
+class DokumenEventController extends Controller
 {
     public function index()
     {
-        $dokumen_kegiatan = DokumenKegiatan::paginate(10);
+        $dokumen_kegiatan = DokumenEvent::paginate(10);
         return view('dokumen_kegiatan.index', compact('dokumen_kegiatan'));
     }
 
@@ -99,13 +99,13 @@ class DokumenKegiatanController extends Controller
             'keterangan' => $request->keterangan
         ];
 
-        DokumenKegiatan::create($data);
+        DokumenEvent::create($data);
         return redirect()->route('dokumen_kegiatan.index')->with('success', 'Data Kekiatan Berhasil Ditambahkan');
     }
 
     public function edit($id)
     {
-        $dokumen_kegiatan = DokumenKegiatan::find($id);
+        $dokumen_kegiatan = DokumenEvent::find($id);
         $periode = Periode::all();
         return view('dokumen_kegiatan.edit', compact('dokumen_kegiatan', 'periode'));
     }
@@ -113,7 +113,7 @@ class DokumenKegiatanController extends Controller
     public function update(Request $request, $id)
     {
         $user = Auth::user();
-        $dokumen_kegiatan = DokumenKegiatan::find($id);
+        $dokumen_kegiatan = DokumenEvent::find($id);
         $request->validate([
             'periode' => 'required|exists:periode,id',
             'nama_kegiatan' => 'required|string|max:255',
@@ -203,7 +203,7 @@ class DokumenKegiatanController extends Controller
 
     public function destroy($id)
     {
-        $dokumen_kegiatan = DokumenKegiatan::find($id);
+        $dokumen_kegiatan = DokumenEvent::find($id);
         // Hapus file proposal jika ada
         if ($dokumen_kegiatan->proposal && file_exists(public_path('dokumen/kegiatan/proposal/' . $dokumen_kegiatan->proposal))) {
             unlink(public_path('dokumen/kegiatan/proposal/' . $dokumen_kegiatan->proposal));
