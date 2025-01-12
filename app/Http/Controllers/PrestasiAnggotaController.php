@@ -11,14 +11,18 @@ use Illuminate\Support\Facades\Validator;
 
 class PrestasiAnggotaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $maxdata = 10;
-        $periode = Periode::all();
-        $prestasi = PrestasiAnggota::paginate(10);
-        $anggota = Anggota::all();
+         // Ambil periode dari request atau gunakan periode user yang login
+         $selectedPeriode = $request->input('periode', auth()->user()->id_periode);
+         // Ambil data prestasi berdasarkan periode anggota
+        $prestasi = PrestasiAnggota::whereHas('anggota', function ($query) use ($selectedPeriode) {
+            $query->where('id_periode', $selectedPeriode);
+        })->get();
 
-        return view('prestasi_anggota.index', compact('periode', 'prestasi', 'anggota'));
+        $periode = Periode::all();
+
+        return view('prestasi_anggota.index', compact('periode', 'prestasi'));
     }
 
     public function create(Request $request)
@@ -47,7 +51,6 @@ class PrestasiAnggotaController extends Controller
             'nama_prestasi' => 'required|string|max:255',
             'tingkat' => 'required|in:lokal,nasional,internasional',
             'tahun_prestasi' => 'required|digits:4|integer|before_or_equal:' . date('Y'),
-            'keterangan' => 'nullable|string|max:1000',
             'file' => 'required|file|mimes:jpeg,png,jpg|max:2048',
         ], [
             'id_anggota.required' => 'Anggota harus dipilih.',
@@ -61,8 +64,6 @@ class PrestasiAnggotaController extends Controller
             'tahun_prestasi.digits' => 'Tahun prestasi harus terdiri dari 4 digit.',
             'tahun_prestasi.integer' => 'Tahun prestasi harus berupa angka.',
             'tahun_prestasi.before_or_equal' => 'Tahun prestasi tidak boleh lebih dari tahun ini.',
-            'keterangan.string' => 'Keterangan harus berupa teks.',
-            'keterangan.max' => 'Keterangan maksimal 1000 karakter.',
             'file.required' => 'Gambar harus diisi.',
             'file.file' => 'File harus berupa file.',
             'file.mimes' => 'File harus bertipe jpeg, png, jpg, atau pdf.',
@@ -81,7 +82,6 @@ class PrestasiAnggotaController extends Controller
             'nama_prestasi' => $request->nama_prestasi,
             'tingkat' => $request->tingkat,
             'tahun_prestasi' => $request->tahun_prestasi,
-            'keterangan' => $request->keterangan,
             'file' => $fileFinalName,
         ];
         
@@ -110,7 +110,6 @@ class PrestasiAnggotaController extends Controller
         'nama_prestasi' => 'required|string|max:255',
         'tingkat' => 'required|in:lokal,nasional,internasional',
         'tahun_prestasi' => 'required|digits:4|integer|before_or_equal:' . date('Y'),
-        'keterangan' => 'nullable|string|max:1000',
         'file' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Maksimal 2MB
     ], [
         
@@ -125,9 +124,6 @@ class PrestasiAnggotaController extends Controller
         'tahun_prestasi.digits' => 'Tahun Prestasi harus 4 digit.',
         'tahun_prestasi.integer' => 'Tahun Prestasi harus berupa angka.',
         'tahun_prestasi.before_or_equal' => 'Tahun Prestasi tidak boleh lebih dari tahun ini.',
-        
-        'keterangan.string' => 'Keterangan harus berupa teks.',
-        'keterangan.max' => 'Keterangan maksimal 1000 karakter.',
         
         'file.file' => 'File harus berupa file.',
         'file.mimes' => 'File harus bertipe jpeg, png, jpg, atau pdf.',
@@ -159,7 +155,6 @@ class PrestasiAnggotaController extends Controller
         'nama_prestasi' => $request->nama_prestasi,
         'tingkat' => $request->tingkat,
         'tahun_prestasi' => $request->tahun_prestasi,
-        'keterangan' => $request->keterangan,
         'file' => $fileName,
     ]);
 

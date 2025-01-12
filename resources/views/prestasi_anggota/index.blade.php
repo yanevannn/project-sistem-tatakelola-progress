@@ -5,36 +5,46 @@
     <div class="row mb-4">
         <div class="mb-lg-0 mb-4">
             <div class="col-lg-12">
-                @if(auth()->user()->isPengurus())
-                <button class="btn bg-gradient-success">
-                    <a href="{{ route('prestasi_anggota.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
-                        data-original-title="Tambah prestasi">Tambah Data</a>
-                </button>
-                @endif
+                
+                <div class="row">
+                    <div class="col-8">
+                        <form action="{{ route('prestasi_anggota.index') }}" method="GET">
+                            <label for="periode">PERIODE</label>
+                            <div class="form-group col-lg-2">
+                                <select name="periode" class="form-control mb-4" required onchange="this.form.submit()">
+                                    <option value="" disabled
+                                        {{ !request('periode', auth()->user()->id_periode) ? 'selected' : '' }}>Pilih periode</option>
+                                    @foreach ($periode as $p)
+                                        <option value="{{ $p->id }}"
+                                            {{ request('periode', auth()->user()->id_periode) == $p->id ? 'selected' : '' }}>
+                                            {{ $p->tahun }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    @if(auth()->user()->isPengurus())
+                        <div class="col-lg-4 d-flex justify-content-end align-items-end">
+                            <button class="btn bg-gradient-success">
+                                <a href="{{ route('prestasi_anggota.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
+                                    data-original-title="tambah">Tambah Data</a>
+                            </button>
+                        </div>
+                        @endif
+                </div>
                 <div class="card p-3">
                     <div class="container-fluid px-0">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-lg-9">
+
                                     <h6>Tabel Prestasi Anggota UKM</h6>
-                                </div>
-                                <div class="col-lg-3">
-                                    <form action="{{ route('prestasi_anggota.index') }}" method="GET" class="d-flex">
-                                        <input type="text" value="{{ request('search') }}" class="form-control"
-                                            name="search" placeholder="Kata kunci ..." aria-label="Kata kunci ...">
-                                        <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="submit"
-                                            id="button-addon2">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                     <div class="card-body">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table class="table align-items-center mb-0" id="prestasiAnggotaTable">
                                 <thead>
                                     <tr>
                                         <th
@@ -54,26 +64,15 @@
                                             Tahun Prestasi</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Keterangan</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             File</th>
                                             @if(auth()->user()->isPengurus())
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Aksi</th>
-                                        <th class="text-secondary opacity-7"></th>
                                         @endif
                                     </tr>
                                 </thead>
                                 <tbody class="mb-0">
-                                    @if ($prestasi->isEmpty())
-                                        <tr>
-                                            <td colspan="9" class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0 mt-4">Tidak ada data prestasi.</p>
-                                            </td>
-                                        </tr>
-                                    @else
                                         @foreach ($prestasi as $p)
                                             <tr>
                                                 <td class="text-center font-weight-bold text-xs mb-0">{{ $loop->iteration }}
@@ -87,8 +86,6 @@
                                                 </td>
                                                 <td class="text-center font-weight-bold text-xs mb-0">
                                                     {{ $p->tahun_prestasi }}</td>
-                                                <td class="text-center font-weight-bold text-xs mb-0">{{ $p->keterangan }}
-                                                </td>
                                                 <td class="align-middle text-center">
                                                     <a href="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" target="_blank">
                                                         <img src="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" alt="Prestasi" class="img-fluid" style="max-width: 100%; height: 100px;">
@@ -103,14 +100,9 @@
                                                 @endif
                                             </tr>
                                         @endforeach
-                                    @endif
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-
-                    <div class="px-3">
-                        {{ $prestasi->links() }}
                     </div>
                 </div>
             </div>
@@ -146,6 +138,19 @@
                             'info'); // Tampilkan pesan jika dibatalkan
                     }
                 });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#prestasiAnggotaTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
         });
     </script>

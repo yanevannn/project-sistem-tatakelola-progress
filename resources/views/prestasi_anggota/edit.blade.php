@@ -78,17 +78,9 @@
                             </div>
                         
                             <div class="form-group">
-                                <label for="keterangan">Keterangan</label>
-                                <textarea name="keterangan" id="keterangan" class="form-control" rows="3" placeholder="Masukkan keterangan (jika ada)" >{{ old('keterangan', $prestasi->keterangan) }}</textarea>
-                                @error('keterangan')
-                                        <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        
-                            <div class="form-group">
                                 <label for="file">Gambar</label>
                                 <br>
-                                <img src="{{ asset('dokumen/prestasi_anggota/' . $prestasi->file) }}" alt="{{ $prestasi->file }}" height="200">
+                                <img src="{{ asset('dokumen/prestasi_anggota/' . $prestasi->file) }}" alt="{{ $prestasi->file }}" height="200" class="mb-2">
                                 <input type="file" name="file" id="file" class="form-control" accept="image/*">
                                 <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB dengan format .jpg, .png atau .jpeg</p>
                                 @error('file')

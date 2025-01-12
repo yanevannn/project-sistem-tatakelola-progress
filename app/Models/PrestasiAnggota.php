@@ -16,7 +16,6 @@ class PrestasiAnggota extends Model
         'nama_prestasi',
         'tingkat',
         'tahun_prestasi',
-        'keterangan',
         'file',
     ];
 
