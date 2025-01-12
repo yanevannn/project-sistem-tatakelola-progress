@@ -9,16 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class SuratKeluarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $maxdata = 10;
-        if (request('search')) {
-            $suratkeluar = SuratKeluar::where('nomor_surat_keluar', 'like', '%' . request('search') . '%')->paginate($maxdata)->appends(['search' => request('search')]);
-            return view('surat_keluar.index', compact('suratkeluar'));
-        } else {
-            $suratkeluar = SuratKeluar::paginate($maxdata);
-            return view('surat_keluar.index', compact('suratkeluar'));
-        }
+         // Ambil periode dari request atau gunakan periode user yang login
+         $selectedPeriode = $request->input('periode', auth()->user()->id_periode);
+         // Ambil data surat masuk berdasarkan periode yang dipilih
+         $suratkeluar = SuratKeluar::where('id_periode', $selectedPeriode)->get();
+
+         $periode = Periode::all();
+         return view('surat_keluar.index', compact('suratkeluar', 'periode'));
     }
 
     public function create()
