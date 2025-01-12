@@ -9,22 +9,15 @@ use Illuminate\Http\Request;
 
 class AnggotaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $maxdata = 5;
-        $periode = Periode::all();
-        if (request('search')) {
-            $search = request('search');
-            $anggota = Anggota::where('nim', 'like', '%' . $search . '%')
-                ->orWhere('nama', 'like', '%' . $search . '%')
-                ->paginate($maxdata)
-                ->appends(['search' => $search]);
-            return view('anggota.index', compact('anggota', 'periode'));
-        } else {
+        // Ambil periode dari request atau gunakan periode user yang login
+        $selectedPeriode = $request->input('periode', auth()->user()->id_periode);
+        // Ambil data surat masuk berdasarkan periode yang dipilih
+        $anggota = Anggota::where('id_periode', $selectedPeriode)->get();
 
-            $anggota = Anggota::paginate($maxdata);
-            return view('anggota.index', compact('anggota', 'periode'));
-        }
+        $periode = Periode::all();
+        return view('anggota.index', compact('anggota', 'periode'));
     }
 
     public function create()
