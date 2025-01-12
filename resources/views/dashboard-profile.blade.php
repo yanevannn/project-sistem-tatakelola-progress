@@ -11,16 +11,16 @@
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png" class="bg-white rounded-circle" alt="profile_image">
                 </div>
             </div>
             <div class="col-auto my-auto">
                 <div class="h-100">
                     <h5 class="mb-1">
-                        {{ $user->nama }}
+                        {{ $user->anggota->nama }}
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
-                        {{ $user->jabatan }}
+                        {{ $user->role }}
                     </p>
                 </div>
             </div>
@@ -72,8 +72,18 @@
                                 <div class="d-block d-md-none">
                                     <h6 class="text-uppercase">Reset Password</h6>
                                 </div>
-                            <form action="" method="POST">
+                            <form action="{{ route('resetPassword') }}" method="POST">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li class="text-white">{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 @csrf
+                                @method("PUT")
                                 <div class="form-group">
                                     <label for="current_password">Current Password</label>
                                     <input type="password" class="form-control" id="current_password" name="current_password" required>
@@ -83,10 +93,10 @@
                                     <input type="password" class="form-control" id="new_password" name="new_password" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="new_password_confirmation">Confirm New Password</label>
-                                    <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" required>
+                                    <label for="confirm_password">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-3">Reset Password</button>
+                                <button type="submit" class="btn btn-warning mt-3">Reset Password</button>
                             </form>
                             </div>
                         </div>

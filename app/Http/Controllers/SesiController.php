@@ -11,10 +11,11 @@ use App\Models\DokumenUkm;
 use App\Models\Inventaris;
 use App\Models\SuratMasuk;
 use App\Models\SuratKeluar;
-use Illuminate\Http\Request;
 use App\Models\DokumenEvent;
+use Illuminate\Http\Request;
 use App\Models\PrestasiAnggota;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class SesiController extends Controller
@@ -56,6 +57,38 @@ class SesiController extends Controller
         return redirect('/login');
     }
 
+    public function resetPassword(Request $request)
+    {
+        // Ambil pengguna yang sedang login
+        $user = User::find(Auth::id());
+
+        // Validasi input
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required|same:new_password'
+        ], [
+            'current_password.required' => 'Password lama wajib diisi',
+            'new_password.required' => 'Password baru wajib diisi',
+            'new_password.min' => 'Password baru harus lebih dari 8 karakter',
+            'confirm_password.required' => 'Konfirmasi password wajib diisi',
+            'confirm_password.same' => 'Konfirmasi password harus sama dengan password baru'
+        ]);
+        
+
+        // Verifikasi password lama
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Password lama tidak cocok']);
+        }
+
+        // Update password
+        $user->password = bcrypt($request->new_password);
+        $user->save();
+
+        // Redirect atau response sukses
+        return redirect()->route('dashboard.profile')->with('success', 'Password berhasil diperbarui');
+    }
+
     public function dashboard()
     {
         $user = Auth::user();
@@ -93,7 +126,7 @@ class SesiController extends Controller
         $prestasi = PrestasiAnggota::whereHas('anggota', function ($query) use ($currentPeriodeId) {
             $query->where('id_periode', $currentPeriodeId);
         })->count();
-        
+
         // Hitung total pemasukan dan pengeluaran untuk periode tertentu
         $totalPemasukan = Keuangan::where('id_periode', $currentPeriodeId)->sum('pemasukan');
         $totalPengeluaran = Keuangan::where('id_periode', $currentPeriodeId)->sum('pengeluaran');

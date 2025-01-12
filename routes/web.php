@@ -24,6 +24,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[SesiController::class,'dashboard'])->name('dashboard');
     Route::get('/dashboard/profile',[SesiController::class,'dashboardProfile'])->name('dashboard.profile');
+    Route::put('/dashboard/profile/resetpassword',[SesiController::class,'resetPassword'])->name('resetPassword');
     Route::get('/logout', [SesiController::class, 'logout']);
 });
 
