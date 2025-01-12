@@ -75,13 +75,13 @@ Route::middleware('auth', 'role:pengurus-inti')->group(function () {
     Route::put('/dokumen_ukm/{id}', [DokumenUkmController::class, 'update'])->name('dokumen_ukm.update');
 
 
-    // DOkumen Kegiatan
-    Route::get('/dokumen_kegiatan', [DokumenEventController::class, 'index'])->name('dokumen_kegiatan.index');
-    Route::get('/dokumen_kegiatan/create', [DokumenEventController::class, 'create'])->name('dokumen_kegiatan.create');
-    Route::post('/dokumen_kegiatan/store', [DokumenEventController::class, 'store'])->name('dokumen_kegiatan.store');
-    Route::get('/dokumen_kegiatan/edit/{id}', [DokumenEventController::class, 'edit'])->name('dokumen_kegiatan.edit');
-    Route::put('/dokumen_kegiatan/{id}', [DokumenEventController::class, 'update'])->name('dokumen_kegiatan.update');
-    Route::delete('/dokumen_kegiatan{id}', [DokumenEventController::class, 'destroy'])->name('dokumen_kegiatan.destroy');
+    // DOkumen Event
+    Route::get('/dokumen_event', [DokumenEventController::class, 'index'])->name('dokumen_event.index');
+    Route::get('/dokumen_event/create', [DokumenEventController::class, 'create'])->name('dokumen_event.create');
+    Route::post('/dokumen_event/store', [DokumenEventController::class, 'store'])->name('dokumen_event.store');
+    Route::get('/dokumen_event/edit/{id}', [DokumenEventController::class, 'edit'])->name('dokumen_event.edit');
+    Route::put('/dokumen_event/{id}', [DokumenEventController::class, 'update'])->name('dokumen_event.update');
+    Route::delete('/dokumen_event{id}', [DokumenEventController::class, 'destroy'])->name('dokumen_event.destroy');
 
     Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris.index');
     Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index');

@@ -9,7 +9,7 @@
                     <h6>Tambah Dokumen Kegiatan UKM</h6>
                 </div>
                 <div class="card-body p-3">
-                    <form action="{{ route('dokumen_kegiatan.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dokumen_event.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf <!-- Token CSRF untuk keamanan Laravel -->
                         <div class="row">
                             <div class="form-group col-lg-6 mb-0">

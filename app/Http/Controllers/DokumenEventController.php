@@ -10,16 +10,22 @@ use Illuminate\Support\Facades\Validator;
 
 class DokumenEventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $dokumen_kegiatan = DokumenEvent::paginate(10);
-        return view('dokumen_kegiatan.index', compact('dokumen_kegiatan'));
+        $user = Auth::user();
+        // Ambil periode dari request atau gunakan periode user yang login
+        $selectedPeriode = $request->input('periode', $user->id_periode);
+        // Ambil data surat masuk berdasarkan periode yang dipilih
+        $dokumen_event = DokumenEvent::where('id_periode', $selectedPeriode)->get();
+
+        $periode = Periode::all();
+        return view('dokumen_event.index', compact('dokumen_event', 'periode'));
     }
 
     public function create()
     {
         $periode = Periode::all();
-        return view('dokumen_kegiatan.create', compact('periode'));
+        return view('dokumen_event.create', compact('periode'));
     }
 
     public function store(Request $request)
@@ -100,20 +106,20 @@ class DokumenEventController extends Controller
         ];
 
         DokumenEvent::create($data);
-        return redirect()->route('dokumen_kegiatan.index')->with('success', 'Data Kekiatan Berhasil Ditambahkan');
+        return redirect()->route('dokumen_event.index')->with('success', 'Data Kekiatan Berhasil Ditambahkan');
     }
 
     public function edit($id)
     {
-        $dokumen_kegiatan = DokumenEvent::find($id);
+        $dokumen_event = DokumenEvent::find($id);
         $periode = Periode::all();
-        return view('dokumen_kegiatan.edit', compact('dokumen_kegiatan', 'periode'));
+        return view('dokumen_event.edit', compact('dokumen_event', 'periode'));
     }
 
     public function update(Request $request, $id)
     {
         $user = Auth::user();
-        $dokumen_kegiatan = DokumenEvent::find($id);
+        $dokumen_event = DokumenEvent::find($id);
         $request->validate([
             'periode' => 'required|exists:periode,id',
             'nama_kegiatan' => 'required|string|max:255',
@@ -145,8 +151,8 @@ class DokumenEventController extends Controller
 
         // Proses file proposal
         if ($request->hasFile('proposal')) {
-            if ($dokumen_kegiatan->proposal && file_exists(public_path('dokumen/kegiatan/proposal/' . $dokumen_kegiatan->proposal))) {
-                unlink(public_path('dokumen/kegiatan/proposal/' . $dokumen_kegiatan->proposal));
+            if ($dokumen_event->proposal && file_exists(public_path('dokumen/kegiatan/proposal/' . $dokumen_event->proposal))) {
+                unlink(public_path('dokumen/kegiatan/proposal/' . $dokumen_event->proposal));
             }
             $originalProposalName = $request->file('proposal')->getClientOriginalName();
             $proposalNameWithoutExtension = pathinfo($originalProposalName, PATHINFO_FILENAME);
@@ -154,13 +160,13 @@ class DokumenEventController extends Controller
             $proposalFileName = 'proposal-' . $formattedProposalName . '-' . uniqid() . '.pdf';
             $request->file('proposal')->move(public_path('dokumen/kegiatan/proposal/'), $proposalFileName);
         } else {
-            $proposalFileName = $dokumen_kegiatan->proposal;
+            $proposalFileName = $dokumen_event->proposal;
         }
 
         // Proses file LPJ
         if ($request->hasFile('lpj')) {
-            if ($dokumen_kegiatan->lpj && file_exists(public_path('dokumen/kegiatan/lpj/' . $dokumen_kegiatan->lpj))) {
-                unlink(public_path('dokumen/kegiatan/lpj/' . $dokumen_kegiatan->lpj));
+            if ($dokumen_event->lpj && file_exists(public_path('dokumen/kegiatan/lpj/' . $dokumen_event->lpj))) {
+                unlink(public_path('dokumen/kegiatan/lpj/' . $dokumen_event->lpj));
             }
             $originalLpjName = $request->file('lpj')->getClientOriginalName();
             $lpjNameWithoutExtension = pathinfo($originalLpjName, PATHINFO_FILENAME);
@@ -168,13 +174,13 @@ class DokumenEventController extends Controller
             $lpjFileName = 'lpj-' . $formattedLpjName . '-' . uniqid() . '.pdf';
             $request->file('lpj')->move(public_path('dokumen/kegiatan/lpj/'), $lpjFileName);
         } else {
-            $lpjFileName = $dokumen_kegiatan->lpj;
+            $lpjFileName = $dokumen_event->lpj;
         }
 
         // Proses file LPJK
         if ($request->hasFile('lpjk')) {
-            if ($dokumen_kegiatan->lpjk && file_exists(public_path('dokumen/kegiatan/lpjk/' . $dokumen_kegiatan->lpjk))) {
-                unlink(public_path('dokumen/kegiatan/lpjk/' . $dokumen_kegiatan->lpjk));
+            if ($dokumen_event->lpjk && file_exists(public_path('dokumen/kegiatan/lpjk/' . $dokumen_event->lpjk))) {
+                unlink(public_path('dokumen/kegiatan/lpjk/' . $dokumen_event->lpjk));
             }
             $originalLpjkName = $request->file('lpjk')->getClientOriginalName();
             $lpjkNameWithoutExtension = pathinfo($originalLpjkName, PATHINFO_FILENAME);
@@ -182,7 +188,7 @@ class DokumenEventController extends Controller
             $lpjkFileName = 'lpjk-' . $formattedLpjkName . '-' . uniqid() . '.pdf';
             $request->file('lpjk')->move(public_path('dokumen/kegiatan/lpjk/'), $lpjkFileName);
         } else {
-            $lpjkFileName = $dokumen_kegiatan->lpjk;
+            $lpjkFileName = $dokumen_event->lpjk;
         }
 
         $data = [
@@ -197,29 +203,29 @@ class DokumenEventController extends Controller
             'keterangan' => $request->keterangan
         ];
 
-        $dokumen_kegiatan->update($data);
-        return redirect()->route('dokumen_kegiatan.index')->with('success', ' Dokumen Kegiatan Berhasil Diupdate!');
+        $dokumen_event->update($data);
+        return redirect()->route('dokumen_event.index')->with('success', ' Dokumen Kegiatan Berhasil Diupdate!');
     }
 
     public function destroy($id)
     {
-        $dokumen_kegiatan = DokumenEvent::find($id);
+        $dokumen_event = DokumenEvent::find($id);
         // Hapus file proposal jika ada
-        if ($dokumen_kegiatan->proposal && file_exists(public_path('dokumen/kegiatan/proposal/' . $dokumen_kegiatan->proposal))) {
-            unlink(public_path('dokumen/kegiatan/proposal/' . $dokumen_kegiatan->proposal));
+        if ($dokumen_event->proposal && file_exists(public_path('dokumen/kegiatan/proposal/' . $dokumen_event->proposal))) {
+            unlink(public_path('dokumen/kegiatan/proposal/' . $dokumen_event->proposal));
         }
 
         // Hapus file LPJ jika ada
-        if ($dokumen_kegiatan->lpj && file_exists(public_path('dokumen/kegiatan/lpj/' . $dokumen_kegiatan->lpj))) {
-            unlink(public_path('dokumen/kegiatan/lpj/' . $dokumen_kegiatan->lpj));
+        if ($dokumen_event->lpj && file_exists(public_path('dokumen/kegiatan/lpj/' . $dokumen_event->lpj))) {
+            unlink(public_path('dokumen/kegiatan/lpj/' . $dokumen_event->lpj));
         }
 
         // Hapus file LPJK jika ada
-        if ($dokumen_kegiatan->lpjk && file_exists(public_path('dokumen/kegiatan/lpjk/' . $dokumen_kegiatan->lpjk))) {
-            unlink(public_path('dokumen/kegiatan/lpjk/' . $dokumen_kegiatan->lpjk));
+        if ($dokumen_event->lpjk && file_exists(public_path('dokumen/kegiatan/lpjk/' . $dokumen_event->lpjk))) {
+            unlink(public_path('dokumen/kegiatan/lpjk/' . $dokumen_event->lpjk));
         }
 
-        $dokumen_kegiatan->delete();
-        return redirect()->route('dokumen_kegiatan.index')->with('success', 'Data Berhasil Dihapus!');
+        $dokumen_event->delete();
+        return redirect()->route('dokumen_event.index')->with('success', 'Data Berhasil Dihapus!');
     }
 }

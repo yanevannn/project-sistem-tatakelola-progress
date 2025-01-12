@@ -9,7 +9,7 @@
                     <h6>Tambah Dokumen Kegiatan UKM</h6>
                 </div>
                 <div class="card-body p-3">
-                    <form action="{{ route('dokumen_kegiatan.update',$dokumen_kegiatan->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dokumen_event.update',$dokumen_event->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf <!-- Token CSRF untuk keamanan Laravel -->
                         @method('PUT')
                         <div class="row">
@@ -17,7 +17,7 @@
                                 <div class="form-group">
                                     <label for="nama_kegiatan">Nama Kegiatan</label>
                                     <input type="text" name="nama_kegiatan" class="form-control"
-                                        placeholder="masukkan nama kegiatan" value="{{ old('nama_kegiatan', $dokumen_kegiatan->nama_kegiatan) }}">
+                                        placeholder="masukkan nama kegiatan" value="{{ old('nama_kegiatan', $dokumen_event->nama_kegiatan) }}">
                                     @error('nama_kegiatan')
                                         <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                                     @enderror
@@ -28,7 +28,7 @@
                                 <select name="periode" class="form-control" required>
                                     <option value="" disabled selected>Pilih Periode</option>
                                     @foreach ($periode as $p)
-                                        <option value="{{ $p->id }}" {{ old('periode', $dokumen_kegiatan->id_periode) == $p->id ? 'selected' : '' }}>
+                                        <option value="{{ $p->id }}" {{ old('periode', $dokumen_event->id_periode) == $p->id ? 'selected' : '' }}>
                                             {{ $p->tahun }}
                                         </option>
                                     @endforeach
@@ -41,14 +41,14 @@
                         <div class="row">
                             <div class="form-group col-lg-4">
                                 <label for="tanggal_mulai">Tanggal Mulai</label>
-                                <input type="date" class="form-control" name="tanggal_mulai" value="{{ old('tanggal_mulai', $dokumen_kegiatan->tanggal_mulai) }}">        
+                                <input type="date" class="form-control" name="tanggal_mulai" value="{{ old('tanggal_mulai', $dokumen_event->tanggal_mulai) }}">        
                                 @error('tanggal_mulai')
                                     <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="tanggal_selesai">Tanggal Selesai</label>
-                                <input type="date" class="form-control" name="tanggal_selesai" value="{{ old('tanggal_selesai', $dokumen_kegiatan->tanggal_selesai) }}">
+                                <input type="date" class="form-control" name="tanggal_selesai" value="{{ old('tanggal_selesai', $dokumen_event->tanggal_selesai) }}">
                                 @error('tanggal_selesai')
                                     <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                                 @enderror
@@ -56,10 +56,10 @@
                             <div class="form-group col-lg-4">
                                 <label for="keterangan">Keterangan</label>
                                 <select class="form-control" name="keterangan" id="keterangan">
-                                    <option value="Sedang Proses" {{ old('keterangan', $dokumen_kegiatan->keterangan) == 'Sedang Proses' ? 'selected' : '' }}>Sedang Proses</option>
-                                    <option value="Selesai" {{ old('keterangan', $dokumen_kegiatan->keterangan) == 'Selesai' ? 'selected' : '' }}>Selesai</option>
-                                    <option value="Ditunda" {{ old('keterangan', $dokumen_kegiatan->keterangan) == 'Ditunda' ? 'selected' : '' }}>Ditunda</option>
-                                    <option value="Dibatalkan" {{ old('keterangan', $dokumen_kegiatan->keterangan) == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
+                                    <option value="Sedang Proses" {{ old('keterangan', $dokumen_event->keterangan) == 'Sedang Proses' ? 'selected' : '' }}>Sedang Proses</option>
+                                    <option value="Selesai" {{ old('keterangan', $dokumen_event->keterangan) == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                                    <option value="Ditunda" {{ old('keterangan', $dokumen_event->keterangan) == 'Ditunda' ? 'selected' : '' }}>Ditunda</option>
+                                    <option value="Dibatalkan" {{ old('keterangan', $dokumen_event->keterangan) == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
                                 </select>
                                 @error('keterangan')
                                     <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
@@ -72,8 +72,8 @@
                                 <label for="proposal">File Proposal</label>
                                 <input type="file" class="form-control" name="proposal">
                                 <p class="text-secondary font-weight-bold text-xs mt-2">
-                                    @if ($dokumen_kegiatan->proposal)
-                                    Dokumen saat Ini : <a href="{{ asset('dokumen/kegiatan/proposal/'. $dokumen_kegiatan->proposal) }}" target="_blank">Klik Disini</a></p>
+                                    @if ($dokumen_event->proposal)
+                                    Dokumen saat Ini : <a href="{{ asset('dokumen/kegiatan/proposal/'. $dokumen_event->proposal) }}" target="_blank">Klik Disini</a></p>
                                     @else
                                         Dokumen tidak tersedia
                                     @endif
@@ -88,8 +88,8 @@
                                 <label for="lpj">File LPJ</label>
                                 <input type="file" class="form-control" name="lpj">
                                 <p class="text-secondary font-weight-bold text-xs mt-2">
-                                    @if ($dokumen_kegiatan->lpj)
-                                        Dokumen saat ini: <a href="{{ asset('dokumen/kegiatan/lpj/' . $dokumen_kegiatan->lpj) }}" target="_blank">Klik Disini</a>
+                                    @if ($dokumen_event->lpj)
+                                        Dokumen saat ini: <a href="{{ asset('dokumen/kegiatan/lpj/' . $dokumen_event->lpj) }}" target="_blank">Klik Disini</a>
                                     @else
                                         Dokumen tidak tersedia
                                     @endif
@@ -105,8 +105,8 @@
                                 <label for="lpjk">File LPJK</label>
                                 <input type="file" class="form-control" name="lpjk">
                                 <p class="text-secondary font-weight-bold text-xs mt-2">
-                                    @if ($dokumen_kegiatan->lpjk)
-                                    Dokumen saat Ini : <a href="{{ asset('dokumen/kegiatan/lpjk/'. $dokumen_kegiatan->lpjk) }}" target="_blank">Klik Disini</a></p>
+                                    @if ($dokumen_event->lpjk)
+                                    Dokumen saat Ini : <a href="{{ asset('dokumen/kegiatan/lpjk/'. $dokumen_event->lpjk) }}" target="_blank">Klik Disini</a></p>
                                     @else
                                         Dokumen tidak tersedia
                                     @endif
