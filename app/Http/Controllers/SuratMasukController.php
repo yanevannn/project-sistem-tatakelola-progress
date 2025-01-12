@@ -10,16 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class SuratMasukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $maxdata = 5;
-        if (request('search')) {
-            $suratmasuk = SuratMasuk::where('nomor_surat_masuk', 'like', '%' . request('search') . '%')->paginate($maxdata)->appends(['search' => request('search')]);
-            return view('surat_masuk.index', compact('suratmasuk'));
-        } else {
-            $suratmasuk = SuratMasuk::paginate($maxdata);
-            return view('surat_masuk.index', compact('suratmasuk'));
-        }
+            // Ambil periode dari request atau gunakan periode user yang login
+            $selectedPeriode = $request->input('periode', auth()->user()->id_periode);
+            // Ambil data surat masuk berdasarkan periode yang dipilih
+            $suratmasuk = SuratMasuk::where('id_periode', $selectedPeriode)->get();
+
+            $periode = Periode::all();
+            return view('surat_masuk.index', compact('suratmasuk', 'periode'));
     }
 
 

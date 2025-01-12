@@ -179,6 +179,12 @@ table.dataTable th.dt-center,
 table.dataTable td.dt-center,
 table.dataTable td.dataTables_empty {
   text-align: center;
+  font-family: sans-serif;
+  color: #67748e;
+  font-size: 14px;
+  font-size: small;
+  padding: 100px 0;
+  font-weight: 600 !important;
 }
 table.dataTable th.dt-right,
 table.dataTable td.dt-right {
@@ -272,7 +278,7 @@ table.dataTable tfoot th {
 table.dataTable > thead > tr > th,
 table.dataTable > thead > tr > td {
   padding: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid #e9ecef;
 }
 table.dataTable > thead > tr > th:active,
 table.dataTable > thead > tr > td:active {
@@ -431,7 +437,7 @@ table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.or
   box-shadow: inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.962);
 }
 table.dataTable.no-footer {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid#e9ecef;
 }
 table.dataTable.compact thead th,
 table.dataTable.compact thead td,
