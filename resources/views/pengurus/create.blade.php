@@ -5,7 +5,7 @@
     <div class="col-lg-12 mb-lg-0 mb-4">
         <div class="card">
             <div class="card-header pb-0">
-                <h6>Tambah Data Transaksi</h6>
+                <h6>Tambah Data Pengurus</h6>
             </div>
             <div class="card-body p-3">
                 <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">

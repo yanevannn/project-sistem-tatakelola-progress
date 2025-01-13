@@ -40,14 +40,14 @@
                             <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group col-lg-6">
+                    {{-- <div class="form-group col-lg-6">
                         <label for="email">Email</label>
                         <input type="email" name="email" class="form-control" placeholder="email anggota"
                             value="{{ $anggota->email }}"required>
                         @error('email')
                             <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="form-group col-lg-6">
                         <label for="kelas">Kelas</label>
                         <input type="text" name="kelas" class="form-control" placeholder="Kelas anggota"

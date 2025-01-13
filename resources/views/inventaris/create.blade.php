@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('page-title', 'Edit Data Inventaris')
+@section('page-title', 'Data Inventaris')
 
 @section('content')
     <div class="row mb-4">

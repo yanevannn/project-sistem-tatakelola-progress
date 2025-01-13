@@ -1,12 +1,12 @@
 @extends('layout.layout')
-@section('page-title', 'Perbarui Dokumen UKM')
+@section('page-title', 'Data Dokumen UKM')
 
 @section('content')
     <div class="row mb-4">
         <div class="col-lg-12 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
-                    <h6>Perbarui Surat Keluar</h6>
+                    <h6>Edit Dokumen UKM</h6>
                 </div>
                 <div class="card-body p-3">
                     <form action="{{ route('dokumen_ukm.update',$dokumen_ukm->id) }}" method="POST" enctype="multipart/form-data">

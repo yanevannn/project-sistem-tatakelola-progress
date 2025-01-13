@@ -1,12 +1,12 @@
 @extends('layout.layout')
-@section('page-title', 'Perbarui Surat Keluar')
+@section('page-title', 'Data Surat Keluar')
 
 @section('content')
     <div class="row mb-4">
         <div class="col-lg-12 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
-                    <h6>Perbarui Surat Keluar</h6>
+                    <h6>Edit Surat Keluar</h6>
                 </div>
                 <div class="card-body p-3">
                     <form action="{{ route('suratkeluar.update', $suratkeluar->id) }}" method="POST"
@@ -78,6 +78,16 @@
                         <div class="form-group">
                             <label for="file">File Surat</label>
                             <input type="file" class="form-control" name="file" value="{{ $suratkeluar->file }}">
+                            <!-- Menampilkan nama file yang tersimpan -->
+                            @if (!empty($suratkeluar->file))
+                            <p class="text-secondary font-weight-bold text-xs mt-2" id="fileName">
+                                File saat ini: <a href="{{ asset('dokumen/suratkeluar/' . $suratkeluar->file) }}" target="_blank">Klik Disini</a>
+                            </p>
+                            @else
+                                <p class="text-secondary font-weight-bold text-xs mt-2" id="fileName">
+                                    Belum ada file yang diunggah
+                                </p>
+                            @endif
                             <p class="text-secondary font-weight-bold text-xs mt-2"> Note : Maksimal ukuran file 2MB </p>
                             @error('file')
                                 <div class="text-danger">{{ $message }}</div> <!-- Menampilkan pesan kesalahan -->

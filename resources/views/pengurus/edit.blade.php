@@ -29,14 +29,21 @@
                     </div>                    
                     <div class="form-group col-lg-6">
                         <label for="nim">NIM</label>
-                        <input type="text" name="nim" class="form-control" value="{{ old('nim', $pengurus->nim) }}" required>
+                        <input type="text" name="nim" class="form-control" value="{{ old('nim', $pengurus->anggota->nim) }}" required>
+                        @error('nim')
+                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{ old('email', $pengurus->email) }}" required>
                         @error('nim')
                             <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="nama">Nama</label>
-                        <input type="text" name="nama" class="form-control" value="{{ old('nama', $pengurus->nama) }}" required>
+                        <input type="text" name="nama" class="form-control" value="{{ old('nama', $pengurus->anggota->nama) }}" required>
                         @error('nama')
                             <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                         @enderror
@@ -71,15 +78,8 @@
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="no_hp">No Telephone</label>
-                        <input type="text" name="no_hp" class="form-control" value="{{ old('no_hp', $pengurus->no_hp) }}" required>
+                        <input type="text" name="no_hp" class="form-control" value="{{ old('no_hp', $pengurus->anggota->no_hp) }}" required>
                         @error('no_hp')
-                            <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-lg-6">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" name="alamat" class="form-control" value="{{ old('alamat', $pengurus->alamat)  }}" required>
-                        @error('alamat')
                             <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                         @enderror
                     </div>

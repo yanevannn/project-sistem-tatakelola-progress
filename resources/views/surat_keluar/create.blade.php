@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('page-title', 'Tambah Surat Keluar')
+@section('page-title', 'Data Surat Keluar')
 
 @section('content')
     <div class="row mb-4">

@@ -85,7 +85,13 @@
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->nim }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->no_hp }}</td>
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->kelas }}</td>
-                                            <td class="text-center font-weight-bold text-xs mb-0 text-uppercase">{{ $a->status_keanggotaan }}</td>
+                                            <td class="align-middle text-center text-sm">
+                                                @if ($a->status_keanggotaan === 'aktif')
+                                                    <span class="badge badge-sm bg-success">{{ $a->status_keanggotaan }}</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-danger">{{ $a->status_keanggotaan }}</span>
+                                                @endif
+                                            </td>
                                             @if (auth()->user()->isPengurus())
                                                 <td class="align-middle text-center">
                                                     <button class="btn btn-icon btn-warning" type="button">

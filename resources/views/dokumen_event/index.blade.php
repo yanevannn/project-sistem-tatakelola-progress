@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('page-title', 'Dokumen Event UKM')
+@section('page-title', 'Data Dokumen Event')
 
 @section('content')
     <div class="row mb-4">

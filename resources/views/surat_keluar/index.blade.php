@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('page-title', 'Surat Keluar')
+@section('page-title', 'Data Surat Keluar')
 
 @section('content')
     <div class="row mb-4">
@@ -69,7 +69,6 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Aksi</th>
-                                        <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="mb-0">
@@ -106,11 +105,8 @@
                                                     </p>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <button type="button" class="btn btn-secondary mb-0">
-                                                        <a href="{{ asset('dokumen/suratkeluar/' . $sk->file) }}" download="{{ $sk->file }}" class="text-white">
-                                                            Download
-                                                        </a>
-                                                    </button>
+                                                        <a href="{{ asset('dokumen/suratkeluar/' . $sk->file) }}" target="_blank"
+                                                            class="btn btn-sm btn-primary mb-0">Lihat</a>
                                                 </td>
                                                 
                                                 <td class="align-middle text-center m-0">

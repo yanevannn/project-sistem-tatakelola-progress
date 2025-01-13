@@ -1,12 +1,12 @@
 @extends('layout.layout')
-@section('page-title', 'Perbarui Surat Masuk')
+@section('page-title', 'Data Surat Masuk')
 
 @section('content')
     <div class="row mb-4">
         <div class="col-lg-12 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
-                    <h6>Perbarui Surat Masuk</h6>
+                    <h6>Edit Surat Masuk</h6>
                 </div>
                 <div class="card-body p-3">
                     <form action="{{ route('suratmasuk.update', $suratmasuk->id) }}" method="POST"
@@ -81,9 +81,9 @@
 
                                 <!-- Menampilkan nama file yang tersimpan -->
                                 @if (!empty($suratmasuk->file))
-                                    <p class="text-secondary font-weight-bold text-xs mt-2" id="fileName">
-                                        File saat ini: {{ $suratmasuk->file }}
-                                    </p>
+                                <p class="text-secondary font-weight-bold text-xs mt-2" id="fileName">
+                                    File saat ini: <a href="{{ asset('dokumen/suratmasuk/' . $suratmasuk->file) }}" target="_blank">Klik Disini</a>
+                                </p>
                                 @else
                                     <p class="text-secondary font-weight-bold text-xs mt-2" id="fileName">
                                         Belum ada file yang diunggah

@@ -1,12 +1,12 @@
 @extends('layout.layout')
-@section('page-title', 'Periode')
+@section('page-title', 'Data Periode')
 
 @section('content')
     <div class="row mt-4 mb-4">
         <div class="col-lg-5 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
-                    <h6>Input Periode</h6>
+                    <h6>Tambah Data Periode</h6>
                 </div>
                 <div class="card-body p-3">
                     <form action="/periode" method="POST">

@@ -1,12 +1,12 @@
 @extends('layout.layout')
-@section('page-title', 'Edit Dokumen Kegiatan')
+@section('page-title', 'Data Dokumen Event')
 
 @section('content')
     <div class="row mb-4">
         <div class="col-lg-12 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
-                    <h6>Tambah Dokumen Kegiatan UKM</h6>
+                    <h6>Edit Dokumen Event</h6>
                 </div>
                 <div class="card-body p-3">
                     <form action="{{ route('dokumen_event.update',$dokumen_event->id) }}" method="POST" enctype="multipart/form-data">
