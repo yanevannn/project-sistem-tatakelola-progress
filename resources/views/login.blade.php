@@ -62,7 +62,7 @@
                                                 aria-describedby="password-addon">
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn bg-gradient-danger w-100 mt-4 mb-0">Sign
+                                            <button type="submit" class="btn bg-gradient-danger w-100 mt-4 mb-0">Log
                                                 in</button>
                                         </div>
                                     </form>
