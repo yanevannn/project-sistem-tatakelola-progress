@@ -96,7 +96,7 @@
                     <p class="mb-0 text-secondary">Copyright ©
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> Soft by Van.
+                        </script>by Van.
                     </p>
                 </div>
             </div>
