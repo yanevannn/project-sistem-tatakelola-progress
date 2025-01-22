@@ -96,7 +96,7 @@
                     <p class="mb-0 text-secondary">Copyright ©
                         <script>
                             document.write(new Date().getFullYear())
-                        </script>by Van.
+                        </script>by UKM PROGRESS.
                     </p>
                 </div>
             </div>
