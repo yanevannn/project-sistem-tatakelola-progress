@@ -14,7 +14,8 @@
                         <div class="form-group col-lg-2">
                             <select name="periode" class="form-control mb-4" required onchange="this.form.submit()">
                                 <option value="" disabled
-                                    {{ !request('periode', auth()->user()->id_periode) ? 'selected' : '' }}>Pilih periode</option>
+                                    {{ !request('periode', auth()->user()->id_periode) ? 'selected' : '' }}>Pilih periode
+                                </option>
                                 @foreach ($periode as $p)
                                     <option value="{{ $p->id }}"
                                         {{ request('periode', auth()->user()->id_periode) == $p->id ? 'selected' : '' }}>
@@ -25,17 +26,19 @@
                         </div>
                     </form>
                 </div>
-                    <div class="col-lg-4 d-flex justify-content-end align-items-end">
-                        <button class="btn bg-gradient-success">
-                            <a href="{{ route('anggota.create') }}" class="font-weight-bold text-xs text-white" data-toggle="tooltip"
-                                data-original-title="tambah">Tambah Data</a>
-                        </button>
-                    </div>
+                <div class="col-lg-4 d-flex justify-content-end align-items-end">
+                    @if(auth()->user()->isPengurus())
+                    <button class="btn bg-gradient-success">
+                        <a href="{{ route('anggota.create') }}" class="font-weight-bold text-xs text-white"
+                            data-toggle="tooltip" data-original-title="tambah">Tambah Data</a>
+                    </button>
+                    @endif
+                </div>
             </div>
             <div class="card p-3">
                 <div class="container-fluid px-0">
                     <div class="card-header pb-0">
-                                <h6 class="mb-0">Tabel Anggota UKM</h6>
+                        <h6 class="mb-0">Tabel Anggota UKM</h6>
                     </div>
                 </div>
 
@@ -59,9 +62,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Kelas</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Status Keanggotaan</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Status Keanggotaan</th>
                                     @if (auth()->user()->isPengurus())
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
@@ -87,9 +90,14 @@
                                             <td class="text-center font-weight-bold text-xs mb-0">{{ $a->kelas }}</td>
                                             <td class="align-middle text-center text-sm">
                                                 @if ($a->status_keanggotaan === 'aktif')
-                                                    <span class="badge badge-sm bg-success">{{ $a->status_keanggotaan }}</span>
-                                                @else
-                                                    <span class="badge badge-sm bg-danger">{{ $a->status_keanggotaan }}</span>
+                                                    <span
+                                                        class="badge badge-sm bg-success">{{ $a->status_keanggotaan }}</span>
+                                                @elseif ($a->status_keanggotaan === 'lulus')
+                                                    <span
+                                                        class="badge badge-sm bg-warning">{{ $a->status_keanggotaan }}</span>
+                                                @elseif ($a->status_keanggotaan === 'drop out')
+                                                    <span
+                                                        class="badge badge-sm bg-danger">{{ $a->status_keanggotaan }}</span>
                                                 @endif
                                             </td>
                                             @if (auth()->user()->isPengurus())

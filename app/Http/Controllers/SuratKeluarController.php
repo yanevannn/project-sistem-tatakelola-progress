@@ -38,7 +38,7 @@ class SuratKeluarController extends Controller
                 'tertuju' => 'required|string',
                 'keterangan' => 'nullable|string',
                 'tanggal_surat' => 'required|date',
-                'tanggal_terkirim' => 'required|date|after_or_equal:tanggal_surat',
+                'tanggal_terkirim' => 'required|date|before_or_equal:tanggal_surat',
                 'file' => 'required|file|mimes:pdf,doc,docx|max:2048',
             ],
             [
@@ -53,7 +53,7 @@ class SuratKeluarController extends Controller
                 'tanggal_surat.date' => 'Tanggal surat harus berupa tanggal yang valid.',
                 'tanggal_terkirim.required' => 'Tanggal terkirim harus diisi.',
                 'tanggal_terkirim.date' => 'Tanggal terkirim harus berupa tanggal yang valid.',
-                'tanggal_terkirim.after_or_equal' => 'Tanggal terkirim harus sama atau setelah tanggal surat.',
+                'tanggal_terkirim.before_or_equal' => 'Tanggal terkirim harus sama atau sebelum tanggal surat.',
                 'file.file' => 'File harus berupa file yang valid.',
                 'file.mimes' => 'File harus berupa format pdf, doc, atau docx.',
                 'file.max' => 'Ukuran file maksimal 2MB.'
@@ -104,7 +104,7 @@ class SuratKeluarController extends Controller
                 'tertuju' => 'required|string', 
                 'keterangan' => 'nullable|string', 
                 'tanggal_surat' => 'required|date', 
-                'tanggal_terkirim' => 'required|date|after_or_equal:tanggal_surat',
+                'tanggal_terkirim' => 'required|date|before_or_equal:tanggal_surat',
                 'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048', 
             ],
             [
@@ -119,7 +119,7 @@ class SuratKeluarController extends Controller
                 'tanggal_surat.date' => 'Tanggal surat harus berupa tanggal yang valid.',
                 'tanggal_terkirim.required' => 'Tanggal terkirim harus diisi.',
                 'tanggal_terkirim.date' => 'Tanggal terkirim harus berupa tanggal yang valid.',
-                'tanggal_terkirim.after_or_equal' => 'Tanggal terkirim harus sama atau setelah tanggal surat.',
+                'tanggal_terkirim.before_or_equal' => 'Tanggal terkirim harus sama atau sebelum tanggal surat.',
                 'file.file' => 'File harus berupa file yang valid.',
                 'file.mimes' => 'File harus berupa format pdf, doc, atau docx.', 
                 'file.max' => 'Ukuran file maksimal 2MB.' 

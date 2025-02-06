@@ -87,9 +87,12 @@
                                                 <td class="text-center font-weight-bold text-xs mb-0">
                                                     {{ $p->tahun_prestasi }}</td>
                                                 <td class="align-middle text-center">
-                                                    <a href="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" target="_blank">
+                                                    {{-- <a href="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" target="_blank">
                                                         <img src="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" alt="Prestasi" class="img-fluid" style="max-width: 100%; height: 100px;">
-                                                    </a>
+                                                    </a> --}}
+                                                    <button class="btn btn-primary ">
+                                                        <a href="{{ asset('dokumen/prestasi_anggota/' . $p->file) }}" class="text-white" target="_blank">Lihat Sertifikat</a>
+                                                    </button>
                                                 </td>
                                                 @if(auth()->user()->isPengurus())
                                                 <td class="align-middle text-center">

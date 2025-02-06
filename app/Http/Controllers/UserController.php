@@ -91,7 +91,7 @@ class UserController extends Controller
 
             // Generate plain password (You should decide how to handle plain passwords)
             // $plainPassword = $validatedData['password']; // Store plain password 
-            
+
             // Generate random password
             $plainPassword = Str::random(10);
 
@@ -129,28 +129,28 @@ class UserController extends Controller
     // }
 
     private function validateCsvRecord(array $record)
-{
-    // Validasi data dasar
-    $validatedData = validator($record, [
-        'nim' => 'required|string|max:255', // NIM wajib diisi, maksimal 255 karakter
-        'role' => 'required|in:Ketua,Wakil Ketua,Bendahara,Sekretaris,Divisi I,Divisi II,Divisi III', // Role harus sesuai daftar
-        'email' => 'required|email|max:255', // Email wajib diisi dan valid
-    ])->validate();
+    {
+        // Validasi data dasar
+        $validatedData = validator($record, [
+            'nim' => 'required|string|max:255', // NIM wajib diisi, maksimal 255 karakter
+            'role' => 'required|in:Ketua,Wakil Ketua,Bendahara,Sekretaris,Divisi I,Divisi II,Divisi III', // Role harus sesuai daftar
+            'email' => 'required|email|max:255', // Email wajib diisi dan valid
+        ])->validate();
 
-    // Cek apakah NIM ada di tabel anggota
-    $anggota = Anggota::where('nim', $validatedData['nim'])->first();
+        // Cek apakah NIM ada di tabel anggota
+        $anggota = Anggota::where('nim', $validatedData['nim'])->first();
 
-    if (!$anggota) {
-        throw \Illuminate\Validation\ValidationException::withMessages([
-            'nim' => "NIM {$validatedData['nim']} tidak ditemukan di tabel anggota.",
-        ]);
+        if (!$anggota) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'nim' => "NIM {$validatedData['nim']} tidak ditemukan di tabel anggota.",
+            ]);
+        }
+
+        // Tambahkan ID anggota ke data yang divalidasi
+        $validatedData['id_anggota'] = $anggota->id;
+
+        return $validatedData;
     }
-
-    // Tambahkan ID anggota ke data yang divalidasi
-    $validatedData['id_anggota'] = $anggota->id;
-
-    return $validatedData;
-}
 
 
     public function edit(string $id)
@@ -193,14 +193,20 @@ class UserController extends Controller
         // dd($request);
         $pengurus = User::findOrFail($id);
 
+        // Update data di tabel User
         $pengurus->update([
+            'role' => $request->role,
+            'email' => $request->email, // Jika email juga ingin diperbarui
+        ]);
+
+        // Update data di tabel Anggota yang terkait dengan User
+        $anggota = Anggota::findOrFail($pengurus->id_anggota);
+        $anggota->update([
             'nim' => $request->nim,
             'nama' => $request->nama,
-            'role' => $request->role,
             'jenis_kelamin' => $request->jenis_kelamin,
             'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat
-
+            'alamat' => $request->alamat,
         ]);
 
         return redirect()->route('user.index')->with('updated', 'Data Pengurus Berhasil Diperbarui!');

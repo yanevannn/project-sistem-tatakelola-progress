@@ -93,13 +93,13 @@
                                                     Edit</i>
                                                 </a>
                                             </button>
-                                            @if(auth()->user()->id != $p->id)  
+                                            {{-- @if(auth()->user()->id != $p->id)  
                                             <button class="btn btn-icon btn-2 btn-danger" type="button">
                                                 <a href="" class="text-white">
                                                     Hapus</i>
                                                 </a>
                                             </button>
-                                            @endif
+                                            @endif --}}
                                         </td>
                                     </tr>
                                 @endforeach

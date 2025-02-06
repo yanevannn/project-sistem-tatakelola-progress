@@ -53,7 +53,7 @@ class AnggotaController extends Controller
                 'id_periode' => $idPeriode, // Hubungkan dengan periode
                 'nim' => $validatedData['nim'], // NIM anggota
                 'nama' => $validatedData['nama'], // Nama anggota
-                'email' => $validatedData['email'], // Email anggota
+                // 'email' => $validatedData['email'], // Email anggota
                 'no_hp' => $validatedData['no_hp'] ?? null, // No HP (opsional)
                 'kelas' => $validatedData['kelas'], // Kelas anggota
             ]);
@@ -70,7 +70,7 @@ class AnggotaController extends Controller
             'nim' => 'required|string|max:255', //maksimal 255 karakter
             'nama' => 'required|string|max:255', // Nama wajib diisi, maksimal 255 karakter
             'kelas' => 'required|string|max:100', // Kelas wajib, maksimal 100 karakter
-            'email' => 'required|email|max:255', // Email wajib
+            // 'email' => 'required|email|max:255', // Email wajib
             'no_hp' => 'nullable|string|max:15', // No HP opsional, maksimal 15 karakter
         ])->validate();
     }
@@ -88,7 +88,7 @@ class AnggotaController extends Controller
             'nim' => 'required|string|max:255',
             'nama' => 'required|string|max:255',
             'kelas' => 'required|string|max:100',
-            'email' => 'required|email|max:255',
+            // 'email' => 'required|email|max:255',
             'no_hp' => 'nullable|string|max:15',
             'status_keanggotaan' => 'required|in:aktif,lulus,drop out'
         ], [
@@ -104,9 +104,9 @@ class AnggotaController extends Controller
             'kelas.string' => 'Kelas harus berupa teks.',
             'kelas.max' => 'Kelas tidak boleh lebih dari 100 karakter.',
 
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'email.max' => 'Email tidak boleh lebih dari 255 karakter.',
+            // 'email.required' => 'Email wajib diisi.',
+            // 'email.email' => 'Format email tidak valid.',
+            // 'email.max' => 'Email tidak boleh lebih dari 255 karakter.',
 
             'no_hp.string' => 'Nomor HP harus berupa teks.',
             'no_hp.max' => 'Nomor HP tidak boleh lebih dari 15 karakter.',
@@ -119,7 +119,7 @@ class AnggotaController extends Controller
             'nim' => $request->nim,
             'nama' => $request->nama,
             'kelas' => $request->kelas,
-            'email' => $request->email,
+            // 'email' => $request->email,
             'no_hp' => $request->no_hp,
             'status_keanggotaan' => $request->status_keanggotaan
         ];
