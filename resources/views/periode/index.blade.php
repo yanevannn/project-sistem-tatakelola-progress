@@ -9,11 +9,12 @@
                     <h6>Tambah Data Periode</h6>
                 </div>
                 <div class="card-body p-3">
-                    <form action="/periode" method="POST">
+                    <form action="/periode" method="POST" id="periodeForm">
                         @csrf <!-- Token CSRF untuk keamanan Laravel -->
                         <div class="form-group">
                             <label for="periode">Periode</label>
-                            <input type="text" name="periode" class="form-control" placeholder="masukkan periode"required>
+                            <input type="text" name="periode" class="form-control" placeholder="Masukkan periode"
+                                required>
                             <!-- Menampilkan pesan error untuk 'periode' -->
                             @error('periode')
                                 <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
@@ -21,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>
-                            <select name="status" class="form-control mb-4" required>
+                            <select name="status" class="form-control mb-4" required id="statusSelect">
                                 <option value="" disabled selected>Pilih status</option>
                                 <option value="aktif">Aktif</option>
                                 <option value="non-aktif">Non-Aktif</option>
@@ -31,7 +32,7 @@
                                 <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit"
+                        <button type="submit" id="submitBtn"
                             class="btn bg-gradient-success mb-0 font-weight-bold text-xs text-white">Submit</button>
                     </form>
                 </div>
@@ -66,7 +67,8 @@
                             <tbody>
                                 @foreach ($periode as $pd)
                                     <tr>
-                                        <td class="align-middle text-center font-weight-bold mb-0">{{ $loop->iteration }}</td>
+                                        <td class="align-middle text-center font-weight-bold mb-0">{{ $loop->iteration }}
+                                        </td>
                                         <td class="align-middle">
                                             <p class="text-center font-weight-bold mb-0">{{ $pd->tahun }}</p>
                                         </td>
@@ -145,6 +147,54 @@
                             }
                         });
                 });
+            });
+        </script>
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Menghapus',
+                    text: "{{ session('error') }}",
+                });
+            </script>
+        @endif
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: "{{ session('success') }}",
+                });
+            </script>
+        @endif
+
+        <script>
+            document.getElementById('submitBtn').addEventListener('click', function(event) {
+                event.preventDefault(); // Mencegah form langsung dikirim
+
+                let status = document.getElementById('statusSelect').value; // Ambil nilai status
+                let form = document.getElementById('periodeForm'); // Ambil form
+
+                // Jika status adalah "aktif", tampilkan konfirmasi
+                if (status === 'aktif') {
+                    Swal.fire({
+                        title: "Konfirmasi Periode Aktif",
+                        text: "Anda akan menambahkan periode dengan status aktif. Periode lain yang aktif akan otomatis dinonaktifkan. Lanjutkan?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ya, Lanjutkan",
+                        cancelButtonText: "Batal"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); // Submit form jika user konfirmasi
+                        }
+                    });
+                } else {
+                    // Jika status "non-aktif", langsung submit tanpa konfirmasi
+                    form.submit();
+                }
             });
         </script>
     @endsection
