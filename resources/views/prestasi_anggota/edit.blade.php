@@ -99,3 +99,16 @@
     </div>
        
 @endsection
+
+@section('script')
+@if ($errors->has('keterangan'))
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: 'Prestasi untuk anggota ini dengan tingkat, tahun, dan nama prestasi yang sama sudah ada.',
+            icon: 'error',
+            confirmButtonText: 'Tutup'
+        });
+    </script>
+@endif
+@endsection

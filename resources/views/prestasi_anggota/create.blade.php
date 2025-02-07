@@ -13,20 +13,21 @@
                                     <h6>Tambah Prestasi Anggota</h6>
                                 </div>
                                 <div class="col-lg-3">
-                                    <form id="searchForm" class="d-flex">
-                                        <input type="text" id="searchInput" class="form-control" name="search"
-                                            placeholder="Cari Nama atau NIM..." aria-label="Kata kunci ...">
-                                        <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="button"
-                                            id="searchButton">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="card-body">
+                        <form id="searchForm" class="d-flex">
+                            <input type="text" id="searchInput" class="form-control" name="search"
+                                placeholder="Cari berdasarkan Nama atau NIM Anggota untuk menambahkan prestasi" aria-label="Kata kunci ...">
+                            <button class="btn shadow-none mb-0 btn-outline-dark mx-1" type="button"
+                                id="searchButton">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
                         <!-- Tabel Hasil Pencarian -->
                         <div id="anggotaTable" class="table-responsive">
                             <!-- Hasil pencarian anggota akan muncul di sini -->
@@ -65,7 +66,7 @@
                         
                             <div class="form-group">
                                 <label for="tahun_prestasi">Tahun Prestasi</label>
-                                <input type="number" name="tahun_prestasi" id="tahun_prestasi" class="form-control" value="{{ old('tahun_prestasi') }}" required>
+                                <input type="number" name="tahun_prestasi" id="tahun_prestasi" class="form-control" value="{{ old('tahun_prestasi') }}" min="2020" max="{{ date('Y') }}" required>
                                 @error('tahun_prestasi')
                                         <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                                 @enderror
@@ -179,4 +180,15 @@
             $('#nim_anggota_disabled').val(nim);
         }
     </script>
+    @if ($errors->has('keterangan'))
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: 'Prestasi untuk anggota ini dengan tingkat, tahun, dan nama prestasi yang sama sudah ada.',
+            icon: 'error',
+            confirmButtonText: 'Tutup'
+        });
+    </script>
+@endif
+
 @endsection

@@ -70,6 +70,17 @@ class PrestasiAnggotaController extends Controller
             'file.max' => 'Ukuran file tidak boleh lebih dari 2MB.',
         ]);
 
+        // Cek jika data prestasi dengan anggota, tingkat, tahun dan nama prestasi sudah ada, tanpa memperhatikan perbedaan huruf besar kecil
+        $existingPrestasi = PrestasiAnggota::where('id_anggota', $request->id_anggota)
+        ->where('tingkat', $request->tingkat)
+        ->where('tahun_prestasi', $request->tahun_prestasi)
+        ->whereRaw('LOWER(nama_prestasi) = ?', [strtolower($request->nama_prestasi)])
+        ->first();
+
+        if ($existingPrestasi) {
+        return back()->withErrors(['keterangan' => 'Prestasi untuk anggota ini dengan tingkat, tahun, dan nama prestasi yang sama sudah ada.'])->withInput();
+        }
+
         if ($request->hasFile('file')) {
             $originalFileName = $request->file('file')->getClientOriginalName();
             $fileNameWithoutExtension = pathinfo($originalFileName, PATHINFO_FILENAME);
@@ -129,6 +140,18 @@ class PrestasiAnggotaController extends Controller
         'file.mimes' => 'File harus bertipe jpeg, png, jpg, atau pdf.',
         'file.max' => 'File maksimal 2 MB.',
     ]);
+
+    // Cek jika data prestasi dengan anggota, tingkat, dan tahun sudah ada (untuk update)
+    $existingPrestasi = PrestasiAnggota::where('id_anggota', $prestasi->id_anggota)
+                                       ->where('tingkat', $request->tingkat)
+                                       ->where('tahun_prestasi', $request->tahun_prestasi)
+                                       ->where('id', '!=', $id) // Menghindari pengecekan pada data yang sedang diupdate
+                                       ->first();
+
+    if ($existingPrestasi) {
+        return back()->withErrors(['keterangan' => 'Prestasi untuk anggota ini dengan tingkat dan tahun yang sama sudah ada.'])->withInput();
+    }
+
     // Jika ada file baru yang diupload
     if ($request->hasFile('file')) {
         // Jika ada file lama, hapus file lama
