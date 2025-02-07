@@ -60,7 +60,11 @@ class DokumenEventController extends Controller
             'keterangan.in' => 'Keterangan tidak valid.',
         ]);
 
-
+        // Validasi tambahan untuk status "Selesai" pada store
+        if ($request->keterangan == 'Selesai' && (!$request->hasFile('proposal') || !$request->hasFile('lpj') || !$request->hasFile('lpjk'))) {
+        return back()->withErrors(['keterangan' => 'Status "Selesai" tidak dapat dipilih jika file proposal, LPJ, dan LPJK tidak lengkap.'])
+            ->withInput(); // Mengembalikan input sebelumnya ke form
+        }
 
         if ($request->hasFile('proposal')) {
             $originalProposalName = $request->file('proposal')->getClientOriginalName();
@@ -189,6 +193,11 @@ class DokumenEventController extends Controller
             $request->file('lpjk')->move(public_path('dokumen/kegiatan/lpjk/'), $lpjkFileName);
         } else {
             $lpjkFileName = $dokumen_event->lpjk;
+        }
+
+        // Validasi jika keterangan "Selesai" dan file proposal, LPJ, dan LPJK harus ada
+        if ($request->keterangan == 'Selesai' && (!$proposalFileName || !$lpjFileName || !$lpjkFileName)) {
+            return back()->withErrors(['keterangan' => 'Status "Selesai" tidak dapat dipilih jika file proposal, LPJ, dan LPJK tidak lengkap.'])->withInput();
         }
 
         $data = [

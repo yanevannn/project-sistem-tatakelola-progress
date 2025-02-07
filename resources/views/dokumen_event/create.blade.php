@@ -60,9 +60,9 @@
                                     <option value="Ditunda" {{ old('keterangan', 'Sedang Proses') == 'Ditunda' ? 'selected' : '' }}>Ditunda</option>
                                     <option value="Dibatalkan" {{ old('keterangan', 'Sedang Proses') == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
                                 </select>
-                                @error('keterangan')
+                                {{-- @error('keterangan')
                                     <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
-                                @enderror
+                                @enderror --}}
                             </div>
                         </div>
                         <div class="row">
@@ -104,4 +104,16 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+@if ($errors->has('keterangan'))
+    <script>
+        Swal.fire({
+            title: 'Terjadi Kesalahan!',
+            text: 'Keterangan "Selesai" tidak dapat dipilih jika file proposal, LPJ, dan LPJK kosong.',
+            icon: 'error',
+            confirmButtonText: 'Tutup'
+        });
+    </script>
+@endif
 @endsection
