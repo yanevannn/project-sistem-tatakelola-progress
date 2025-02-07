@@ -49,6 +49,12 @@ class DokumenUkmController extends Controller
             ]
         );
 
+        // Pengecekan jika sudah ada dokumen dengan periode yang sama
+        $existingDokumen = DokumenUkm::where('id_periode', $request->periode)->first();
+        if ($existingDokumen) {
+            return redirect()->route('dokumen_ukm.index')->with('error', 'Dokumen untuk periode ini sudah ada. Silakan pilih periode lain.');
+        }
+
         if ($request->hasFile('rka')) {
             $originalRkaName = $request->file('rka')->getClientOriginalName();
             $rkaNameWithoutExtension = pathinfo($originalRkaName, PATHINFO_FILENAME);
@@ -116,28 +122,39 @@ class DokumenUkmController extends Controller
     {
         $user = Auth::user();
 
-        $request->validate([
-            'periode' => 'required|exists:periode,id',
-            'nama_ketua' => 'required|string',
-            'rka' => 'nullable|file|mimes:pdf|max:2048',
-            'adart' => 'nullable|file|mimes:pdf|max:2048',
-        ],
-        [
-            'periode.required' => 'Periode wajib dipilih.',
-            'periode.exists' => 'Periode yang dipilih tidak valid.',
-            'nama_ketua.required' => 'Nama ketua wajib diisi.',
-            'nama_ketua.string' => 'Nama ketua harus berupa teks.',
-            'rka.nullable' => 'File RKA bersifat opsional, tetapi jika diunggah, pastikan formatnya benar.',
-            'rka.mimes' => 'File RKA harus dalam format PDF!',
-            'rka.max' => 'Ukuran file RKA tidak boleh lebih dari 2MB.',
-            'adart.nullable' => 'File ADART bersifat opsional, tetapi jika diunggah, pastikan formatnya benar.',
-            'adart.mimes' => 'File ADART harus dalam format PDF!.',
-            'adart.max' => 'Ukuran file ADART tidak boleh lebih dari 2MB.',
-        ]);
+        $request->validate(
+            [
+                'periode' => 'required|exists:periode,id',
+                'nama_ketua' => 'required|string',
+                'rka' => 'nullable|file|mimes:pdf|max:2048',
+                'adart' => 'nullable|file|mimes:pdf|max:2048',
+            ],
+            [
+                'periode.required' => 'Periode wajib dipilih.',
+                'periode.exists' => 'Periode yang dipilih tidak valid.',
+                'nama_ketua.required' => 'Nama ketua wajib diisi.',
+                'nama_ketua.string' => 'Nama ketua harus berupa teks.',
+                'rka.nullable' => 'File RKA bersifat opsional, tetapi jika diunggah, pastikan formatnya benar.',
+                'rka.mimes' => 'File RKA harus dalam format PDF!',
+                'rka.max' => 'Ukuran file RKA tidak boleh lebih dari 2MB.',
+                'adart.nullable' => 'File ADART bersifat opsional, tetapi jika diunggah, pastikan formatnya benar.',
+                'adart.mimes' => 'File ADART harus dalam format PDF!.',
+                'adart.max' => 'Ukuran file ADART tidak boleh lebih dari 2MB.',
+            ]
+        );
 
         $dokume_ukm = DokumenUkm::findOrfail($id);
         $dokumen_rka = $dokume_ukm->rka;
         $dokumen_adart = $dokume_ukm->adart;
+
+        // Cek apakah periode yang dipilih sudah ada di dokumen UKM lain
+        $existingDokumen = DokumenUkm::where('id_periode', $request->periode)
+            ->where('id', '!=', $id) // Jangan hitung dokumen yang sedang diupdate
+            ->first();
+
+        if ($existingDokumen) {
+            return redirect()->route('dokumen_ukm.index')->with('error', 'Dokumen untuk periode ini sudah ada. Silakan pilih periode lain.');
+        }
 
         /// Periksa apakah ada file RKA baru
         if ($request->hasFile('rka')) {
@@ -181,7 +198,7 @@ class DokumenUkmController extends Controller
             $dokumen_adart = $fileNameAdart;
         }
 
-        $dokume_ukm -> update (
+        $dokume_ukm->update(
             [
                 'id_user' => $user->id,
                 'id_periode' => $request->periode,

@@ -25,13 +25,17 @@
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="status">Periode</label>
-                                <select name="periode" class="form-control " required>
+                                <select name="periode" class="form-control" required>
                                     <option value="{{ $dokumen_ukm->id_periode }}" selected>
-                                        {{ $dokumen_ukm->periode->tahun }}</option>
+                                        {{ $dokumen_ukm->periode->tahun }}
+                                    </option>
                                     @foreach ($periode as $p)
-                                        <option value="{{ $p->id }}">{{ $p->tahun }}</option>
+                                        @if ($p->id != $dokumen_ukm->id_periode)
+                                            <option value="{{ $p->id }}">{{ $p->tahun }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
+                                
                                 @error('periode')
                                     <div class="text-danger font-weight-bold text-xs mt-2">{{ $message }}</div>
                                 @enderror

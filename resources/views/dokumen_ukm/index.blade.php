@@ -101,6 +101,15 @@
 @endsection
 
 @section('script')
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "{{ session('error') }}",
+        });
+    </script>
+@endif
 <script>
     $(document).ready(function() {
         $('#dokumenUkmTable').DataTable({
